@@ -3,5 +3,8 @@
 
     "sign_in_welcome": "Приветствую в Poster!",
     "sign_in_username": "Имя пользователя",
-    "sign_in_button_text": "Войти"
+    "sign_in_button_text": "Войти",
+
+    "root_tab_wall": "Стена",
+    "root_tab_feed": "Лента"
 }

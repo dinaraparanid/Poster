@@ -3,5 +3,8 @@
 
     "sign_in_welcome": "Welcome to Poster!",
     "sign_in_username": "Username",
-    "sign_in_button_text": "Sign In"
+    "sign_in_button_text": "Sign In",
+
+    "root_tab_wall": "Wall",
+    "root_tab_feed": "Feed"
 }

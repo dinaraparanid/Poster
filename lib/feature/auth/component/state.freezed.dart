@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$AuthState {
   String get username => throw _privateConstructorUsedError;
+  AuthEffect? get effect => throw _privateConstructorUsedError;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -30,7 +31,9 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call({String username});
+  $Res call({String username, AuthEffect? effect});
+
+  $AuthEffectCopyWith<$Res>? get effect;
 }
 
 /// @nodoc
@@ -49,13 +52,32 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   @override
   $Res call({
     Object? username = null,
+    Object? effect = freezed,
   }) {
     return _then(_value.copyWith(
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      effect: freezed == effect
+          ? _value.effect
+          : effect // ignore: cast_nullable_to_non_nullable
+              as AuthEffect?,
     ) as $Val);
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthEffectCopyWith<$Res>? get effect {
+    if (_value.effect == null) {
+      return null;
+    }
+
+    return $AuthEffectCopyWith<$Res>(_value.effect!, (value) {
+      return _then(_value.copyWith(effect: value) as $Val);
+    });
   }
 }
 
@@ -67,7 +89,10 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String username});
+  $Res call({String username, AuthEffect? effect});
+
+  @override
+  $AuthEffectCopyWith<$Res>? get effect;
 }
 
 /// @nodoc
@@ -84,12 +109,17 @@ class __$$AuthStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? username = null,
+    Object? effect = freezed,
   }) {
     return _then(_$AuthStateImpl(
       username: null == username
           ? _value.username
           : username // ignore: cast_nullable_to_non_nullable
               as String,
+      effect: freezed == effect
+          ? _value.effect
+          : effect // ignore: cast_nullable_to_non_nullable
+              as AuthEffect?,
     ));
   }
 }
@@ -97,14 +127,16 @@ class __$$AuthStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$AuthStateImpl implements _AuthState {
-  const _$AuthStateImpl({required this.username});
+  const _$AuthStateImpl({required this.username, this.effect});
 
   @override
   final String username;
+  @override
+  final AuthEffect? effect;
 
   @override
   String toString() {
-    return 'AuthState(username: $username)';
+    return 'AuthState(username: $username, effect: $effect)';
   }
 
   @override
@@ -113,11 +145,12 @@ class _$AuthStateImpl implements _AuthState {
         (other.runtimeType == runtimeType &&
             other is _$AuthStateImpl &&
             (identical(other.username, username) ||
-                other.username == username));
+                other.username == username) &&
+            (identical(other.effect, effect) || other.effect == effect));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, username);
+  int get hashCode => Object.hash(runtimeType, username, effect);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -129,10 +162,14 @@ class _$AuthStateImpl implements _AuthState {
 }
 
 abstract class _AuthState implements AuthState {
-  const factory _AuthState({required final String username}) = _$AuthStateImpl;
+  const factory _AuthState(
+      {required final String username,
+      final AuthEffect? effect}) = _$AuthStateImpl;
 
   @override
   String get username;
+  @override
+  AuthEffect? get effect;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.

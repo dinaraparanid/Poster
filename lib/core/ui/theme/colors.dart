@@ -19,7 +19,7 @@ final class AppColors {
   final AppButtonColors button;
   final AppTextFieldColors textField;
   final AppProgressIndicatorColor indicator;
-  final AppBottomBarColors bottomBar;
+  final AppNavBarColors navBar;
   final AppGradient gradient;
 
   const AppColors({
@@ -28,7 +28,7 @@ final class AppColors {
     required this.button,
     required this.textField,
     required this.indicator,
-    required this.bottomBar,
+    required this.navBar,
     required this.gradient,
   });
 
@@ -38,7 +38,7 @@ final class AppColors {
     button: AppButtonColors._default(),
     textField: AppTextFieldColors._default(),
     indicator: AppProgressIndicatorColor._default(),
-    bottomBar: AppBottomBarColors._default(),
+    navBar: AppNavBarColors._default(),
     gradient: AppGradient._default(),
   );
 }
@@ -66,18 +66,18 @@ final class AppBackgroundColors {
 }
 
 @immutable
-final class AppBottomBarColors {
+final class AppNavBarColors {
   final Color background;
   final Color selected;
   final Color unselected;
 
-  const AppBottomBarColors({
+  const AppNavBarColors({
     required this.background,
     required this.selected,
     required this.unselected,
   });
 
-  factory AppBottomBarColors._default() => const AppBottomBarColors(
+  factory AppNavBarColors._default() => const AppNavBarColors(
     background: _Gunmetal,
     selected: _Aquamarine,
     unselected: _ColumbiaBlue,

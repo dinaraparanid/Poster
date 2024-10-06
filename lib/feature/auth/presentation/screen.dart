@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/ui/theme/mod.dart';
-import 'package:poster/feature/auth/component/component.dart';
-import 'package:poster/feature/auth/component/event.dart';
-import 'package:poster/feature/auth/component/state.dart';
+import 'package:poster/feature/auth/component/mod.dart';
 import 'package:poster/feature/auth/presentation/ui/mod.dart';
 import 'package:poster/feature/auth/presentation/ui/sign_in_button.dart';
+import 'package:poster/feature/root/presentation/screen.dart';
+import 'package:poster/utils/functions/do_nothing.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 final class AuthScreen extends StatelessWidget {
@@ -20,7 +20,17 @@ final class AuthScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (_) => AuthComponent(),
-      child: BlocBuilder<AuthComponent, AuthState>(
+      child: BlocConsumer<AuthComponent, AuthState>(
+        listener: (context, state) => switch (state.effect) {
+          SignedIn() => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const RootScreen()),
+          ),
+
+          FailedToSignIn() => doNothing,
+
+          null => doNothing,
+        },
         builder: (context, state) {
           final onEvent = context.read<AuthComponent>().add;
           return UniversalPlatform.isIOS || UniversalPlatform.isMacOS

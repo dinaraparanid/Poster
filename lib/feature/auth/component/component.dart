@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poster/feature/auth/component/effect.dart';
 import 'package:poster/feature/auth/component/event.dart';
 import 'package:poster/feature/auth/component/state.dart';
 
@@ -14,7 +15,8 @@ final class AuthComponent extends Bloc<AuthEvent, AuthState> {
 
     on<SignInClicked>(
       (event, emit) {
-        // TODO: move to next screen
+        // TODO: make request and check status
+        emit(state.copyWith(effect: const SignedIn()));
       }
     );
   }
