@@ -5,4 +5,6 @@ final class UsernameChanged extends AuthEvent {
   UsernameChanged({required this.username});
 }
 
+final class UsernameCleared extends AuthEvent {}
+
 final class SignInClicked extends AuthEvent {}

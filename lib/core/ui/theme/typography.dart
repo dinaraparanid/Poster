@@ -18,6 +18,7 @@ class AppTypography {
       fontFamily: _NunitoSans,
       fontSize: 16,
       letterSpacing: 0,
+      decoration: TextDecoration.none,
     ),
     this.regular = const TextStyle(
       fontStyle: FontStyle.normal,
@@ -25,6 +26,7 @@ class AppTypography {
       fontFamily: _NunitoSans,
       fontSize: 14,
       letterSpacing: 0.4,
+      decoration: TextDecoration.none,
     ),
     this.caption = const TextStyle(
       fontStyle: FontStyle.normal,
@@ -32,6 +34,7 @@ class AppTypography {
       fontFamily: _NunitoSans,
       fontSize: 12,
       letterSpacing: 0.4,
+      decoration: TextDecoration.none,
     ),
     this.captionSm = const TextStyle(
       fontStyle: FontStyle.normal,
@@ -39,6 +42,7 @@ class AppTypography {
       fontFamily: _NunitoSans,
       fontSize: 10,
       letterSpacing: 0,
+      decoration: TextDecoration.none,
     ),
   });
 }
@@ -57,6 +61,7 @@ class AppHTypo {
       fontFamily: _NunitoSans,
       fontSize: 32,
       letterSpacing: 0,
+      decoration: TextDecoration.none,
     ),
     this.h2 = const TextStyle(
       fontStyle: FontStyle.normal,
@@ -64,6 +69,7 @@ class AppHTypo {
       fontFamily: _NunitoSans,
       fontSize: 24,
       letterSpacing: 0,
+      decoration: TextDecoration.none,
     ),
     this.h3 = const TextStyle(
       fontStyle: FontStyle.normal,
@@ -71,6 +77,7 @@ class AppHTypo {
       fontFamily: _NunitoSans,
       fontSize: 20,
       letterSpacing: 0,
+      decoration: TextDecoration.none,
     ),
     this.h4 = const TextStyle(
       fontStyle: FontStyle.normal,
@@ -78,6 +85,7 @@ class AppHTypo {
       fontFamily: _NunitoSans,
       fontSize: 18,
       letterSpacing: 0,
+      decoration: TextDecoration.none,
     ),
   });
 }

@@ -1,3 +1,7 @@
 {
-    "app_name": "Poster"
+    "app_name": "Poster",
+
+    "sign_in_welcome": "Приветствую в Poster!",
+    "sign_in_username": "Имя пользователя",
+    "sign_in_button_text": "Войти"
 }

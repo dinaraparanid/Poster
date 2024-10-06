@@ -73,19 +73,21 @@ final class AppSize {
   final double large;
   final double extraLarge;
   final double enormous;
+  final double extraEnormous;
   final AppLineSize line;
 
   const AppSize({
-    this.minimum = 15.0,
-    this.extraSmall = 30.0,
-    this.small = 50.0,
-    this.medium = 100.0,
-    this.extraMedium = 150.0,
-    this.big = 200.0,
-    this.extraBig = 250.0,
-    this.large = 300.0,
-    this.extraLarge = 400.0,
-    this.enormous = 500.0,
+    this.minimum = 12.0,
+    this.extraSmall = 16.0,
+    this.small = 24.0,
+    this.medium = 32.0,
+    this.extraMedium = 48.0,
+    this.big = 64.0,
+    this.extraBig = 72.0,
+    this.large = 128.0,
+    this.extraLarge = 256.0,
+    this.enormous = 312.0,
+    this.extraEnormous = 512.0,
     this.line = const AppLineSize(),
   });
 }

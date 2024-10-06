@@ -17,6 +17,13 @@ final class App extends StatelessWidget {
           color: theme.colors.background.primary,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          theme: ThemeData(
+            textSelectionTheme: TextSelectionThemeData(
+              selectionColor: theme.colors.textField.primary.withOpacity(0.5),
+              selectionHandleColor: theme.colors.textField.primary,
+              cursorColor: theme.colors.textField.primary,
+            ),
+          ),
           home: const AuthScreen(),
         ),
       );

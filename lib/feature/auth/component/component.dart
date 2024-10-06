@@ -8,6 +8,10 @@ final class AuthComponent extends Bloc<AuthEvent, AuthState> {
       (event, emit) => emit(state.copyWith(username: event.username))
     );
 
+    on<UsernameCleared>(
+      (event, emit) => emit(state.copyWith(username: ''))
+    );
+
     on<SignInClicked>(
       (event, emit) {
         // TODO: move to next screen

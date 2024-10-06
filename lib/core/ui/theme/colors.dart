@@ -17,6 +17,7 @@ final class AppColors {
   final AppBackgroundColors background;
   final AppTextColors text;
   final AppButtonColors button;
+  final AppTextFieldColors textField;
   final AppProgressIndicatorColor indicator;
   final AppBottomBarColors bottomBar;
   final AppGradient gradient;
@@ -25,6 +26,7 @@ final class AppColors {
     required this.background,
     required this.text,
     required this.button,
+    required this.textField,
     required this.indicator,
     required this.bottomBar,
     required this.gradient,
@@ -34,6 +36,7 @@ final class AppColors {
     background: AppBackgroundColors._default(),
     text: AppTextColors._default(),
     button: AppButtonColors._default(),
+    textField: AppTextFieldColors._default(),
     indicator: AppProgressIndicatorColor._default(),
     bottomBar: AppBottomBarColors._default(),
     gradient: AppGradient._default(),
@@ -83,36 +86,58 @@ final class AppBottomBarColors {
 
 @immutable
 final class AppTextColors {
+  final Color header;
+  final Color primary;
   final Color onCard;
-  final Color onTopBar;
-  final Color onMessage;
+  final Color onButton;
 
   const AppTextColors({
+    required this.header,
+    required this.primary,
     required this.onCard,
-    required this.onTopBar,
-    required this.onMessage,
+    required this.onButton,
   });
 
   factory AppTextColors._default() => const AppTextColors(
+    header: _DarkRaspberry,
+    primary: _ChineseBlack,
     onCard: _Cultured,
-    onTopBar: _DarkRaspberry,
-    onMessage: _ChineseBlack,
+    onButton: _Cultured,
   );
 }
 
 @immutable
 final class AppButtonColors {
+  final Color primary;
+  final Color disabled;
   final Color topBar;
   final AppFabColors fab;
 
   const AppButtonColors({
+    required this.primary,
+    required this.disabled,
     required this.topBar,
     required this.fab,
   });
 
   factory AppButtonColors._default() => AppButtonColors(
+    primary: _MetallicSeaweed,
+    disabled: _DarkJungleGreen,
     topBar: _ChineseBlack,
     fab: AppFabColors._default(),
+  );
+}
+
+@immutable
+final class AppTextFieldColors {
+  final Color primary;
+
+  const AppTextFieldColors({
+    required this.primary,
+  });
+
+  factory AppTextFieldColors._default() => const AppTextFieldColors(
+    primary: _MetallicSeaweed,
   );
 }
 
