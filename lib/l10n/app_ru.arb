@@ -1,10 +1,14 @@
 {
     "app_name": "Poster",
+    "send": "Отправить",
+    "cancel": "Отмена",
 
     "sign_in_welcome": "Приветствую в Poster!",
     "sign_in_username": "Имя пользователя",
     "sign_in_button_text": "Войти",
 
     "root_tab_wall": "Стена",
-    "root_tab_feed": "Лента"
+    "root_tab_feed": "Лента",
+    "root_new_message_dialog_title": "Новое сообщение",
+    "root_new_message_dialog_label": "Текст сообщения"
 }

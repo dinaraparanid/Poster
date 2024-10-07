@@ -17,6 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RootState {
   Tabs get selectedTab => throw _privateConstructorUsedError;
+  RootEffect? get effect => throw _privateConstructorUsedError;
+  String? get message => throw _privateConstructorUsedError;
 
   /// Create a copy of RootState
   /// with the given fields replaced by the non-null parameter values.
@@ -30,7 +32,9 @@ abstract class $RootStateCopyWith<$Res> {
   factory $RootStateCopyWith(RootState value, $Res Function(RootState) then) =
       _$RootStateCopyWithImpl<$Res, RootState>;
   @useResult
-  $Res call({Tabs selectedTab});
+  $Res call({Tabs selectedTab, RootEffect? effect, String? message});
+
+  $RootEffectCopyWith<$Res>? get effect;
 }
 
 /// @nodoc
@@ -49,13 +53,37 @@ class _$RootStateCopyWithImpl<$Res, $Val extends RootState>
   @override
   $Res call({
     Object? selectedTab = null,
+    Object? effect = freezed,
+    Object? message = freezed,
   }) {
     return _then(_value.copyWith(
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
               as Tabs,
+      effect: freezed == effect
+          ? _value.effect
+          : effect // ignore: cast_nullable_to_non_nullable
+              as RootEffect?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
+  }
+
+  /// Create a copy of RootState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RootEffectCopyWith<$Res>? get effect {
+    if (_value.effect == null) {
+      return null;
+    }
+
+    return $RootEffectCopyWith<$Res>(_value.effect!, (value) {
+      return _then(_value.copyWith(effect: value) as $Val);
+    });
   }
 }
 
@@ -67,7 +95,10 @@ abstract class _$$RootStateImplCopyWith<$Res>
       __$$RootStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Tabs selectedTab});
+  $Res call({Tabs selectedTab, RootEffect? effect, String? message});
+
+  @override
+  $RootEffectCopyWith<$Res>? get effect;
 }
 
 /// @nodoc
@@ -84,12 +115,22 @@ class __$$RootStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selectedTab = null,
+    Object? effect = freezed,
+    Object? message = freezed,
   }) {
     return _then(_$RootStateImpl(
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
               as Tabs,
+      effect: freezed == effect
+          ? _value.effect
+          : effect // ignore: cast_nullable_to_non_nullable
+              as RootEffect?,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -97,14 +138,18 @@ class __$$RootStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RootStateImpl implements _RootState {
-  const _$RootStateImpl({required this.selectedTab});
+  const _$RootStateImpl({required this.selectedTab, this.effect, this.message});
 
   @override
   final Tabs selectedTab;
+  @override
+  final RootEffect? effect;
+  @override
+  final String? message;
 
   @override
   String toString() {
-    return 'RootState(selectedTab: $selectedTab)';
+    return 'RootState(selectedTab: $selectedTab, effect: $effect, message: $message)';
   }
 
   @override
@@ -113,11 +158,13 @@ class _$RootStateImpl implements _RootState {
         (other.runtimeType == runtimeType &&
             other is _$RootStateImpl &&
             (identical(other.selectedTab, selectedTab) ||
-                other.selectedTab == selectedTab));
+                other.selectedTab == selectedTab) &&
+            (identical(other.effect, effect) || other.effect == effect) &&
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedTab);
+  int get hashCode => Object.hash(runtimeType, selectedTab, effect, message);
 
   /// Create a copy of RootState
   /// with the given fields replaced by the non-null parameter values.
@@ -129,10 +176,17 @@ class _$RootStateImpl implements _RootState {
 }
 
 abstract class _RootState implements RootState {
-  const factory _RootState({required final Tabs selectedTab}) = _$RootStateImpl;
+  const factory _RootState(
+      {required final Tabs selectedTab,
+      final RootEffect? effect,
+      final String? message}) = _$RootStateImpl;
 
   @override
   Tabs get selectedTab;
+  @override
+  RootEffect? get effect;
+  @override
+  String? get message;
 
   /// Create a copy of RootState
   /// with the given fields replaced by the non-null parameter values.

@@ -4,7 +4,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/ui/theme/app.dart';
 import 'package:poster/feature/root/component/mod.dart';
 import 'package:poster/feature/root/presentation/ui/mod.dart';
+import 'package:poster/feature/root/presentation/ui/new_message_dialog.dart';
 import 'package:poster/feature/root/presentation/ui/new_message_fab.dart';
+import 'package:poster/utils/functions/do_nothing.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 final class RootScreen extends StatelessWidget {
@@ -17,7 +19,14 @@ final class RootScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (_) => RootComponent(),
-      child: BlocBuilder<RootComponent, RootState>(
+      child: BlocConsumer<RootComponent, RootState>(
+        listenWhen: (x, y) => x.effect != y.effect,
+        listener: (context, state) => onEffect(
+          context: context,
+          theme: theme,
+          strings: strings,
+          effect: state.effect,
+        ),
         builder: (context, state) {
           final onEvent = context.read<RootComponent>().add;
 
@@ -40,8 +49,8 @@ final class RootScreen extends StatelessWidget {
                   topRight: Radius.circular(theme.dimensions.radius.small),
                 ),
                 child: UniversalPlatform.isIOS || UniversalPlatform.isMacOS
-                    ? cupertinoUi(theme, strings, state, onEvent)
-                    : materialUi(theme, strings, state, onEvent)
+                  ? cupertinoUi(theme, strings, state, onEvent)
+                  : materialUi(theme, strings, state, onEvent),
               ),
             ),
           );
@@ -80,4 +89,49 @@ final class RootScreen extends StatelessWidget {
     RootState state,
     void Function(RootEvent) onEvent,
   ) => Text('TODO: Body');
+
+  void onEffect({
+    required BuildContext context,
+    required AppTheme theme,
+    required AppLocalizations strings,
+    required RootEffect? effect,
+  }) {
+    final onEvent = context.read<RootComponent>().add;
+
+    switch (effect) {
+      case ShowNewMessageDialog():
+        onShowNewMessageDialog(
+          context: context,
+          theme: theme,
+          strings: strings,
+          onMessageChanged: (msg) => onEvent(UpdateMessage(message: msg)),
+        );
+
+      case null: doNothing;
+      case None(): doNothing;
+    }
+  }
+
+  void onShowNewMessageDialog({
+    required BuildContext context,
+    required AppTheme theme,
+    required AppLocalizations strings,
+    required void Function(String) onMessageChanged,
+  }) {
+    if (UniversalPlatform.isIOS || UniversalPlatform.isMacOS) {
+      showCupertinoNewMessageDialog(
+        context: context,
+        theme: theme,
+        strings: strings,
+        onMessageChanged: onMessageChanged,
+      );
+    } else {
+      showMaterialNewMessageDialog(
+        context: context,
+        theme: theme,
+        strings: strings,
+        onMessageChanged: onMessageChanged,
+      );
+    }
+  }
 }

@@ -17,7 +17,9 @@ final class NewMessageFab extends StatelessWidget {
 
         return FloatingActionButton(
           backgroundColor: theme.colors.button.fab.background,
-          onPressed: () => onEvent(NewMessageButtonClicked()),
+          onPressed: () => onEvent(
+            UpdateNewMessageDialogVisibility(isVisible: true)
+          ),
           shape: const CircleBorder(),
           child: Image.asset(
             AppImages.load('send_message.png'),

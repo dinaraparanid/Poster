@@ -7,4 +7,12 @@ final class TabClicked extends RootEvent {
   TabClicked({required this.tab});
 }
 
-final class NewMessageButtonClicked extends RootEvent {}
+final class UpdateNewMessageDialogVisibility extends RootEvent {
+  final bool isVisible;
+  UpdateNewMessageDialogVisibility({required this.isVisible});
+}
+
+final class UpdateMessage extends RootEvent {
+  final String message;
+  UpdateMessage({required this.message});
+}

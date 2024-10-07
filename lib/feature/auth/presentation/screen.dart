@@ -21,6 +21,7 @@ final class AuthScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) => AuthComponent(),
       child: BlocConsumer<AuthComponent, AuthState>(
+        listenWhen: (x, y) => x.effect != y.effect,
         listener: (context, state) => switch (state.effect) {
           SignedIn() => onSignedIn(
               context: context,
