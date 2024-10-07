@@ -4,6 +4,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/ui/theme/app.dart';
 import 'package:poster/feature/root/component/mod.dart';
 import 'package:poster/feature/root/presentation/ui/mod.dart';
+import 'package:poster/feature/wall/presentation/screen.dart';
 import 'package:poster/utils/functions/do_nothing.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -91,7 +92,10 @@ final class RootScreen extends StatelessWidget {
     AppLocalizations strings,
     RootState state,
     void Function(RootEvent) onEvent,
-  ) => Text('TODO: Body');
+  ) => switch (state.selectedTab) {
+    Tabs.wall => const WallScreen(),
+    Tabs.feed => Text("TODO: Feed screen"),
+  };
 
   void onEffect({
     required BuildContext context,

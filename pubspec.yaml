@@ -17,6 +17,9 @@ dependencies:
   freezed: ^2.5.7
   freezed_annotation: ^2.4.4
   universal_platform: ^1.0.0+1
+  streaming_shared_preferences: ^2.0.0
+  shared_preferences: ^2.3.2
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
