@@ -22,13 +22,13 @@ final class AuthScreen extends StatelessWidget {
       create: (_) => AuthComponent(),
       child: BlocConsumer<AuthComponent, AuthState>(
         listener: (context, state) => switch (state.effect) {
-          SignedIn() => Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const RootScreen()),
+          SignedIn() => onSignedIn(
+              context: context,
+              onEvent: context.read<AuthComponent>().add,
           ),
 
           FailedToSignIn() => doNothing,
-
+          None() => doNothing,
           null => doNothing,
         },
         builder: (context, state) {
@@ -114,4 +114,16 @@ final class AuthScreen extends StatelessWidget {
       fontWeight: FontWeight.w700,
     ),
   );
+
+  void onSignedIn({
+    required BuildContext context,
+    required void Function(AuthEvent) onEvent,
+  }) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const RootScreen()),
+    );
+
+    onEvent(NavigatedToSignIn());
+  }
 }

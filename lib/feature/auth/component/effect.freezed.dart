@@ -20,18 +20,21 @@ mixin _$AuthEffect {
   TResult when<TResult extends Object?>({
     required TResult Function() signedIn,
     required TResult Function() failedToSignIn,
+    required TResult Function() none,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? signedIn,
     TResult? Function()? failedToSignIn,
+    TResult? Function()? none,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signedIn,
     TResult Function()? failedToSignIn,
+    TResult Function()? none,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$AuthEffect {
   TResult map<TResult extends Object?>({
     required TResult Function(SignedIn value) signedIn,
     required TResult Function(FailedToSignIn value) failedToSignIn,
+    required TResult Function(None value) none,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignedIn value)? signedIn,
     TResult? Function(FailedToSignIn value)? failedToSignIn,
+    TResult? Function(None value)? none,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignedIn value)? signedIn,
     TResult Function(FailedToSignIn value)? failedToSignIn,
+    TResult Function(None value)? none,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -120,6 +126,7 @@ class _$SignedInImpl implements SignedIn {
   TResult when<TResult extends Object?>({
     required TResult Function() signedIn,
     required TResult Function() failedToSignIn,
+    required TResult Function() none,
   }) {
     return signedIn();
   }
@@ -129,6 +136,7 @@ class _$SignedInImpl implements SignedIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? signedIn,
     TResult? Function()? failedToSignIn,
+    TResult? Function()? none,
   }) {
     return signedIn?.call();
   }
@@ -138,6 +146,7 @@ class _$SignedInImpl implements SignedIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signedIn,
     TResult Function()? failedToSignIn,
+    TResult Function()? none,
     required TResult orElse(),
   }) {
     if (signedIn != null) {
@@ -151,6 +160,7 @@ class _$SignedInImpl implements SignedIn {
   TResult map<TResult extends Object?>({
     required TResult Function(SignedIn value) signedIn,
     required TResult Function(FailedToSignIn value) failedToSignIn,
+    required TResult Function(None value) none,
   }) {
     return signedIn(this);
   }
@@ -160,6 +170,7 @@ class _$SignedInImpl implements SignedIn {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignedIn value)? signedIn,
     TResult? Function(FailedToSignIn value)? failedToSignIn,
+    TResult? Function(None value)? none,
   }) {
     return signedIn?.call(this);
   }
@@ -169,6 +180,7 @@ class _$SignedInImpl implements SignedIn {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignedIn value)? signedIn,
     TResult Function(FailedToSignIn value)? failedToSignIn,
+    TResult Function(None value)? none,
     required TResult orElse(),
   }) {
     if (signedIn != null) {
@@ -225,6 +237,7 @@ class _$FailedToSignInImpl implements FailedToSignIn {
   TResult when<TResult extends Object?>({
     required TResult Function() signedIn,
     required TResult Function() failedToSignIn,
+    required TResult Function() none,
   }) {
     return failedToSignIn();
   }
@@ -234,6 +247,7 @@ class _$FailedToSignInImpl implements FailedToSignIn {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? signedIn,
     TResult? Function()? failedToSignIn,
+    TResult? Function()? none,
   }) {
     return failedToSignIn?.call();
   }
@@ -243,6 +257,7 @@ class _$FailedToSignInImpl implements FailedToSignIn {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? signedIn,
     TResult Function()? failedToSignIn,
+    TResult Function()? none,
     required TResult orElse(),
   }) {
     if (failedToSignIn != null) {
@@ -256,6 +271,7 @@ class _$FailedToSignInImpl implements FailedToSignIn {
   TResult map<TResult extends Object?>({
     required TResult Function(SignedIn value) signedIn,
     required TResult Function(FailedToSignIn value) failedToSignIn,
+    required TResult Function(None value) none,
   }) {
     return failedToSignIn(this);
   }
@@ -265,6 +281,7 @@ class _$FailedToSignInImpl implements FailedToSignIn {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SignedIn value)? signedIn,
     TResult? Function(FailedToSignIn value)? failedToSignIn,
+    TResult? Function(None value)? none,
   }) {
     return failedToSignIn?.call(this);
   }
@@ -274,6 +291,7 @@ class _$FailedToSignInImpl implements FailedToSignIn {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SignedIn value)? signedIn,
     TResult Function(FailedToSignIn value)? failedToSignIn,
+    TResult Function(None value)? none,
     required TResult orElse(),
   }) {
     if (failedToSignIn != null) {
@@ -285,4 +303,114 @@ class _$FailedToSignInImpl implements FailedToSignIn {
 
 abstract class FailedToSignIn implements AuthEffect {
   const factory FailedToSignIn() = _$FailedToSignInImpl;
+}
+
+/// @nodoc
+abstract class _$$NoneImplCopyWith<$Res> {
+  factory _$$NoneImplCopyWith(
+          _$NoneImpl value, $Res Function(_$NoneImpl) then) =
+      __$$NoneImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NoneImplCopyWithImpl<$Res>
+    extends _$AuthEffectCopyWithImpl<$Res, _$NoneImpl>
+    implements _$$NoneImplCopyWith<$Res> {
+  __$$NoneImplCopyWithImpl(_$NoneImpl _value, $Res Function(_$NoneImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthEffect
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$NoneImpl implements None {
+  const _$NoneImpl();
+
+  @override
+  String toString() {
+    return 'AuthEffect.none()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NoneImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() signedIn,
+    required TResult Function() failedToSignIn,
+    required TResult Function() none,
+  }) {
+    return none();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? signedIn,
+    TResult? Function()? failedToSignIn,
+    TResult? Function()? none,
+  }) {
+    return none?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? signedIn,
+    TResult Function()? failedToSignIn,
+    TResult Function()? none,
+    required TResult orElse(),
+  }) {
+    if (none != null) {
+      return none();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SignedIn value) signedIn,
+    required TResult Function(FailedToSignIn value) failedToSignIn,
+    required TResult Function(None value) none,
+  }) {
+    return none(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SignedIn value)? signedIn,
+    TResult? Function(FailedToSignIn value)? failedToSignIn,
+    TResult? Function(None value)? none,
+  }) {
+    return none?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SignedIn value)? signedIn,
+    TResult Function(FailedToSignIn value)? failedToSignIn,
+    TResult Function(None value)? none,
+    required TResult orElse(),
+  }) {
+    if (none != null) {
+      return none(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class None implements AuthEffect {
+  const factory None() = _$NoneImpl;
 }

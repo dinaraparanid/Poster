@@ -19,5 +19,11 @@ final class AuthComponent extends Bloc<AuthEvent, AuthState> {
         emit(state.copyWith(effect: const SignedIn()));
       }
     );
+
+    on<NavigatedToSignIn>(
+      (event, emit) {
+        emit(state.copyWith(effect: const None()));
+      }
+    );
   }
 }

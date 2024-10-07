@@ -8,3 +8,5 @@ final class UsernameChanged extends AuthEvent {
 final class UsernameCleared extends AuthEvent {}
 
 final class SignInClicked extends AuthEvent {}
+
+final class NavigatedToSignIn extends AuthEvent {}

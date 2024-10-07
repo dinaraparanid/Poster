@@ -6,4 +6,5 @@ part 'effect.freezed.dart';
 sealed class AuthEffect with _$AuthEffect {
   const factory AuthEffect.signedIn() = SignedIn;
   const factory AuthEffect.failedToSignIn() = FailedToSignIn;
+  const factory AuthEffect.none() = None;
 }
