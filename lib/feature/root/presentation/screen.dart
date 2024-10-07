@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/ui/theme/app.dart';
 import 'package:poster/feature/root/component/mod.dart';
+import 'package:poster/feature/root/component/properties.dart';
 import 'package:poster/feature/root/presentation/ui/mod.dart';
 import 'package:poster/feature/root/presentation/ui/new_message_dialog.dart';
 import 'package:poster/feature/root/presentation/ui/new_message_fab.dart';
@@ -25,6 +26,7 @@ final class RootScreen extends StatelessWidget {
           context: context,
           theme: theme,
           strings: strings,
+          sendEnabled: state.isSendEnabled,
           effect: state.effect,
         ),
         builder: (context, state) {
@@ -94,6 +96,7 @@ final class RootScreen extends StatelessWidget {
     required BuildContext context,
     required AppTheme theme,
     required AppLocalizations strings,
+    required bool sendEnabled,
     required RootEffect? effect,
   }) {
     final onEvent = context.read<RootComponent>().add;
@@ -105,33 +108,12 @@ final class RootScreen extends StatelessWidget {
           theme: theme,
           strings: strings,
           onMessageChanged: (msg) => onEvent(UpdateMessage(message: msg)),
+          onSend: () => onEvent(SendMessage()),
+          onCancel: () => onEvent(UpdateNewMessageDialogVisibility(isVisible: false)),
         );
 
       case null: doNothing;
       case None(): doNothing;
-    }
-  }
-
-  void onShowNewMessageDialog({
-    required BuildContext context,
-    required AppTheme theme,
-    required AppLocalizations strings,
-    required void Function(String) onMessageChanged,
-  }) {
-    if (UniversalPlatform.isIOS || UniversalPlatform.isMacOS) {
-      showCupertinoNewMessageDialog(
-        context: context,
-        theme: theme,
-        strings: strings,
-        onMessageChanged: onMessageChanged,
-      );
-    } else {
-      showMaterialNewMessageDialog(
-        context: context,
-        theme: theme,
-        strings: strings,
-        onMessageChanged: onMessageChanged,
-      );
     }
   }
 }

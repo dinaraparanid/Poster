@@ -12,7 +12,7 @@ final class RootComponent extends Bloc<RootEvent, RootState> {
     on<UpdateNewMessageDialogVisibility>(
       (event, emit) => emit(
         switch (event.isVisible) {
-          true => state.copyWith(effect: const ShowNewMessageDialog(), message: ''),
+          true => state.copyWith(effect: const ShowNewMessageDialog()),
           false => state.copyWith(effect: const None()),
         }
       )
@@ -20,6 +20,13 @@ final class RootComponent extends Bloc<RootEvent, RootState> {
 
     on<UpdateMessage>(
       (event, emit) => emit(state.copyWith(message: event.message))
+    );
+
+    on<SendMessage>(
+      (event, emit) {
+        // TODO: make request if message is not empty
+        emit(state.copyWith(effect: const None(), message: ''));
+      }
     );
   }
 }

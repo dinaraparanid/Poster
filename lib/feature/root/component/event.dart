@@ -16,3 +16,5 @@ final class UpdateMessage extends RootEvent {
   final String message;
   UpdateMessage({required this.message});
 }
+
+final class SendMessage extends RootEvent {}

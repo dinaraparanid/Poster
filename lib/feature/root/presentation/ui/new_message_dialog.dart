@@ -3,13 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/ui/foundation/text_field.dart';
 import 'package:poster/core/ui/theme/app.dart';
-import 'package:poster/utils/functions/do_nothing.dart';
+import 'package:universal_platform/universal_platform.dart';
 
-void showCupertinoNewMessageDialog({
+void onShowNewMessageDialog({
   required BuildContext context,
   required AppTheme theme,
   required AppLocalizations strings,
   required void Function(String) onMessageChanged,
+  required void Function() onSend,
+  required void Function() onCancel,
+}) {
+  if (UniversalPlatform.isIOS || UniversalPlatform.isMacOS) {
+    _showCupertinoNewMessageDialog(
+      context: context,
+      theme: theme,
+      strings: strings,
+      onMessageChanged: onMessageChanged,
+      onSend: onSend,
+      onCancel: onCancel,
+    );
+  } else {
+    _showMaterialNewMessageDialog(
+      context: context,
+      theme: theme,
+      strings: strings,
+      onMessageChanged: onMessageChanged,
+      onSend: onSend,
+      onCancel: onCancel,
+    );
+  }
+}
+
+void _showCupertinoNewMessageDialog({
+  required BuildContext context,
+  required AppTheme theme,
+  required AppLocalizations strings,
+  required void Function(String) onMessageChanged,
+  required void Function() onSend,
+  required void Function() onCancel,
 }) => showCupertinoDialog(
   context: context,
   builder: (context) => CupertinoAlertDialog(
@@ -20,15 +51,22 @@ void showCupertinoNewMessageDialog({
       ),
     ),
     content: _body(strings: strings, onMessageChanged: onMessageChanged),
-    actions: _actions(theme: theme, strings: strings),
+    actions: _actions(
+      theme: theme,
+      strings: strings,
+      onSend: onSend,
+      onCancel: onCancel,
+    ),
   ),
 );
 
-void showMaterialNewMessageDialog({
+void _showMaterialNewMessageDialog({
   required BuildContext context,
   required AppTheme theme,
   required AppLocalizations strings,
   required void Function(String) onMessageChanged,
+  required void Function() onSend,
+  required void Function() onCancel,
 }) => showDialog(
   context: context,
   builder: (context) => AlertDialog(
@@ -40,7 +78,18 @@ void showMaterialNewMessageDialog({
       ),
     ),
     content: _body(strings: strings, onMessageChanged: onMessageChanged),
-    actions: _actions(theme: theme, strings: strings),
+    actions: _actions(
+      theme: theme,
+      strings: strings,
+      onSend: () {
+        onSend();
+        Navigator.pop(context);
+      },
+      onCancel: () {
+        onCancel();
+        Navigator.pop(context);
+      },
+    ),
   ),
 );
 
@@ -55,17 +104,28 @@ Widget _body({
 List<Widget> _actions({
   required AppTheme theme,
   required AppLocalizations strings,
+  required void Function() onSend,
+  required void Function() onCancel,
 }) => [
-  _action(theme: theme, text: strings.cancel, onPressed: doNothing),
-  _action(theme: theme, text: strings.send, onPressed: doNothing),
+  _action(
+    theme: theme,
+    text: strings.cancel,
+    onPressed: onCancel,
+  ),
+
+  _action(
+    theme: theme,
+    text: strings.send,
+    onPressed: onSend,
+  ),
 ];
 
 TextButton _action({
   required AppTheme theme,
   required String text,
-  required Function() onPressed,
+  required void Function() onPressed,
 }) => TextButton(
-  onPressed: doNothing,
+  onPressed: onPressed,
   style: TextButton.styleFrom(
     overlayColor: theme.colors.text.primary,
   ),
