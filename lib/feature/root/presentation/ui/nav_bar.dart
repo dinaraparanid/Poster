@@ -51,7 +51,7 @@ List<BottomNavigationBarItem> _items({
 }) => [
   BottomNavigationBarItem(
     icon: Image.asset(
-      AppImages.load('ic_wall.png'),
+      AppImages.loadPng('ic_wall'),
       width: theme.dimensions.size.small,
       height: theme.dimensions.size.small,
       color: state.selectedTab == Tabs.wall
@@ -62,7 +62,7 @@ List<BottomNavigationBarItem> _items({
   ),
   BottomNavigationBarItem(
     icon: Image.asset(
-      AppImages.load('ic_feed.png'),
+      AppImages.loadPng('ic_feed'),
       width: theme.dimensions.size.small,
       height: theme.dimensions.size.small,
       color: state.selectedTab == Tabs.feed

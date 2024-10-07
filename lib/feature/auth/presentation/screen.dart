@@ -99,7 +99,7 @@ final class AuthScreen extends StatelessWidget {
       theme.dimensions.padding.zero,
     ),
     child: Image.asset(
-      AppImages.load('sign_in_preview.png'),
+      AppImages.loadPng('sign_in_preview'),
       width: theme.dimensions.size.extraLarge,
       height: theme.dimensions.size.extraLarge,
     ),
@@ -120,7 +120,7 @@ final class AuthScreen extends StatelessWidget {
     required BuildContext context,
     required void Function(AuthEvent) onEvent,
   }) {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (_) => const RootScreen()),
     );

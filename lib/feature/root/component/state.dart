@@ -11,5 +11,6 @@ abstract class RootState with _$RootState {
     required Tabs selectedTab,
     RootEffect? effect,
     String? message,
+    required bool hasIncomingAnnouncements,
   }) = _RootState;
 }

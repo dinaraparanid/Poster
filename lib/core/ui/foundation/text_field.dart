@@ -111,7 +111,7 @@ final class _AppTextField extends State<AppTextField> {
       widget.onCanceled?.call();
     },
     child: Image.asset(
-      AppImages.load('ic_cancel.png'),
+      AppImages.loadPng('ic_cancel'),
       width: theme.dimensions.size.small,
       height: theme.dimensions.size.small,
       color: theme.colors.textField.primary,

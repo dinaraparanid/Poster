@@ -4,7 +4,12 @@ import 'package:poster/feature/root/component/event.dart';
 import 'package:poster/feature/root/component/state.dart';
 
 final class RootComponent extends Bloc<RootEvent, RootState> {
-  RootComponent() : super(const RootState(selectedTab: Tabs.wall)) {
+  RootComponent() : super(
+    const RootState(
+      selectedTab: Tabs.wall,
+      hasIncomingAnnouncements: false,
+    )
+  ) {
     on<TabClicked>(
       (event, emit) => emit(state.copyWith(selectedTab: event.tab))
     );
@@ -26,6 +31,12 @@ final class RootComponent extends Bloc<RootEvent, RootState> {
       (event, emit) {
         // TODO: make request if message is not empty
         emit(state.copyWith(effect: const None(), message: ''));
+      }
+    );
+
+    on<AnnouncementsClicked>(
+      (event, emit) {
+        // TODO: announcements screen
       }
     );
   }

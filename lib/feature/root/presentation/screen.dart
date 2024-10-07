@@ -3,10 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/ui/theme/app.dart';
 import 'package:poster/feature/root/component/mod.dart';
-import 'package:poster/feature/root/component/properties.dart';
 import 'package:poster/feature/root/presentation/ui/mod.dart';
-import 'package:poster/feature/root/presentation/ui/new_message_dialog.dart';
-import 'package:poster/feature/root/presentation/ui/new_message_fab.dart';
 import 'package:poster/utils/functions/do_nothing.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -37,6 +34,10 @@ final class RootScreen extends StatelessWidget {
             backgroundColor: theme.colors.background.primary,
             floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
             floatingActionButton: const NewMessageFab(),
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(theme.dimensions.size.big),
+              child: const RootTopBar()
+            ),
             body: body(theme, strings, state, onEvent),
             bottomNavigationBar: Container(
               decoration: BoxDecoration(

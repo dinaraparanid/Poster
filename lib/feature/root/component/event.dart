@@ -18,3 +18,5 @@ final class UpdateMessage extends RootEvent {
 }
 
 final class SendMessage extends RootEvent {}
+
+final class AnnouncementsClicked extends RootEvent {}

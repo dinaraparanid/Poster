@@ -54,8 +54,14 @@ void _showCupertinoNewMessageDialog({
     actions: _actions(
       theme: theme,
       strings: strings,
-      onSend: onSend,
-      onCancel: onCancel,
+      onSend: () {
+        onSend();
+        Navigator.pop(context);
+      },
+      onCancel: () {
+        onCancel();
+        Navigator.pop(context);
+      },
     ),
   ),
 );

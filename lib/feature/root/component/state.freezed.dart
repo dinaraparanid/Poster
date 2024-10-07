@@ -19,6 +19,7 @@ mixin _$RootState {
   Tabs get selectedTab => throw _privateConstructorUsedError;
   RootEffect? get effect => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
+  bool get hasIncomingAnnouncements => throw _privateConstructorUsedError;
 
   /// Create a copy of RootState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,7 +33,11 @@ abstract class $RootStateCopyWith<$Res> {
   factory $RootStateCopyWith(RootState value, $Res Function(RootState) then) =
       _$RootStateCopyWithImpl<$Res, RootState>;
   @useResult
-  $Res call({Tabs selectedTab, RootEffect? effect, String? message});
+  $Res call(
+      {Tabs selectedTab,
+      RootEffect? effect,
+      String? message,
+      bool hasIncomingAnnouncements});
 
   $RootEffectCopyWith<$Res>? get effect;
 }
@@ -55,6 +60,7 @@ class _$RootStateCopyWithImpl<$Res, $Val extends RootState>
     Object? selectedTab = null,
     Object? effect = freezed,
     Object? message = freezed,
+    Object? hasIncomingAnnouncements = null,
   }) {
     return _then(_value.copyWith(
       selectedTab: null == selectedTab
@@ -69,6 +75,10 @@ class _$RootStateCopyWithImpl<$Res, $Val extends RootState>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      hasIncomingAnnouncements: null == hasIncomingAnnouncements
+          ? _value.hasIncomingAnnouncements
+          : hasIncomingAnnouncements // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -95,7 +105,11 @@ abstract class _$$RootStateImplCopyWith<$Res>
       __$$RootStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Tabs selectedTab, RootEffect? effect, String? message});
+  $Res call(
+      {Tabs selectedTab,
+      RootEffect? effect,
+      String? message,
+      bool hasIncomingAnnouncements});
 
   @override
   $RootEffectCopyWith<$Res>? get effect;
@@ -117,6 +131,7 @@ class __$$RootStateImplCopyWithImpl<$Res>
     Object? selectedTab = null,
     Object? effect = freezed,
     Object? message = freezed,
+    Object? hasIncomingAnnouncements = null,
   }) {
     return _then(_$RootStateImpl(
       selectedTab: null == selectedTab
@@ -131,6 +146,10 @@ class __$$RootStateImplCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as String?,
+      hasIncomingAnnouncements: null == hasIncomingAnnouncements
+          ? _value.hasIncomingAnnouncements
+          : hasIncomingAnnouncements // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -138,7 +157,11 @@ class __$$RootStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RootStateImpl implements _RootState {
-  const _$RootStateImpl({required this.selectedTab, this.effect, this.message});
+  const _$RootStateImpl(
+      {required this.selectedTab,
+      this.effect,
+      this.message,
+      required this.hasIncomingAnnouncements});
 
   @override
   final Tabs selectedTab;
@@ -146,10 +169,12 @@ class _$RootStateImpl implements _RootState {
   final RootEffect? effect;
   @override
   final String? message;
+  @override
+  final bool hasIncomingAnnouncements;
 
   @override
   String toString() {
-    return 'RootState(selectedTab: $selectedTab, effect: $effect, message: $message)';
+    return 'RootState(selectedTab: $selectedTab, effect: $effect, message: $message, hasIncomingAnnouncements: $hasIncomingAnnouncements)';
   }
 
   @override
@@ -160,11 +185,15 @@ class _$RootStateImpl implements _RootState {
             (identical(other.selectedTab, selectedTab) ||
                 other.selectedTab == selectedTab) &&
             (identical(other.effect, effect) || other.effect == effect) &&
-            (identical(other.message, message) || other.message == message));
+            (identical(other.message, message) || other.message == message) &&
+            (identical(
+                    other.hasIncomingAnnouncements, hasIncomingAnnouncements) ||
+                other.hasIncomingAnnouncements == hasIncomingAnnouncements));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedTab, effect, message);
+  int get hashCode => Object.hash(
+      runtimeType, selectedTab, effect, message, hasIncomingAnnouncements);
 
   /// Create a copy of RootState
   /// with the given fields replaced by the non-null parameter values.
@@ -179,7 +208,8 @@ abstract class _RootState implements RootState {
   const factory _RootState(
       {required final Tabs selectedTab,
       final RootEffect? effect,
-      final String? message}) = _$RootStateImpl;
+      final String? message,
+      required final bool hasIncomingAnnouncements}) = _$RootStateImpl;
 
   @override
   Tabs get selectedTab;
@@ -187,6 +217,8 @@ abstract class _RootState implements RootState {
   RootEffect? get effect;
   @override
   String? get message;
+  @override
+  bool get hasIncomingAnnouncements;
 
   /// Create a copy of RootState
   /// with the given fields replaced by the non-null parameter values.

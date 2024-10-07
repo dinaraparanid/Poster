@@ -22,7 +22,7 @@ final class NewMessageFab extends StatelessWidget {
           ),
           shape: const CircleBorder(),
           child: Image.asset(
-            AppImages.load('send_message.png'),
+            AppImages.loadPng('send_message'),
             color: theme.colors.button.fab.content,
             width: theme.dimensions.size.small,
             height: theme.dimensions.size.small,
