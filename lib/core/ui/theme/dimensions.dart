@@ -5,11 +5,13 @@ final class AppDimensions {
   final AppPadding padding;
   final AppRadius radius;
   final AppSize size;
+  final AppOffsets offset;
 
   const AppDimensions({
     this.padding = const AppPadding(),
     this.radius = const AppRadius(),
-    this.size = const AppSize()
+    this.size = const AppSize(),
+    this.offset = const AppOffsets(),
   });
 }
 
@@ -116,5 +118,14 @@ final class AppLineSize {
     this.large = 20,
     this.extraLarge = 24,
     this.enormous = 32,
+  });
+}
+
+@immutable
+final class AppOffsets {
+  final Offset shadow;
+
+  const AppOffsets({
+    this.shadow = const Offset(4, 4),
   });
 }

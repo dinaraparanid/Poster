@@ -75,6 +75,7 @@ void _showMaterialNewMessageDialog({
   required void Function() onCancel,
 }) => showDialog(
   context: context,
+  barrierDismissible: false,
   builder: (context) => AlertDialog(
     backgroundColor: theme.colors.background.primary,
     title: Text(

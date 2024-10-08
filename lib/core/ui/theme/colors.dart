@@ -11,6 +11,7 @@ const _Gunmetal = Color(0xFF022B3A);
 const _MetallicSeaweed = Color(0xFF1F7A8C);
 const _DarkJungleGreen = Color(0xFF082126);
 const _Lavender = Color.fromRGBO(225, 229, 242, 0.5);
+const _Shadow = Color.fromRGBO(0, 0, 0, 0.25);
 
 @immutable
 final class AppColors {
@@ -21,6 +22,7 @@ final class AppColors {
   final AppProgressIndicatorColor indicator;
   final AppNavBarColors navBar;
   final AppGradient gradient;
+  final Color shadow;
 
   const AppColors({
     required this.background,
@@ -30,6 +32,7 @@ final class AppColors {
     required this.indicator,
     required this.navBar,
     required this.gradient,
+    required this.shadow,
   });
 
   factory AppColors.create() => AppColors(
@@ -40,6 +43,7 @@ final class AppColors {
     indicator: AppProgressIndicatorColor._default(),
     navBar: AppNavBarColors._default(),
     gradient: AppGradient._default(),
+    shadow: _Shadow,
   );
 }
 

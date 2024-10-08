@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/ui/theme/app.dart';
 import 'package:poster/feature/wall/component/component.dart';
+import 'package:poster/feature/wall/presentation/ui/profile/container.dart';
 
 final class WallScreen extends StatelessWidget {
   const WallScreen({super.key});
@@ -14,7 +15,15 @@ final class WallScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => WallComponent(repository: context.read()),
-      child: Text("TODO: Wall screen"),
+      child: const SizedBox(
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            ProfileContainer(),
+          ],
+        ),
+      ),
     );
   }
 }
