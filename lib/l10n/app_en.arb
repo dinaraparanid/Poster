@@ -2,6 +2,7 @@
     "app_name": "Poster",
     "send": "Send",
     "cancel": "Cancel",
+    "unspecified": "Unspecified",
 
     "sign_in_welcome": "Welcome to Poster!",
     "sign_in_username": "Username",
@@ -10,5 +11,41 @@
     "root_tab_wall": "Wall",
     "root_tab_feed": "Feed",
     "root_new_message_dialog_title": "New message",
-    "root_new_message_dialog_label": "Message text"
+    "root_new_message_dialog_label": "Message text",
+
+    "wall_age_undefined": "Years: unspecified",
+    "wall_age": "{value, plural, one{1 Year}  other{{value} Years}}",
+    "@wall_age": {
+        "description": "profile age",
+        "placeholders": {
+            "value": {
+                "type": "int",
+                "example": "?"
+            }
+        }
+    },
+
+    "wall_edit_profile": "Edit profile",
+
+    "wall_followers": "Followers: {value}",
+    "@wall_followers": {
+        "description": "profile followers",
+        "placeholder": {
+            "value": {
+                "type": "int",
+                "example": "?"
+            }
+        }
+    },
+
+    "wall_following": "Following: {value}",
+    "@wall_following": {
+        "description": "profile following",
+        "placeholder": {
+            "value": {
+                "type": "int",
+                "example": "?"
+            }
+        }
+    }
 }

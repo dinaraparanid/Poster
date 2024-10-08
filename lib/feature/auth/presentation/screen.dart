@@ -19,7 +19,7 @@ final class AuthScreen extends StatelessWidget {
     final strings = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (_) => AuthComponent(),
+      create: (context) => AuthComponent(repository: context.read()),
       child: BlocConsumer<AuthComponent, AuthState>(
         listenWhen: (x, y) => x.effect != y.effect,
         listener: (context, state) => switch (state.effect) {

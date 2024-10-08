@@ -21,6 +21,13 @@ extension Properties<T> on UiState<T> {
     Refreshing() => (this as Refreshing<T>).value.getOrNull,
     Data() => (this as Data<T>).value,
   };
+
+  bool get isInitial => this is Initial;
+  bool get isLoading => this is Loading;
+  bool get isError => this is Error;
+  bool get isSuccess => this is Success;
+  bool get isRefreshing => this is Refreshing;
+  bool get isEvaluating => isInitial || isLoading || isRefreshing;
 }
 
 extension Mapper<T> on T {

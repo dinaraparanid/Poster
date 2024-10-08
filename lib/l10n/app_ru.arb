@@ -2,6 +2,7 @@
     "app_name": "Poster",
     "send": "Отправить",
     "cancel": "Отмена",
+    "unspecified": "Не указано",
 
     "sign_in_welcome": "Приветствую в Poster!",
     "sign_in_username": "Имя пользователя",
@@ -10,5 +11,41 @@
     "root_tab_wall": "Стена",
     "root_tab_feed": "Лента",
     "root_new_message_dialog_title": "Новое сообщение",
-    "root_new_message_dialog_label": "Текст сообщения"
+    "root_new_message_dialog_label": "Текст сообщения",
+
+    "wall_age_undefined": "Лет: ?",
+    "wall_age": "{value, plural, one{1 Год} two{2 Года} few{{value} Года} other{{value} Лет}}",
+    "@wall_age": {
+        "description": "profile age",
+        "placeholders": {
+            "value": {
+                "type": "int",
+                "example": "?"
+            }
+        }
+    },
+
+    "wall_edit_profile": "Редактировать",
+
+    "wall_followers": "Подписчиков: {value}",
+    "@wall_followers": {
+        "description": "profile followers",
+        "placeholder": {
+            "value": {
+                "type": "String",
+                "example": "?"
+            }
+        }
+    },
+
+    "wall_following": "Подписан: {value}",
+    "@wall_following": {
+        "description": "profile following",
+        "placeholder": {
+            "value": {
+                "type": "String",
+                "example": "?"
+            }
+        }
+    }
 }
