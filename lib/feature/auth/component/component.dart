@@ -4,6 +4,7 @@ import 'package:poster/domain/auth/repository.dart';
 import 'package:poster/feature/auth/component/effect.dart';
 import 'package:poster/feature/auth/component/event.dart';
 import 'package:poster/feature/auth/component/state.dart';
+import 'package:poster/utils/functions/do_nothing.dart';
 
 final class AuthComponent extends Bloc<AuthEvent, AuthState> {
   final AuthRepository repository;
@@ -19,12 +20,16 @@ final class AuthComponent extends Bloc<AuthEvent, AuthState> {
 
     on<SignInClicked>(
       (event, emit) async {
-        // TODO: make request and check status
+        final res = await repository.login(state.username);
 
-        final profile = Profile(username: state.username);
-        await repository.updateProfile(profile);
-
-        emit(state.copyWith(effect: const SignedIn()));
+        await res.fold(
+          (_) async => doNothing(), // TODO: error handling
+          (_) async {
+            final profile = Profile(username: state.username);
+            await repository.updateProfile(profile);
+            emit(state.copyWith(effect: const SignedIn()));
+          }
+        );
       }
     );
 

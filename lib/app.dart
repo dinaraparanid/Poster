@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/ui/theme/mod.dart';
-import 'package:poster/data/auth/repository.dart';
+import 'package:poster/data/auth/mod.dart';
+import 'package:poster/data/dio/dio.dart';
 import 'package:poster/domain/auth/mod.dart';
 import 'package:poster/feature/auth/presentation/screen.dart';
 
@@ -16,7 +17,17 @@ final class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (_) => theme),
-        RepositoryProvider<AuthRepository>(create: (_) => AuthRepositoryImpl()),
+        RepositoryProvider(create: (_) => AppDio()),
+
+        // ---------------------- Auth ----------------------
+        RepositoryProvider<AuthApi>(create: (context) => AuthApiImpl(client: context.read())),
+        RepositoryProvider<AuthStorage>(create: (context) => AuthStorageImpl()),
+        RepositoryProvider<AuthRepository>(
+          create: (context) => AuthRepositoryImpl(
+            storage: context.read(),
+            api: context.read(),
+          ),
+        ),
       ],
       child: MaterialApp(
         color: theme.colors.background.primary,

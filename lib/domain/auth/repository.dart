@@ -1,6 +1,4 @@
-import 'package:poster/domain/auth/profile.dart';
+import 'package:poster/domain/auth/api.dart';
+import 'package:poster/domain/auth/storage.dart';
 
-abstract class AuthRepository {
-  Future<Profile?> get profile;
-  Future<void> updateProfile(Profile profile);
-}
+abstract class AuthRepository with AuthApi, AuthStorage {}
