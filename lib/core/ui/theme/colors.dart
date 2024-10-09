@@ -50,20 +50,20 @@ final class AppColors {
 @immutable
 final class AppBackgroundColors {
   final Color primary;
-  final Color message;
+  final Color post;
   final Color divider;
   final Color avatarPlaceholder;
 
   const AppBackgroundColors({
     required this.primary,
-    required this.message,
+    required this.post,
     required this.divider,
     required this.avatarPlaceholder,
   });
 
   factory AppBackgroundColors._default() => const AppBackgroundColors(
     primary: _GhostWhite,
-    message: _ColumbiaBlue,
+    post: _ColumbiaBlue,
     divider: _Lavender,
     avatarPlaceholder: _MoonstoneBlue,
   );
@@ -113,12 +113,16 @@ final class AppTextColors {
 @immutable
 final class AppButtonColors {
   final Color primary;
+  final Color ripple;
+  final Color like;
   final Color disabled;
   final Color topBar;
   final AppFabColors fab;
 
   const AppButtonColors({
     required this.primary,
+    required this.ripple,
+    required this.like,
     required this.disabled,
     required this.topBar,
     required this.fab,
@@ -126,6 +130,8 @@ final class AppButtonColors {
 
   factory AppButtonColors._default() => AppButtonColors(
     primary: _MetallicSeaweed,
+    ripple: _MetallicSeaweed.withOpacity(0.25),
+    like: _DarkRaspberry.withOpacity(0.25),
     disabled: _DarkJungleGreen,
     topBar: _ChineseBlack,
     fab: AppFabColors._default(),

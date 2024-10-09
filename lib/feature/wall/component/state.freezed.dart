@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$WallState {
   UiState<Profile> get profileState => throw _privateConstructorUsedError;
+  List<Post> get posts => throw _privateConstructorUsedError;
 
   /// Create a copy of WallState
   /// with the given fields replaced by the non-null parameter values.
@@ -30,7 +31,7 @@ abstract class $WallStateCopyWith<$Res> {
   factory $WallStateCopyWith(WallState value, $Res Function(WallState) then) =
       _$WallStateCopyWithImpl<$Res, WallState>;
   @useResult
-  $Res call({UiState<Profile> profileState});
+  $Res call({UiState<Profile> profileState, List<Post> posts});
 
   $UiStateCopyWith<Profile, $Res> get profileState;
 }
@@ -51,12 +52,17 @@ class _$WallStateCopyWithImpl<$Res, $Val extends WallState>
   @override
   $Res call({
     Object? profileState = null,
+    Object? posts = null,
   }) {
     return _then(_value.copyWith(
       profileState: null == profileState
           ? _value.profileState
           : profileState // ignore: cast_nullable_to_non_nullable
               as UiState<Profile>,
+      posts: null == posts
+          ? _value.posts
+          : posts // ignore: cast_nullable_to_non_nullable
+              as List<Post>,
     ) as $Val);
   }
 
@@ -79,7 +85,7 @@ abstract class _$$WallStateImplCopyWith<$Res>
       __$$WallStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UiState<Profile> profileState});
+  $Res call({UiState<Profile> profileState, List<Post> posts});
 
   @override
   $UiStateCopyWith<Profile, $Res> get profileState;
@@ -99,12 +105,17 @@ class __$$WallStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? profileState = null,
+    Object? posts = null,
   }) {
     return _then(_$WallStateImpl(
       profileState: null == profileState
           ? _value.profileState
           : profileState // ignore: cast_nullable_to_non_nullable
               as UiState<Profile>,
+      posts: null == posts
+          ? _value._posts
+          : posts // ignore: cast_nullable_to_non_nullable
+              as List<Post>,
     ));
   }
 }
@@ -112,14 +123,23 @@ class __$$WallStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$WallStateImpl implements _WallState {
-  const _$WallStateImpl({required this.profileState});
+  const _$WallStateImpl(
+      {required this.profileState, required final List<Post> posts})
+      : _posts = posts;
 
   @override
   final UiState<Profile> profileState;
+  final List<Post> _posts;
+  @override
+  List<Post> get posts {
+    if (_posts is EqualUnmodifiableListView) return _posts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_posts);
+  }
 
   @override
   String toString() {
-    return 'WallState(profileState: $profileState)';
+    return 'WallState(profileState: $profileState, posts: $posts)';
   }
 
   @override
@@ -128,11 +148,13 @@ class _$WallStateImpl implements _WallState {
         (other.runtimeType == runtimeType &&
             other is _$WallStateImpl &&
             (identical(other.profileState, profileState) ||
-                other.profileState == profileState));
+                other.profileState == profileState) &&
+            const DeepCollectionEquality().equals(other._posts, _posts));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, profileState);
+  int get hashCode => Object.hash(
+      runtimeType, profileState, const DeepCollectionEquality().hash(_posts));
 
   /// Create a copy of WallState
   /// with the given fields replaced by the non-null parameter values.
@@ -144,11 +166,14 @@ class _$WallStateImpl implements _WallState {
 }
 
 abstract class _WallState implements WallState {
-  const factory _WallState({required final UiState<Profile> profileState}) =
-      _$WallStateImpl;
+  const factory _WallState(
+      {required final UiState<Profile> profileState,
+      required final List<Post> posts}) = _$WallStateImpl;
 
   @override
   UiState<Profile> get profileState;
+  @override
+  List<Post> get posts;
 
   /// Create a copy of WallState
   /// with the given fields replaced by the non-null parameter values.
