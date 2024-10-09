@@ -1,28 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/ui/foundation/ui_state.dart';
-import 'package:poster/domain/auth/mod.dart';
+import 'package:poster/domain/auth/repository.dart';
 import 'package:poster/domain/post/post.dart';
-import 'package:poster/feature/wall/component/event.dart';
-import 'package:poster/feature/wall/component/state.dart';
+import 'package:poster/feature/feed/component/event.dart';
+import 'package:poster/feature/feed/component/state.dart';
 
-final class WallComponent extends Bloc<WallEvent, WallState> {
-  WallComponent({required AuthRepository repository}) : super(WallState.initial()) {
+final class FeedComponent extends Bloc<FeedEvent, FeedState> {
+  FeedComponent({required AuthRepository repository}) : super(FeedState.initial()) {
     on<Create>(
       (event, emit) async {
-        final profile = await repository.profile;
-
-        if (profile != null) {
-          emit(state.copyWith(profileState: profile.toUiState()));
-        }
-
-        // TODO: request posts by user
+        // TODO: request posts
         emit(state.copyWith(posts: _stub));
       }
     );
 
     on<Refresh>(
-      (event, emit) {
-        // TODO: request posts by user
+      (event, emit) async {
+        // TODO: request posts
         emit(state.copyWith(posts: _stub));
       }
     );

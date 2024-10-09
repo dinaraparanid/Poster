@@ -1,11 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/ui/foundation/post.dart';
+import 'package:poster/core/ui/foundation/post/block.dart';
 import 'package:poster/core/ui/theme/app.dart';
-import 'package:poster/feature/wall/component/mod.dart';
+import 'package:poster/domain/post/post.dart';
 
 final class PostList extends StatelessWidget {
-  const PostList({super.key});
+  final List<Post> posts;
+
+  const PostList({
+    super.key,
+    required this.posts,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,20 +18,18 @@ final class PostList extends StatelessWidget {
 
     // TODO: empty stub
 
-    return BlocBuilder<WallComponent, WallState>(
-      builder: (context, state) => ListView.separated(
-        itemCount: state.posts.length,
-        padding: EdgeInsets.only(
+    return ListView.separated(
+      itemCount: posts.length,
+      padding: EdgeInsets.only(
           top: theme.dimensions.padding.big,
           bottom: theme.dimensions.padding.enormous,
           right: theme.dimensions.padding.medium,
           left: theme.dimensions.padding.medium
-        ),
-        separatorBuilder: (context, index) => SizedBox(
-          height: theme.dimensions.padding.big,
-        ),
-        itemBuilder: (context, index) => PostBlock(post: state.posts[index]),
       ),
+      separatorBuilder: (context, index) => SizedBox(
+        height: theme.dimensions.padding.big,
+      ),
+      itemBuilder: (context, index) => PostBlock(post: posts[index]),
     );
   }
 }

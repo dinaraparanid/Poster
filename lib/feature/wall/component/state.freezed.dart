@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$WallState {
-  UiState<Profile> get profileState => throw _privateConstructorUsedError;
+  UiState<Profile> get profileState =>
+      throw _privateConstructorUsedError; // TODO: Paging
   List<Post> get posts => throw _privateConstructorUsedError;
 
   /// Create a copy of WallState
@@ -129,7 +130,9 @@ class _$WallStateImpl implements _WallState {
 
   @override
   final UiState<Profile> profileState;
+// TODO: Paging
   final List<Post> _posts;
+// TODO: Paging
   @override
   List<Post> get posts {
     if (_posts is EqualUnmodifiableListView) return _posts;
@@ -171,7 +174,7 @@ abstract class _WallState implements WallState {
       required final List<Post> posts}) = _$WallStateImpl;
 
   @override
-  UiState<Profile> get profileState;
+  UiState<Profile> get profileState; // TODO: Paging
   @override
   List<Post> get posts;
 

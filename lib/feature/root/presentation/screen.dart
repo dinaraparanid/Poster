@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/ui/theme/app.dart';
+import 'package:poster/feature/feed/presentation/screen.dart';
 import 'package:poster/feature/root/component/mod.dart';
 import 'package:poster/feature/root/presentation/ui/mod.dart';
 import 'package:poster/feature/wall/presentation/screen.dart';
@@ -94,7 +95,7 @@ final class RootScreen extends StatelessWidget {
     void Function(RootEvent) onEvent,
   ) => switch (state.selectedTab) {
     Tabs.wall => const WallScreen(),
-    Tabs.feed => Text("TODO: Feed screen"),
+    Tabs.feed => const FeedScreen(),
   };
 
   void onEffect({
