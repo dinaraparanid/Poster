@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RootState {
+  UiState<Profile> get profileState => throw _privateConstructorUsedError;
   Tabs get selectedTab => throw _privateConstructorUsedError;
   RootEffect? get effect => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
@@ -34,11 +35,13 @@ abstract class $RootStateCopyWith<$Res> {
       _$RootStateCopyWithImpl<$Res, RootState>;
   @useResult
   $Res call(
-      {Tabs selectedTab,
+      {UiState<Profile> profileState,
+      Tabs selectedTab,
       RootEffect? effect,
       String? message,
       bool hasIncomingAnnouncements});
 
+  $UiStateCopyWith<Profile, $Res> get profileState;
   $RootEffectCopyWith<$Res>? get effect;
 }
 
@@ -57,12 +60,17 @@ class _$RootStateCopyWithImpl<$Res, $Val extends RootState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? profileState = null,
     Object? selectedTab = null,
     Object? effect = freezed,
     Object? message = freezed,
     Object? hasIncomingAnnouncements = null,
   }) {
     return _then(_value.copyWith(
+      profileState: null == profileState
+          ? _value.profileState
+          : profileState // ignore: cast_nullable_to_non_nullable
+              as UiState<Profile>,
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
@@ -80,6 +88,16 @@ class _$RootStateCopyWithImpl<$Res, $Val extends RootState>
           : hasIncomingAnnouncements // ignore: cast_nullable_to_non_nullable
               as bool,
     ) as $Val);
+  }
+
+  /// Create a copy of RootState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UiStateCopyWith<Profile, $Res> get profileState {
+    return $UiStateCopyWith<Profile, $Res>(_value.profileState, (value) {
+      return _then(_value.copyWith(profileState: value) as $Val);
+    });
   }
 
   /// Create a copy of RootState
@@ -106,11 +124,14 @@ abstract class _$$RootStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Tabs selectedTab,
+      {UiState<Profile> profileState,
+      Tabs selectedTab,
       RootEffect? effect,
       String? message,
       bool hasIncomingAnnouncements});
 
+  @override
+  $UiStateCopyWith<Profile, $Res> get profileState;
   @override
   $RootEffectCopyWith<$Res>? get effect;
 }
@@ -128,12 +149,17 @@ class __$$RootStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? profileState = null,
     Object? selectedTab = null,
     Object? effect = freezed,
     Object? message = freezed,
     Object? hasIncomingAnnouncements = null,
   }) {
     return _then(_$RootStateImpl(
+      profileState: null == profileState
+          ? _value.profileState
+          : profileState // ignore: cast_nullable_to_non_nullable
+              as UiState<Profile>,
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
@@ -158,11 +184,14 @@ class __$$RootStateImplCopyWithImpl<$Res>
 
 class _$RootStateImpl implements _RootState {
   const _$RootStateImpl(
-      {required this.selectedTab,
+      {required this.profileState,
+      required this.selectedTab,
       this.effect,
       this.message,
       required this.hasIncomingAnnouncements});
 
+  @override
+  final UiState<Profile> profileState;
   @override
   final Tabs selectedTab;
   @override
@@ -174,7 +203,7 @@ class _$RootStateImpl implements _RootState {
 
   @override
   String toString() {
-    return 'RootState(selectedTab: $selectedTab, effect: $effect, message: $message, hasIncomingAnnouncements: $hasIncomingAnnouncements)';
+    return 'RootState(profileState: $profileState, selectedTab: $selectedTab, effect: $effect, message: $message, hasIncomingAnnouncements: $hasIncomingAnnouncements)';
   }
 
   @override
@@ -182,6 +211,8 @@ class _$RootStateImpl implements _RootState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RootStateImpl &&
+            (identical(other.profileState, profileState) ||
+                other.profileState == profileState) &&
             (identical(other.selectedTab, selectedTab) ||
                 other.selectedTab == selectedTab) &&
             (identical(other.effect, effect) || other.effect == effect) &&
@@ -192,8 +223,8 @@ class _$RootStateImpl implements _RootState {
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, selectedTab, effect, message, hasIncomingAnnouncements);
+  int get hashCode => Object.hash(runtimeType, profileState, selectedTab,
+      effect, message, hasIncomingAnnouncements);
 
   /// Create a copy of RootState
   /// with the given fields replaced by the non-null parameter values.
@@ -206,11 +237,14 @@ class _$RootStateImpl implements _RootState {
 
 abstract class _RootState implements RootState {
   const factory _RootState(
-      {required final Tabs selectedTab,
+      {required final UiState<Profile> profileState,
+      required final Tabs selectedTab,
       final RootEffect? effect,
       final String? message,
       required final bool hasIncomingAnnouncements}) = _$RootStateImpl;
 
+  @override
+  UiState<Profile> get profileState;
   @override
   Tabs get selectedTab;
   @override

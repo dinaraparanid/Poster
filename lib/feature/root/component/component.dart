@@ -1,15 +1,32 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poster/core/ui/foundation/ui_state.dart';
+import 'package:poster/domain/auth/mod.dart';
+import 'package:poster/domain/post/mod.dart';
 import 'package:poster/feature/root/component/effect.dart';
 import 'package:poster/feature/root/component/event.dart';
 import 'package:poster/feature/root/component/state.dart';
+import 'package:poster/utils/functions/do_nothing.dart';
 
 final class RootComponent extends Bloc<RootEvent, RootState> {
-  RootComponent() : super(
-    const RootState(
-      selectedTab: Tabs.wall,
-      hasIncomingAnnouncements: false,
-    )
-  ) {
+  final AuthRepository authRepository;
+  final PostRepository postsRepository;
+
+  RootComponent({
+    required this.authRepository,
+    required this.postsRepository,
+  }) : super(RootState.initial()) {
+    on<Create>(
+      (event, emit) async {
+        final profile = await authRepository.profile;
+
+        if (profile != null) {
+          emit(state.copyWith(profileState: profile.toUiState()));
+        } else {
+          emit(state.copyWith(profileState: const Error(null)));
+        }
+      }
+    );
+
     on<TabClicked>(
       (event, emit) => emit(state.copyWith(selectedTab: event.tab))
     );
@@ -28,9 +45,26 @@ final class RootComponent extends Bloc<RootEvent, RootState> {
     );
 
     on<SendMessage>(
-      (event, emit) {
-        // TODO: make request if message is not empty
-        emit(state.copyWith(effect: const None(), message: ''));
+      (event, emit) async {
+        final username = state.profileState.getOrNull?.username;
+        final message = state.message;
+
+        if (username != null && message != null && message.isNotEmpty) {
+          final res = await postsRepository.createPost(
+            username: username,
+            text: message,
+          );
+
+          res.fold(
+            (_) => doNothing(), // TODO: show error snackbar
+            (_) {
+              // TODO: show success snackbar
+              emit(state.copyWith(effect: const None(), message: ''));
+            }
+          );
+        } else {
+          // TODO: show error snackbar
+        }
       }
     );
 
@@ -39,5 +73,7 @@ final class RootComponent extends Bloc<RootEvent, RootState> {
         // TODO: announcements screen
       }
     );
+
+    add(Create());
   }
 }

@@ -1,49 +1,43 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/domain/auth/repository.dart';
-import 'package:poster/domain/post/post.dart';
+import 'package:poster/core/ui/foundation/ui_state.dart';
+import 'package:poster/domain/auth/mod.dart';
+import 'package:poster/domain/post/mod.dart';
 import 'package:poster/feature/feed/component/event.dart';
 import 'package:poster/feature/feed/component/state.dart';
 
 final class FeedComponent extends Bloc<FeedEvent, FeedState> {
-  FeedComponent({required AuthRepository repository}) : super(FeedState.initial()) {
+  final AuthRepository authRepository;
+  final PostRepository postRepository;
+
+  FeedComponent({
+    required this.authRepository,
+    required this.postRepository,
+  }) : super(FeedState.initial()) {
     on<Create>(
       (event, emit) async {
-        // TODO: request posts
-        emit(state.copyWith(posts: _stub));
+        emit(state.copyWith(postsState: const Loading()));
+        await _loadPosts(emit);
       }
     );
 
     on<Refresh>(
       (event, emit) async {
-        // TODO: request posts
-        emit(state.copyWith(posts: _stub));
+        emit(state.copyWith(postsState: Refreshing(value: state.postsState)));
+        await _loadPosts(emit);
       }
     );
 
     add(Create());
   }
-}
 
-List<Post> get _stub => const [
-  Post(
-    id: 0,
-    text: 'I ended up in the back of a flashing car With the city shining on my face The lights are blinding me again',
-    author: 'Michael Jackson',
-    timestamp: 1728456918,
-    liked: ['Michael Jordon', 'Elon Musk'],
-  ),
-  Post(
-    id: 0,
-    text: 'I ended up in the back of a flashing car With the city shining on my face The lights are blinding me again',
-    author: 'Michael Jackson',
-    timestamp: 1728370518,
-    liked: ['Michael Jordon', 'Elon Musk'],
-  ),
-  Post(
-    id: 0,
-    text: 'I ended up in the back of a flashing car With the city shining on my face The lights are blinding me again',
-    author: 'Michael Jackson',
-    timestamp: 1728456918,
-    liked: ['Michael Jordon', 'Elon Musk'],
-  )
-];
+  Future<void> _loadPosts(Emitter<FeedState> emit) async {
+    final res = await postRepository.feedPosts;
+
+    final postsState = res.fold(
+      (e) => Error<List<Post>>(e),
+      (posts) => posts.toUiState(),
+    );
+
+    emit(state.copyWith(postsState: postsState));
+  }
+}

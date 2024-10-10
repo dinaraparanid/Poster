@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:poster/data/post/post_response.dart';
+import 'package:poster/data/post/posts_response.dart';
 import 'package:poster/data/url.dart';
 import 'package:poster/domain/post/mod.dart';
 
@@ -14,7 +15,7 @@ final class PostApiImpl with PostApi {
     required String text,
   }) async {
     try {
-      await client.patch(
+      await client.post(
         '$BaseUrl/new',
         data: { 'username': username, 'text': text },
       );
@@ -28,13 +29,15 @@ final class PostApiImpl with PostApi {
   Future<Either<Exception, List<Post>>> get feedPosts async {
     try {
       final res = await client.get('$BaseUrl/feed');
+      final response = PostsResponse.fromJson(res.data);
 
       return Either.right(
-        (res.data['data'] as List<Map<String, dynamic>>)
-          .map((j) => PostResponse.fromJson(j).toPost())
+        response.data
+          .map((j) => j.toPost())
           .toList(growable: false)
       );
     } on Exception catch (e) {
+      print(e.toString());
       return Either.left(e);
     }
   }
@@ -49,12 +52,15 @@ final class PostApiImpl with PostApi {
         queryParameters: { 'username': username },
       );
 
+      final response = PostsResponse.fromJson(res.data);
+
       return Either.right(
-        (res.data['data'] as List<Map<String, dynamic>>)
-          .map((j) => PostResponse.fromJson(j).toPost())
-          .toList(growable: false)
+        response.data
+          .map((j) => j.toPost())
+          .toList(growable: false),
       );
     } on Exception catch (e) {
+      print(e.toString());
       return Either.left(e);
     }
   }

@@ -4,7 +4,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/ui/theme/mod.dart';
 import 'package:poster/data/auth/mod.dart';
 import 'package:poster/data/dio/dio.dart';
+import 'package:poster/data/post/mod.dart';
 import 'package:poster/domain/auth/mod.dart';
+import 'package:poster/domain/post/mod.dart';
 import 'package:poster/feature/auth/presentation/screen.dart';
 
 final class App extends StatelessWidget {
@@ -27,6 +29,16 @@ final class App extends StatelessWidget {
             storage: context.read(),
             api: context.read(),
           ),
+        ),
+
+        // ---------------------- Posts ----------------------
+        RepositoryProvider<LikeApi>(create: (context) => LikeApiImpl(client: context.read())),
+        RepositoryProvider<PostApi>(create: (context) => PostApiImpl(client: context.read())),
+        RepositoryProvider<PostRepository>(
+          create: (context) => PostRepositoryImpl(
+            postApi: context.read(),
+            likeApi: context.read(),
+          )
         ),
       ],
       child: MaterialApp(

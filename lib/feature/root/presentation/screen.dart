@@ -18,7 +18,10 @@ final class RootScreen extends StatelessWidget {
     final strings = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (_) => RootComponent(),
+      create: (context) => RootComponent(
+        authRepository: context.read(),
+        postsRepository: context.read(),
+      ),
       child: BlocConsumer<RootComponent, RootState>(
         listenWhen: (x, y) => x.effect != y.effect,
         listener: (context, state) => onEffect(

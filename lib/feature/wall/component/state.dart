@@ -10,11 +10,11 @@ abstract class WallState with _$WallState {
   const factory WallState({
     required UiState<Profile> profileState,
     // TODO: Paging
-    required List<Post> posts,
+    required UiState<List<Post>> postsState,
   }) = _WallState;
 
   factory WallState.initial() => const WallState(
     profileState: Loading(),
-    posts: [],
+    postsState: Loading(),
   );
 }

@@ -12,7 +12,10 @@ final class FeedScreen extends StatelessWidget {
     final theme = context.read<AppTheme>();
 
     return BlocProvider(
-      create: (context) => FeedComponent(repository: context.read()),
+      create: (context) => FeedComponent(
+        authRepository: context.read(),
+        postRepository: context.read(),
+      ),
       child: BlocBuilder<FeedComponent, FeedState>(
         builder: (context, state) {
           final onEvent = context.read<FeedComponent>().add;
@@ -23,7 +26,7 @@ final class FeedScreen extends StatelessWidget {
               color: theme.colors.indicator.primary,
               backgroundColor: theme.colors.indicator.background,
               onRefresh: () async => onEvent(Refresh()),
-              child: PostList(posts: state.posts),
+              child: PostList(postsState: state.postsState),
             ),
           );
         },

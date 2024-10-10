@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WallState {
   UiState<Profile> get profileState =>
       throw _privateConstructorUsedError; // TODO: Paging
-  List<Post> get posts => throw _privateConstructorUsedError;
+  UiState<List<Post>> get postsState => throw _privateConstructorUsedError;
 
   /// Create a copy of WallState
   /// with the given fields replaced by the non-null parameter values.
@@ -32,9 +32,10 @@ abstract class $WallStateCopyWith<$Res> {
   factory $WallStateCopyWith(WallState value, $Res Function(WallState) then) =
       _$WallStateCopyWithImpl<$Res, WallState>;
   @useResult
-  $Res call({UiState<Profile> profileState, List<Post> posts});
+  $Res call({UiState<Profile> profileState, UiState<List<Post>> postsState});
 
   $UiStateCopyWith<Profile, $Res> get profileState;
+  $UiStateCopyWith<List<Post>, $Res> get postsState;
 }
 
 /// @nodoc
@@ -53,17 +54,17 @@ class _$WallStateCopyWithImpl<$Res, $Val extends WallState>
   @override
   $Res call({
     Object? profileState = null,
-    Object? posts = null,
+    Object? postsState = null,
   }) {
     return _then(_value.copyWith(
       profileState: null == profileState
           ? _value.profileState
           : profileState // ignore: cast_nullable_to_non_nullable
               as UiState<Profile>,
-      posts: null == posts
-          ? _value.posts
-          : posts // ignore: cast_nullable_to_non_nullable
-              as List<Post>,
+      postsState: null == postsState
+          ? _value.postsState
+          : postsState // ignore: cast_nullable_to_non_nullable
+              as UiState<List<Post>>,
     ) as $Val);
   }
 
@@ -76,6 +77,16 @@ class _$WallStateCopyWithImpl<$Res, $Val extends WallState>
       return _then(_value.copyWith(profileState: value) as $Val);
     });
   }
+
+  /// Create a copy of WallState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UiStateCopyWith<List<Post>, $Res> get postsState {
+    return $UiStateCopyWith<List<Post>, $Res>(_value.postsState, (value) {
+      return _then(_value.copyWith(postsState: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -86,10 +97,12 @@ abstract class _$$WallStateImplCopyWith<$Res>
       __$$WallStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UiState<Profile> profileState, List<Post> posts});
+  $Res call({UiState<Profile> profileState, UiState<List<Post>> postsState});
 
   @override
   $UiStateCopyWith<Profile, $Res> get profileState;
+  @override
+  $UiStateCopyWith<List<Post>, $Res> get postsState;
 }
 
 /// @nodoc
@@ -106,17 +119,17 @@ class __$$WallStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? profileState = null,
-    Object? posts = null,
+    Object? postsState = null,
   }) {
     return _then(_$WallStateImpl(
       profileState: null == profileState
           ? _value.profileState
           : profileState // ignore: cast_nullable_to_non_nullable
               as UiState<Profile>,
-      posts: null == posts
-          ? _value._posts
-          : posts // ignore: cast_nullable_to_non_nullable
-              as List<Post>,
+      postsState: null == postsState
+          ? _value.postsState
+          : postsState // ignore: cast_nullable_to_non_nullable
+              as UiState<List<Post>>,
     ));
   }
 }
@@ -124,25 +137,17 @@ class __$$WallStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$WallStateImpl implements _WallState {
-  const _$WallStateImpl(
-      {required this.profileState, required final List<Post> posts})
-      : _posts = posts;
+  const _$WallStateImpl({required this.profileState, required this.postsState});
 
   @override
   final UiState<Profile> profileState;
 // TODO: Paging
-  final List<Post> _posts;
-// TODO: Paging
   @override
-  List<Post> get posts {
-    if (_posts is EqualUnmodifiableListView) return _posts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_posts);
-  }
+  final UiState<List<Post>> postsState;
 
   @override
   String toString() {
-    return 'WallState(profileState: $profileState, posts: $posts)';
+    return 'WallState(profileState: $profileState, postsState: $postsState)';
   }
 
   @override
@@ -152,12 +157,12 @@ class _$WallStateImpl implements _WallState {
             other is _$WallStateImpl &&
             (identical(other.profileState, profileState) ||
                 other.profileState == profileState) &&
-            const DeepCollectionEquality().equals(other._posts, _posts));
+            (identical(other.postsState, postsState) ||
+                other.postsState == postsState));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, profileState, const DeepCollectionEquality().hash(_posts));
+  int get hashCode => Object.hash(runtimeType, profileState, postsState);
 
   /// Create a copy of WallState
   /// with the given fields replaced by the non-null parameter values.
@@ -171,12 +176,12 @@ class _$WallStateImpl implements _WallState {
 abstract class _WallState implements WallState {
   const factory _WallState(
       {required final UiState<Profile> profileState,
-      required final List<Post> posts}) = _$WallStateImpl;
+      required final UiState<List<Post>> postsState}) = _$WallStateImpl;
 
   @override
   UiState<Profile> get profileState; // TODO: Paging
   @override
-  List<Post> get posts;
+  UiState<List<Post>> get postsState;
 
   /// Create a copy of WallState
   /// with the given fields replaced by the non-null parameter values.

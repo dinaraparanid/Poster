@@ -13,7 +13,10 @@ final class WallScreen extends StatelessWidget {
     final theme = context.read<AppTheme>();
 
     return BlocProvider(
-      create: (context) => WallComponent(repository: context.read()),
+      create: (context) => WallComponent(
+        authRepository: context.read(),
+        postRepository: context.read(),
+      ),
       child: BlocBuilder<WallComponent, WallState>(
         builder: (context, state) {
           final onEvent = context.read<WallComponent>().add;
@@ -28,7 +31,7 @@ final class WallScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const ProfileContainer(),
-                  Expanded(child: PostList(posts: state.posts)),
+                  Expanded(child: PostList(postsState: state.postsState)),
                 ],
               ),
             ),

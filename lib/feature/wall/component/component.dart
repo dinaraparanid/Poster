@@ -1,56 +1,53 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/ui/foundation/ui_state.dart';
 import 'package:poster/domain/auth/mod.dart';
-import 'package:poster/domain/post/post.dart';
+import 'package:poster/domain/post/mod.dart';
 import 'package:poster/feature/wall/component/event.dart';
 import 'package:poster/feature/wall/component/state.dart';
 
 final class WallComponent extends Bloc<WallEvent, WallState> {
-  WallComponent({required AuthRepository repository}) : super(WallState.initial()) {
+  final AuthRepository authRepository;
+  final PostRepository postRepository;
+
+  WallComponent({
+    required this.authRepository,
+    required this.postRepository,
+  }) : super(WallState.initial()) {
     on<Create>(
       (event, emit) async {
-        final profile = await repository.profile;
+        final profile = await authRepository.profile;
 
         if (profile != null) {
           emit(state.copyWith(profileState: profile.toUiState()));
+          emit(state.copyWith(postsState: const Loading()));
+          await _loadPosts(emit);
+        } else {
+          emit(state.copyWith(profileState: const Error(null)));
         }
-
-        // TODO: request posts by user
-        emit(state.copyWith(posts: _stub));
       }
     );
 
     on<Refresh>(
-      (event, emit) {
-        // TODO: request posts by user
-        emit(state.copyWith(posts: _stub));
-      }
+      (event, emit) async {
+        emit(state.copyWith(postsState: Refreshing(value: state.postsState)));
+        await _loadPosts(emit);
+      },
     );
 
     add(Create());
   }
-}
 
-List<Post> get _stub => const [
-  Post(
-    id: 0,
-    text: 'I ended up in the back of a flashing car With the city shining on my face The lights are blinding me again',
-    author: 'Michael Jackson',
-    timestamp: 1728456918,
-    liked: ['Michael Jordon', 'Elon Musk'],
-  ),
-  Post(
-    id: 0,
-    text: 'I ended up in the back of a flashing car With the city shining on my face The lights are blinding me again',
-    author: 'Michael Jackson',
-    timestamp: 1728370518,
-    liked: ['Michael Jordon', 'Elon Musk'],
-  ),
-  Post(
-    id: 0,
-    text: 'I ended up in the back of a flashing car With the city shining on my face The lights are blinding me again',
-    author: 'Michael Jackson',
-    timestamp: 1728456918,
-    liked: ['Michael Jordon', 'Elon Musk'],
-  )
-];
+  Future<void> _loadPosts(Emitter<WallState> emit) async {
+    final username = state.profileState.getOrNull?.username;
+    if (username == null) return;
+
+    final res = await postRepository.wallPosts(username: username);
+
+    final postsState = res.fold(
+      (e) => Error<List<Post>>(e),
+      (posts) => posts.toUiState(),
+    );
+
+    emit(state.copyWith(postsState: postsState));
+  }
+}

@@ -20,7 +20,11 @@ final class PostBlock extends StatelessWidget {
       constraints: BoxConstraints(
         maxWidth: theme.dimensions.size.extraEnormous,
       ),
-      padding: EdgeInsets.all(theme.dimensions.padding.medium),
+      padding: EdgeInsets.only(
+        top: theme.dimensions.padding.medium,
+        left: theme.dimensions.padding.medium,
+        right: theme.dimensions.padding.medium,
+      ),
       decoration: BoxDecoration(
         color: theme.colors.background.post,
         borderRadius: BorderRadius.all(
@@ -66,6 +70,7 @@ final class PostBlock extends StatelessWidget {
 
       Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             post.author,
