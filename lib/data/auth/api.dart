@@ -5,7 +5,6 @@ import 'package:poster/domain/auth/api.dart';
 
 final class AuthApiImpl with AuthApi {
   final Dio client;
-
   AuthApiImpl({required this.client});
 
   @override

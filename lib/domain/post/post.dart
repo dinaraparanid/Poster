@@ -9,6 +9,7 @@ final _postDateFormat = DateFormat('d MMM y HH:mm');
 @freezed
 abstract class Post with _$Post {
   const factory Post({
+    required int id,
     required String text,
     required String author,
     required int timestamp,

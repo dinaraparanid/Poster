@@ -20,6 +20,7 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Post {
+  int get id => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   String get author => throw _privateConstructorUsedError;
   int get timestamp => throw _privateConstructorUsedError;
@@ -39,7 +40,8 @@ abstract class $PostCopyWith<$Res> {
   factory $PostCopyWith(Post value, $Res Function(Post) then) =
       _$PostCopyWithImpl<$Res, Post>;
   @useResult
-  $Res call({String text, String author, int timestamp, List<String> liked});
+  $Res call(
+      {int id, String text, String author, int timestamp, List<String> liked});
 }
 
 /// @nodoc
@@ -57,12 +59,17 @@ class _$PostCopyWithImpl<$Res, $Val extends Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? text = null,
     Object? author = null,
     Object? timestamp = null,
     Object? liked = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -90,7 +97,8 @@ abstract class _$$PostImplCopyWith<$Res> implements $PostCopyWith<$Res> {
       __$$PostImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String text, String author, int timestamp, List<String> liked});
+  $Res call(
+      {int id, String text, String author, int timestamp, List<String> liked});
 }
 
 /// @nodoc
@@ -105,12 +113,17 @@ class __$$PostImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? text = null,
     Object? author = null,
     Object? timestamp = null,
     Object? liked = null,
   }) {
     return _then(_$PostImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       text: null == text
           ? _value.text
           : text // ignore: cast_nullable_to_non_nullable
@@ -135,7 +148,8 @@ class __$$PostImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PostImpl implements _Post {
   const _$PostImpl(
-      {required this.text,
+      {required this.id,
+      required this.text,
       required this.author,
       required this.timestamp,
       required final List<String> liked})
@@ -144,6 +158,8 @@ class _$PostImpl implements _Post {
   factory _$PostImpl.fromJson(Map<String, dynamic> json) =>
       _$$PostImplFromJson(json);
 
+  @override
+  final int id;
   @override
   final String text;
   @override
@@ -160,7 +176,7 @@ class _$PostImpl implements _Post {
 
   @override
   String toString() {
-    return 'Post(text: $text, author: $author, timestamp: $timestamp, liked: $liked)';
+    return 'Post(id: $id, text: $text, author: $author, timestamp: $timestamp, liked: $liked)';
   }
 
   @override
@@ -168,6 +184,7 @@ class _$PostImpl implements _Post {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PostImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.author, author) || other.author == author) &&
             (identical(other.timestamp, timestamp) ||
@@ -177,7 +194,7 @@ class _$PostImpl implements _Post {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, text, author, timestamp,
+  int get hashCode => Object.hash(runtimeType, id, text, author, timestamp,
       const DeepCollectionEquality().hash(_liked));
 
   /// Create a copy of Post
@@ -198,13 +215,16 @@ class _$PostImpl implements _Post {
 
 abstract class _Post implements Post {
   const factory _Post(
-      {required final String text,
+      {required final int id,
+      required final String text,
       required final String author,
       required final int timestamp,
       required final List<String> liked}) = _$PostImpl;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$PostImpl.fromJson;
 
+  @override
+  int get id;
   @override
   String get text;
   @override
