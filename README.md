@@ -1,16 +1,36 @@
-# poster
+**Poster**
+-----------------
 
-A new Flutter project.
+## **About App**
+Multiplatform mini-social-network application
+that allows to share posts, written in Flutter.
 
-## Getting Started
+## **Structure**
+Application utilizes principle of **Clean Architecture**,
+using **Bloc** library as a state management tool.
 
-This project is a starting point for a Flutter application.
+* **Feature** folder contains implementation of ***screens*** used in app (chat screen).
+* **Domain** folder contains abstractions and models
+* **Data** folder contains ***implementations of abstractions*** and special libraries (***Dio http client***)
 
-A few resources to get you started if this is your first Flutter project:
+## **Preview**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+[Full showcase](https://rutube.ru/video/private/907f7b4c2542ec327a30c2e95db34543/?p=7Q8q2II3ldFqUUo_H3VGYQ)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![Preview](https://i.ibb.co/WK138PQ/2024-10-10-19-19-26.png)
+
+## **Stack**
+
+<ul>
+    <li>Dart 3.5.3</li>
+    <li>Flutter 3.24.3</li>
+    <li>Dio</li>
+    <li>Bloc</li>
+    <li>Shared Preferences</li>
+    <li>FPDart</li>
+    <li>freezed + json annotations</li>
+    <li>intl + l10n</li>
+</ul>
+
+## **License**
+*GNU Public License V 3.0*
