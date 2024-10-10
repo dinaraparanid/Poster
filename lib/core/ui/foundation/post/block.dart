@@ -9,7 +9,13 @@ import 'package:poster/domain/post/post.dart';
 
 final class PostBlock extends StatelessWidget {
   final Post post;
-  const PostBlock({super.key, required this.post});
+  final void Function() onLike;
+
+  const PostBlock({
+    super.key,
+    required this.post,
+    required this.onLike,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +122,7 @@ final class PostBlock extends StatelessWidget {
       ),
 
       AppClickable(
-        onClick: () => print("TODO: Like"),
+        onClick: onLike,
         rippleColor: theme.colors.button.like,
         border: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(

@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$FeedState {
-// TODO: Paging
+  UiState<Profile> get profileState =>
+      throw _privateConstructorUsedError; // TODO: Paging
   UiState<List<Post>> get postsState => throw _privateConstructorUsedError;
 
   /// Create a copy of FeedState
@@ -31,8 +32,9 @@ abstract class $FeedStateCopyWith<$Res> {
   factory $FeedStateCopyWith(FeedState value, $Res Function(FeedState) then) =
       _$FeedStateCopyWithImpl<$Res, FeedState>;
   @useResult
-  $Res call({UiState<List<Post>> postsState});
+  $Res call({UiState<Profile> profileState, UiState<List<Post>> postsState});
 
+  $UiStateCopyWith<Profile, $Res> get profileState;
   $UiStateCopyWith<List<Post>, $Res> get postsState;
 }
 
@@ -51,14 +53,29 @@ class _$FeedStateCopyWithImpl<$Res, $Val extends FeedState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? profileState = null,
     Object? postsState = null,
   }) {
     return _then(_value.copyWith(
+      profileState: null == profileState
+          ? _value.profileState
+          : profileState // ignore: cast_nullable_to_non_nullable
+              as UiState<Profile>,
       postsState: null == postsState
           ? _value.postsState
           : postsState // ignore: cast_nullable_to_non_nullable
               as UiState<List<Post>>,
     ) as $Val);
+  }
+
+  /// Create a copy of FeedState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UiStateCopyWith<Profile, $Res> get profileState {
+    return $UiStateCopyWith<Profile, $Res>(_value.profileState, (value) {
+      return _then(_value.copyWith(profileState: value) as $Val);
+    });
   }
 
   /// Create a copy of FeedState
@@ -80,8 +97,10 @@ abstract class _$$FeedStateImplCopyWith<$Res>
       __$$FeedStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({UiState<List<Post>> postsState});
+  $Res call({UiState<Profile> profileState, UiState<List<Post>> postsState});
 
+  @override
+  $UiStateCopyWith<Profile, $Res> get profileState;
   @override
   $UiStateCopyWith<List<Post>, $Res> get postsState;
 }
@@ -99,9 +118,14 @@ class __$$FeedStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? profileState = null,
     Object? postsState = null,
   }) {
     return _then(_$FeedStateImpl(
+      profileState: null == profileState
+          ? _value.profileState
+          : profileState // ignore: cast_nullable_to_non_nullable
+              as UiState<Profile>,
       postsState: null == postsState
           ? _value.postsState
           : postsState // ignore: cast_nullable_to_non_nullable
@@ -113,15 +137,17 @@ class __$$FeedStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FeedStateImpl implements _FeedState {
-  const _$FeedStateImpl({required this.postsState});
+  const _$FeedStateImpl({required this.profileState, required this.postsState});
 
+  @override
+  final UiState<Profile> profileState;
 // TODO: Paging
   @override
   final UiState<List<Post>> postsState;
 
   @override
   String toString() {
-    return 'FeedState(postsState: $postsState)';
+    return 'FeedState(profileState: $profileState, postsState: $postsState)';
   }
 
   @override
@@ -129,12 +155,14 @@ class _$FeedStateImpl implements _FeedState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FeedStateImpl &&
+            (identical(other.profileState, profileState) ||
+                other.profileState == profileState) &&
             (identical(other.postsState, postsState) ||
                 other.postsState == postsState));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, postsState);
+  int get hashCode => Object.hash(runtimeType, profileState, postsState);
 
   /// Create a copy of FeedState
   /// with the given fields replaced by the non-null parameter values.
@@ -146,10 +174,12 @@ class _$FeedStateImpl implements _FeedState {
 }
 
 abstract class _FeedState implements FeedState {
-  const factory _FeedState({required final UiState<List<Post>> postsState}) =
-      _$FeedStateImpl;
+  const factory _FeedState(
+      {required final UiState<Profile> profileState,
+      required final UiState<List<Post>> postsState}) = _$FeedStateImpl;
 
-// TODO: Paging
+  @override
+  UiState<Profile> get profileState; // TODO: Paging
   @override
   UiState<List<Post>> get postsState;
 

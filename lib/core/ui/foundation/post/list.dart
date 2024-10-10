@@ -7,10 +7,12 @@ import 'package:poster/domain/post/post.dart';
 
 final class PostList extends StatelessWidget {
   final UiState<List<Post>> postsState;
+  final void Function(int postId) onPostLike;
 
   const PostList({
     super.key,
     required this.postsState,
+    required this.onPostLike,
   });
 
   @override
@@ -24,13 +26,13 @@ final class PostList extends StatelessWidget {
 
       Refreshing<List<Post>>(value: final state) => switch (state) {
         Data<List<Post>>(value: final posts) =>
-          Content(posts: posts, theme: theme),
+          Content(posts: posts, theme: theme, onPostLike: onPostLike),
 
         _ => LoadingStub(theme: theme),
       },
 
       Data<List<Post>>(value: final posts) =>
-        Content(posts: posts, theme: theme),
+        Content(posts: posts, theme: theme, onPostLike: onPostLike),
 
       Success<List<Post>>() => Container(),
 
@@ -41,6 +43,7 @@ final class PostList extends StatelessWidget {
   Widget Content({
     required List<Post> posts,
     required AppTheme theme,
+    required void Function (int postId) onPostLike,
   }) => ListView.separated(
     itemCount: posts.length,
     padding: EdgeInsets.only(
@@ -52,7 +55,10 @@ final class PostList extends StatelessWidget {
     separatorBuilder: (context, index) => SizedBox(
       height: theme.dimensions.padding.big,
     ),
-    itemBuilder: (context, index) => PostBlock(post: posts[index]),
+    itemBuilder: (context, index) => PostBlock(
+      post: posts[index],
+      onLike: () => onPostLike(posts[index].id),
+    ),
   );
 
   Widget LoadingStub({required AppTheme theme}) => Container(

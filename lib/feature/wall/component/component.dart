@@ -19,10 +19,12 @@ final class WallComponent extends Bloc<WallEvent, WallState> {
 
         if (profile != null) {
           emit(state.copyWith(profileState: profile.toUiState()));
-          emit(state.copyWith(postsState: const Loading()));
           await _loadPosts(emit);
         } else {
-          emit(state.copyWith(profileState: const Error(null)));
+          emit(state.copyWith(
+            profileState: const Error(null),
+            postsState: const Error(null)
+          ));
         }
       }
     );
@@ -32,6 +34,17 @@ final class WallComponent extends Bloc<WallEvent, WallState> {
         emit(state.copyWith(postsState: Refreshing(value: state.postsState)));
         await _loadPosts(emit);
       },
+    );
+
+    on<Like>(
+      (event, emit) async {
+        final username = state.profileState.getOrNull?.username;
+        if (username == null) return;
+
+        await postRepository.likePost(username: username, messageId: event.postId);
+        // TODO: error handling
+        add(Refresh());
+      }
     );
 
     add(Create());

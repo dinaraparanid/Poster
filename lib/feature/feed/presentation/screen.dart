@@ -26,7 +26,10 @@ final class FeedScreen extends StatelessWidget {
               color: theme.colors.indicator.primary,
               backgroundColor: theme.colors.indicator.background,
               onRefresh: () async => onEvent(Refresh()),
-              child: PostList(postsState: state.postsState),
+              child: PostList(
+                postsState: state.postsState,
+                onPostLike: (id) => onEvent(Like(postId: id)),
+              ),
             ),
           );
         },

@@ -31,7 +31,12 @@ final class WallScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   const ProfileContainer(),
-                  Expanded(child: PostList(postsState: state.postsState)),
+                  Expanded(
+                    child: PostList(
+                      postsState: state.postsState,
+                      onPostLike: (id) => onEvent(Like(postId: id)),
+                    )
+                  ),
                 ],
               ),
             ),
