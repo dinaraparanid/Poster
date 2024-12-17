@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/ui/foundation/post/list.dart';
-import 'package:poster/core/ui/theme/app.dart';
+import 'package:poster/core/presentation/post/list.dart';
+import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/feature/wall/component/mod.dart';
 import 'package:poster/feature/wall/presentation/ui/mod.dart';
 
@@ -14,7 +14,7 @@ final class WallScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => WallComponent(
-        authRepository: context.read(),
+        profileRepository: context.read(),
         postRepository: context.read(),
       ),
       child: BlocBuilder<WallComponent, WallState>(

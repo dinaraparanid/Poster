@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:poster/core/ui/theme/app.dart';
-import 'package:poster/core/ui/theme/images.dart';
+import 'package:poster/core/presentation/theme/app.dart';
+import 'package:poster/core/presentation/theme/images.dart';
 import 'package:poster/feature/root/component/mod.dart';
 
 final class RootTopBarHeader extends StatelessWidget {

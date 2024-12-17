@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:poster/core/ui/foundation/ui_state.dart';
-import 'package:poster/domain/auth/profile.dart';
+import 'package:poster/core/presentation/foundation/ui_state.dart';
+import 'package:poster/core/domain/profile/entity/profile.dart';
 import 'package:poster/domain/post/post.dart';
 
 part 'state.freezed.dart';

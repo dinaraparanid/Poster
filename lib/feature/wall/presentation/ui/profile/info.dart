@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:poster/core/ui/foundation/ui_state.dart';
-import 'package:poster/core/ui/theme/app.dart';
-import 'package:poster/core/ui/theme/images.dart';
-import 'package:poster/domain/auth/profile.dart';
+import 'package:poster/core/presentation/foundation/ui_state.dart';
+import 'package:poster/core/presentation/theme/app.dart';
+import 'package:poster/core/presentation/theme/images.dart';
+import 'package:poster/core/domain/profile/entity/profile.dart';
 import 'package:poster/feature/wall/component/mod.dart';
 import 'package:shimmer/shimmer.dart';
 

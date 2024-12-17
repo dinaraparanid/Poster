@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/ui/foundation/profile_cover_stub.dart';
-import 'package:poster/core/ui/theme/app.dart';
+import 'package:poster/core/presentation/foundation/profile_cover_stub.dart';
+import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/feature/wall/presentation/ui/profile/info.dart';
 
 final class ProfileContainer extends StatelessWidget {

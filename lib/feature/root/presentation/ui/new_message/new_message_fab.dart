@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/ui/theme/app.dart';
-import 'package:poster/core/ui/theme/images.dart';
+import 'package:poster/core/presentation/theme/app.dart';
+import 'package:poster/core/presentation/theme/images.dart';
 import 'package:poster/feature/root/component/mod.dart';
 
 final class NewMessageFab extends StatelessWidget {

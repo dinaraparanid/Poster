@@ -5,13 +5,12 @@
 Multiplatform mini-social-network application
 that allows to share posts, written in Flutter.
 
+Application utilizes principle of **Clean Architecture**,
+using **BLoC** library as a state management tool.
+
 ## **Structure**
 Application utilizes principle of **Clean Architecture**,
 using **Bloc** library as a state management tool.
-
-* **Feature** folder contains implementation of ***screens*** used in app (chat screen).
-* **Domain** folder contains abstractions and models
-* **Data** folder contains ***implementations of abstractions*** and special libraries (***Dio http client***)
 
 ## **Preview**
 
@@ -22,8 +21,8 @@ using **Bloc** library as a state management tool.
 ## **Stack**
 
 <ul>
-    <li>Dart 3.5.3</li>
-    <li>Flutter 3.24.3</li>
+    <li>Dart 3</li>
+    <li>Flutter 3</li>
     <li>Dio</li>
     <li>Bloc</li>
     <li>Shared Preferences</li>

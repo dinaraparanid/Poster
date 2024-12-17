@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:poster/core/ui/theme/app.dart';
+import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/feature/feed/presentation/screen.dart';
 import 'package:poster/feature/root/component/mod.dart';
 import 'package:poster/feature/root/presentation/ui/mod.dart';
 import 'package:poster/feature/wall/presentation/screen.dart';
-import 'package:poster/utils/functions/do_nothing.dart';
+import 'package:poster/core/utils/functions/do_nothing.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 final class RootScreen extends StatelessWidget {
@@ -19,7 +19,7 @@ final class RootScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => RootComponent(
-        authRepository: context.read(),
+        profileRepository: context.read(),
         postsRepository: context.read(),
       ),
       child: BlocConsumer<RootComponent, RootState>(

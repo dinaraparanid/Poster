@@ -1,23 +1,23 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/ui/foundation/ui_state.dart';
-import 'package:poster/domain/auth/mod.dart';
+import 'package:poster/core/domain/profile/repository/profile_repository.dart';
+import 'package:poster/core/presentation/foundation/ui_state.dart';
 import 'package:poster/domain/post/mod.dart';
 import 'package:poster/feature/root/component/effect.dart';
 import 'package:poster/feature/root/component/event.dart';
 import 'package:poster/feature/root/component/state.dart';
-import 'package:poster/utils/functions/do_nothing.dart';
+import 'package:poster/core/utils/functions/do_nothing.dart';
 
 final class RootComponent extends Bloc<RootEvent, RootState> {
-  final AuthRepository authRepository;
+  final ProfileRepository profileRepository;
   final PostRepository postsRepository;
 
   RootComponent({
-    required this.authRepository,
+    required this.profileRepository,
     required this.postsRepository,
   }) : super(RootState.initial()) {
     on<Create>(
       (event, emit) async {
-        final profile = await authRepository.profile;
+        final profile = await profileRepository.profile;
 
         if (profile != null) {
           emit(state.copyWith(profileState: profile.toUiState()));

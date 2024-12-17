@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/ui/foundation/post/list.dart';
-import 'package:poster/core/ui/theme/app.dart';
+import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/feature/feed/component/mod.dart';
+import 'package:poster/core/presentation/post/list.dart';
 
 final class FeedScreen extends StatelessWidget {
   const FeedScreen({super.key});
@@ -13,7 +13,7 @@ final class FeedScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (context) => FeedComponent(
-        authRepository: context.read(),
+        profileRepository: context.read(),
         postRepository: context.read(),
       ),
       child: BlocBuilder<FeedComponent, FeedState>(
