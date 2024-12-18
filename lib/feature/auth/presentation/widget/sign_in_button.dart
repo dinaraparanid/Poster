@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/foundation/button.dart';
 import 'package:poster/core/presentation/theme/app.dart';
+import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/auth/presentation/bloc/mod.dart';
 
 final class SignInButton extends StatelessWidget {
@@ -11,13 +12,13 @@ final class SignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.read<AppTheme>();
+    final bloc = di<AuthBloc>();
+    final theme = di<AppTheme>();
     final strings = AppLocalizations.of(context)!;
 
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        final onEvent = context.read<AuthBloc>().add;
-        void onClick() => onEvent(SignInClicked());
+        void onClick() => bloc.add(SignInClicked());
 
         return AppButton(
           enabled: state.isSignInEnabled,

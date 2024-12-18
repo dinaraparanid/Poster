@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/theme/mod.dart';
 import 'package:poster/core/utils/functions/do_nothing.dart';
-import 'package:poster/feature/auth/domain/use_case/login_use_case.dart';
+import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/auth/presentation/bloc/mod.dart';
 import 'package:poster/feature/auth/presentation/widget/mod.dart';
-import 'package:poster/feature/root/presentation/screen.dart';
+import 'package:poster/feature/root/presentation/root_screen.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 final class AuthScreen extends StatelessWidget {
@@ -15,20 +15,18 @@ final class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.read<AppTheme>();
+    final bloc = di<AuthBloc>();
+    final theme = di<AppTheme>();
     final strings = AppLocalizations.of(context)!;
 
     return BlocProvider(
-      create: (context) => AuthBloc(
-        // TODO: GetIt
-        loginUseCase: LoginUseCase(repository: context.read())
-      ),
+      create: (_) => bloc,
       child: BlocConsumer<AuthBloc, AuthState>(
         listenWhen: (x, y) => x.effect != y.effect,
         listener: (context, state) => switch (state.effect) {
           SignedIn() => onSignedIn(
               context: context,
-              onEvent: context.read<AuthBloc>().add,
+              onEvent: bloc.add,
           ),
 
           FailedToSignIn() => doNothing,
@@ -36,7 +34,7 @@ final class AuthScreen extends StatelessWidget {
           null => doNothing,
         },
         builder: (context, state) {
-          final onEvent = context.read<AuthBloc>().add;
+          final onEvent = bloc.add;
           return UniversalPlatform.isIOS || UniversalPlatform.isMacOS
             ? cupertinoUi(theme, strings, state, onEvent)
             : materialUi(theme, strings, state, onEvent);

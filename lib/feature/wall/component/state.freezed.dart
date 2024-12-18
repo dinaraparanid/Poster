@@ -35,7 +35,7 @@ abstract class $WallStateCopyWith<$Res> {
   $Res call({UiState<Profile> profileState, UiState<List<Post>> postsState});
 
   $UiStateCopyWith<Profile, $Res> get profileState;
-  $UiStateCopyWith<List<Post>, $Res> get postsState;
+  $UiStateCopyWith<List<InvalidType>, $Res> get postsState;
 }
 
 /// @nodoc
@@ -82,8 +82,9 @@ class _$WallStateCopyWithImpl<$Res, $Val extends WallState>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UiStateCopyWith<List<Post>, $Res> get postsState {
-    return $UiStateCopyWith<List<Post>, $Res>(_value.postsState, (value) {
+  $UiStateCopyWith<List<InvalidType>, $Res> get postsState {
+    return $UiStateCopyWith<List<InvalidType>, $Res>(_value.postsState,
+        (value) {
       return _then(_value.copyWith(postsState: value) as $Val);
     });
   }
@@ -102,7 +103,7 @@ abstract class _$$WallStateImplCopyWith<$Res>
   @override
   $UiStateCopyWith<Profile, $Res> get profileState;
   @override
-  $UiStateCopyWith<List<Post>, $Res> get postsState;
+  $UiStateCopyWith<List<InvalidType>, $Res> get postsState;
 }
 
 /// @nodoc

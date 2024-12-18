@@ -1,3 +1,3 @@
-import 'package:poster/core/domain/profile/data_source/profile_local_data_source.dart';
+import 'package:poster/core/domain/profile/data_source/profile_storage.dart';
 
-abstract class ProfileRepository with ProfileLocalDataSource {}
+abstract class ProfileRepository with ProfileStorage {}

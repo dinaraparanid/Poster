@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/presentation/post/block.dart';
+import 'package:poster/core/domain/post/entity/post.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
+import 'package:poster/core/presentation/post/block.dart';
 import 'package:poster/core/presentation/theme/app.dart';
-import 'package:poster/domain/post/post.dart';
 
 final class PostList extends StatelessWidget {
   final UiState<List<Post>> postsState;

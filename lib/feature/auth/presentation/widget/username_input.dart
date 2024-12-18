@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/foundation/text_field.dart';
 import 'package:poster/core/presentation/theme/app.dart';
+import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/auth/presentation/bloc/mod.dart';
 
 final class UsernameInput extends StatelessWidget {
@@ -11,17 +12,17 @@ final class UsernameInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.read<AppTheme>();
+    final bloc = di<AuthBloc>();
+    final theme = di<AppTheme>();
     final strings = AppLocalizations.of(context)!;
 
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        final onEvent = context.read<AuthBloc>().add;
-
         void onChanged(String username) =>
-            onEvent(UsernameChanged(username: username));
+            bloc.add(UsernameChanged(username: username));
 
-        void onCanceled() => onEvent(UsernameCleared());
+        void onCanceled() =>
+            bloc.add(UsernameCleared());
 
         return Container(
           padding: EdgeInsets.symmetric(

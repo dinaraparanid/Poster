@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poster/core/domain/post/entity/post.dart';
 import 'package:poster/core/presentation/foundation/clickable.dart';
 import 'package:poster/core/presentation/foundation/profile_cover_stub.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
-import 'package:poster/domain/post/post.dart';
 
 final class PostBlock extends StatelessWidget {
   final Post post;
