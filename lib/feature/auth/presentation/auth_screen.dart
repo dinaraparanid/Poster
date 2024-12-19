@@ -11,12 +11,13 @@ import 'package:poster/feature/root/presentation/root_screen.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 final class AuthScreen extends StatelessWidget {
-  const AuthScreen({super.key});
+  final bloc = di<AuthBloc>();
+  final theme = di<AppTheme>();
+
+  AuthScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final bloc = di<AuthBloc>();
-    final theme = di<AppTheme>();
     final strings = AppLocalizations.of(context)!;
 
     return BlocProvider(
@@ -123,7 +124,7 @@ final class AuthScreen extends StatelessWidget {
   }) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => const RootScreen()),
+      MaterialPageRoute(builder: (_) => RootScreen()),
     );
 
     onEvent(NavigatedToSignIn());

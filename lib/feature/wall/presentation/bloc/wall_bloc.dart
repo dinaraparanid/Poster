@@ -1,16 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poster/core/domain/post/entity/post.dart';
+import 'package:poster/core/domain/post/repository/post_repository.dart';
 import 'package:poster/core/domain/profile/repository/profile_repository.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
-import 'package:poster/domain/auth/mod.dart';
-import 'package:poster/domain/post/mod.dart';
-import 'package:poster/feature/wall/component/event.dart';
-import 'package:poster/feature/wall/component/state.dart';
+import 'package:poster/feature/wall/presentation/bloc/wall_event.dart';
+import 'package:poster/feature/wall/presentation/bloc/wall_state.dart';
 
-final class WallComponent extends Bloc<WallEvent, WallState> {
+final class WallBloc extends Bloc<WallEvent, WallState> {
   final ProfileRepository profileRepository;
   final PostRepository postRepository;
 
-  WallComponent({
+  WallBloc({
     required this.profileRepository,
     required this.postRepository,
   }) : super(WallState.initial()) {
@@ -24,7 +24,7 @@ final class WallComponent extends Bloc<WallEvent, WallState> {
         } else {
           emit(state.copyWith(
             profileState: const Error(null),
-            postsState: const Error(null)
+            postsState: const Error(null),
           ));
         }
       }

@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:poster/core/domain/profile/entity/profile.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
-import 'package:poster/core/domain/profile/entity/profile.dart';
-import 'package:poster/feature/wall/component/mod.dart';
+import 'package:poster/di/app_module.dart';
+import 'package:poster/feature/wall/presentation/bloc/mod.dart';
 import 'package:shimmer/shimmer.dart';
 
 const _transitionDuration = Duration(seconds: 1);
@@ -15,14 +16,15 @@ const _dividerWidth = 1.0;
 const _dividerHeight = 24.0;
 
 final class ProfileInfo extends StatelessWidget {
-  const ProfileInfo({super.key});
+  final theme = di<AppTheme>();
+
+  ProfileInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.read<AppTheme>();
     final strings = AppLocalizations.of(context)!;
 
-    return BlocBuilder<WallComponent, WallState>(
+    return BlocBuilder<WallBloc, WallState>(
       builder: (context, state) {
         final profileState = state.profileState;
         final profile = profileState.getOrNull;

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
+import 'package:poster/di/app_module.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 const _cancelIconAnimDuration = Duration(milliseconds: 100);
@@ -24,16 +24,14 @@ final class AppTextField extends StatefulWidget {
 }
 
 final class _AppTextField extends State<AppTextField> {
+  final theme = di<AppTheme>();
   final _controller = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    final theme = context.read<AppTheme>();
-
-    return UniversalPlatform.isIOS || UniversalPlatform.isMacOS
+  Widget build(BuildContext context) =>
+    UniversalPlatform.isIOS || UniversalPlatform.isMacOS
       ? cupertinoUi(theme)
       : materialUi(theme);
-  }
 
   Widget materialUi(AppTheme theme) => TextField(
     controller: _controller,

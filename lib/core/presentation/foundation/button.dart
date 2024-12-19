@@ -1,15 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/presentation/theme/app.dart';
+import 'package:poster/di/app_module.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 final class AppButton extends StatelessWidget {
+  final theme = di<AppTheme>();
+
   final bool enabled;
   final void Function() onClick;
   final Widget child;
 
-  const AppButton({
+  AppButton({
     super.key,
     required this.enabled,
     required this.onClick,
@@ -17,20 +19,16 @@ final class AppButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final theme = context.read<AppTheme>();
-
-    return Container(
-      width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: theme.dimensions.padding.medium),
-      constraints: BoxConstraints(
-        maxWidth: theme.dimensions.size.extraEnormous,
-      ),
-      child: UniversalPlatform.isIOS || UniversalPlatform.isMacOS
-        ? cupertinoUi(theme)
-        : materialUi(theme),
-    );
-  }
+  Widget build(BuildContext context) => Container(
+    width: double.infinity,
+    margin: EdgeInsets.symmetric(horizontal: theme.dimensions.padding.medium),
+    constraints: BoxConstraints(
+      maxWidth: theme.dimensions.size.extraEnormous,
+    ),
+    child: UniversalPlatform.isIOS || UniversalPlatform.isMacOS
+      ? cupertinoUi(theme)
+      : materialUi(theme),
+  );
 
   Widget materialUi(AppTheme theme) => ElevatedButton(
     onPressed: enabled ? onClick : null,

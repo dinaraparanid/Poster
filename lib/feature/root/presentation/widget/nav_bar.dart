@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
-import 'package:poster/feature/root/component/mod.dart';
+import 'package:poster/feature/root/presentation/bloc/mod.dart';
 
 BottomNavigationBar MaterialRootNavBar({
   required AppTheme theme,
@@ -55,8 +55,8 @@ List<BottomNavigationBarItem> _items({
       width: theme.dimensions.size.small,
       height: theme.dimensions.size.small,
       color: state.selectedTab == Tabs.wall
-          ? theme.colors.navBar.selected
-          : theme.colors.navBar.unselected,
+        ? theme.colors.navBar.selected
+        : theme.colors.navBar.unselected,
     ),
     label: strings.root_tab_wall,
   ),
@@ -66,8 +66,8 @@ List<BottomNavigationBarItem> _items({
       width: theme.dimensions.size.small,
       height: theme.dimensions.size.small,
       color: state.selectedTab == Tabs.feed
-          ? theme.colors.navBar.selected
-          : theme.colors.navBar.unselected,
+        ? theme.colors.navBar.selected
+        : theme.colors.navBar.unselected,
     ),
     label: strings.root_tab_feed,
   ),

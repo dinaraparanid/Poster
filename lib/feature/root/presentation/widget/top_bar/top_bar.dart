@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/presentation/foundation/clickable.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
-import 'package:poster/feature/root/component/mod.dart';
+import 'package:poster/di/app_module.dart';
+import 'package:poster/feature/root/presentation/bloc/mod.dart';
 import 'package:poster/feature/root/presentation/widget/mod.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -13,13 +14,13 @@ final class RootTopBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.read<AppTheme>();
+    final bloc = di<RootBloc>();
+    final theme = di<AppTheme>();
 
-    return BlocBuilder<RootComponent, RootState>(
+    return BlocBuilder<RootBloc, RootState>(
       builder: (context, state) {
-        final onEvent = context.read<RootComponent>().add;
-        void onClick() => onEvent(AnnouncementsClicked());
         final hasIncoming = state.hasIncomingAnnouncements;
+        void onClick() => bloc.add(AnnouncementsClicked());
 
         return UniversalPlatform.isIOS || UniversalPlatform.isMacOS
           ? CupertinoUi(hasIncoming: hasIncoming, theme: theme, onClick: onClick)

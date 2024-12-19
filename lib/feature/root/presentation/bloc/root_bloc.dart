@@ -1,19 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poster/core/domain/post/repository/post_repository.dart';
 import 'package:poster/core/domain/profile/repository/profile_repository.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
-import 'package:poster/domain/post/mod.dart';
-import 'package:poster/feature/root/component/effect.dart';
-import 'package:poster/feature/root/component/event.dart';
-import 'package:poster/feature/root/component/state.dart';
 import 'package:poster/core/utils/functions/do_nothing.dart';
+import 'package:poster/feature/root/domain/use_case/create_post_use_case.dart';
+import 'package:poster/feature/root/presentation/bloc/root_effect.dart';
+import 'package:poster/feature/root/presentation/bloc/root_event.dart';
+import 'package:poster/feature/root/presentation/bloc/root_state.dart';
 
-final class RootComponent extends Bloc<RootEvent, RootState> {
-  final ProfileRepository profileRepository;
-  final PostRepository postsRepository;
-
-  RootComponent({
-    required this.profileRepository,
-    required this.postsRepository,
+final class RootBloc extends Bloc<RootEvent, RootState> {
+  RootBloc({
+    required CreatePostUseCase createPostUseCase,
+    required ProfileRepository profileRepository,
+    required PostRepository postsRepository,
   }) : super(RootState.initial()) {
     on<Create>(
       (event, emit) async {
@@ -50,14 +49,11 @@ final class RootComponent extends Bloc<RootEvent, RootState> {
         final message = state.message;
 
         if (username != null && message != null && message.isNotEmpty) {
-          final res = await postsRepository.createPost(
+          createPostUseCase.execute(
             username: username,
-            text: message,
-          );
-
-          res.fold(
-            (_) => doNothing(), // TODO: show error snackbar
-            (_) {
+            message: message,
+            onFailure: doNothing, // TODO: show error snackbar
+            onSuccess: () {
               // TODO: show success snackbar
               emit(state.copyWith(effect: const None(), message: ''));
             }

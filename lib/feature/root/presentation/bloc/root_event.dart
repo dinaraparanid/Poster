@@ -1,4 +1,4 @@
-import 'package:poster/feature/root/component/state.dart';
+import 'package:poster/feature/root/presentation/bloc/root_state.dart';
 
 sealed class RootEvent {}
 

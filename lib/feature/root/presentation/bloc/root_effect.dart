@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'effect.freezed.dart';
+part 'root_effect.freezed.dart';
 
 @freezed
 sealed class RootEffect with _$RootEffect {

@@ -22,7 +22,7 @@ final class App extends StatelessWidget {
           cursorColor: theme.colors.textField.primary,
         ),
       ),
-      home: const AuthScreen(),
+      home: AuthScreen(),
     );
   }
 }
