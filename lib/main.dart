@@ -4,5 +4,5 @@ import 'package:poster/di/app_module.dart';
 
 void main() {
   di.registerAppModule();
-  runApp(const App());
+  runApp(App());
 }

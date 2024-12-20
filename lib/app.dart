@@ -5,24 +5,22 @@ import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/auth/presentation/auth_screen.dart';
 
 final class App extends StatelessWidget {
-  const App({super.key});
+  final theme = di<AppTheme>();
+
+  App({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final theme = di<AppTheme>();
-
-    return MaterialApp(
-      color: theme.colors.background.primary,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      theme: ThemeData(
-        textSelectionTheme: TextSelectionThemeData(
-          selectionColor: theme.colors.textField.primary.withValues(alpha: 0.5),
-          selectionHandleColor: theme.colors.textField.primary,
-          cursorColor: theme.colors.textField.primary,
-        ),
+  Widget build(BuildContext context) => MaterialApp(
+    color: theme.colors.background.primary,
+    localizationsDelegates: AppLocalizations.localizationsDelegates,
+    supportedLocales: AppLocalizations.supportedLocales,
+    theme: ThemeData(
+      textSelectionTheme: TextSelectionThemeData(
+        selectionColor: theme.colors.textField.primary.withValues(alpha: 0.5),
+        selectionHandleColor: theme.colors.textField.primary,
+        cursorColor: theme.colors.textField.primary,
       ),
-      home: AuthScreen(),
-    );
-  }
+    ),
+    home: AuthScreen(),
+  );
 }
