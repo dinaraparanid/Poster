@@ -69,7 +69,7 @@ final class RootTopBar extends StatelessWidget {
     onClick: onClick,
     border: const CircleBorder(),
     child: Image.asset(
-      AppImages.loadPng(hasIncoming ? 'ic_bell_incoming' : 'ic_bell'),
+      AppImages.loadPng(hasIncoming ? 'ic_bell_incoming' : 'ic_bell').value,
       width: theme.dimensions.size.small,
       height: theme.dimensions.size.small,
     ),

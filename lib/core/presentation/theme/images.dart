@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:poster/core/presentation/foundation/image_asset.dart';
 
 @immutable
 class AppImages {
   const AppImages._();
-  static String load(String file) => 'assets/images/$file';
-  static String loadPng(String filename) => load('$filename.png');
+
+  static ImageAsset load(String file) => ImageAsset('assets/images/$file');
+  static ImageAsset loadPng(String filename) => load('$filename.png');
+  static ImageAsset loadSvg(String filename) => load('$filename.svg');
 }

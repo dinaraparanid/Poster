@@ -9,7 +9,7 @@ sealed class UiState<T> {
   const factory UiState.refreshing({required UiState<T> value}) = Refreshing;
   const factory UiState.data({required T value}) = Data;
   const factory UiState.success() = Success;
-  const factory UiState.error(Exception? e) = Error;
+  const factory UiState.error([Exception? e]) = Error;
 }
 
 extension Properties<T> on UiState<T> {

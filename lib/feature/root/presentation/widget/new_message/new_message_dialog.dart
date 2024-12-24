@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:poster/core/presentation/foundation/text_field.dart';
+import 'package:poster/core/presentation/foundation/app_text_field.dart';
 import 'package:poster/core/presentation/theme/app.dart';
+import 'package:poster/core/presentation/theme/images.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 void onShowNewMessageDialog({
+  required TextEditingController controller,
   required BuildContext context,
   required AppTheme theme,
   required AppLocalizations strings,
@@ -13,28 +15,22 @@ void onShowNewMessageDialog({
   required void Function() onSend,
   required void Function() onCancel,
 }) {
-  if (UniversalPlatform.isIOS || UniversalPlatform.isMacOS) {
-    _showCupertinoNewMessageDialog(
-      context: context,
-      theme: theme,
-      strings: strings,
-      onMessageChanged: onMessageChanged,
-      onSend: onSend,
-      onCancel: onCancel,
-    );
-  } else {
-    _showMaterialNewMessageDialog(
-      context: context,
-      theme: theme,
-      strings: strings,
-      onMessageChanged: onMessageChanged,
-      onSend: onSend,
-      onCancel: onCancel,
-    );
-  }
+  final showDialog = UniversalPlatform.isIOS || UniversalPlatform.isMacOS
+    ? _showCupertinoNewMessageDialog : _showMaterialNewMessageDialog;
+
+  showDialog(
+    controller: controller,
+    context: context,
+    theme: theme,
+    strings: strings,
+    onMessageChanged: onMessageChanged,
+    onSend: onSend,
+    onCancel: onCancel,
+  );
 }
 
 void _showCupertinoNewMessageDialog({
+  required TextEditingController controller,
   required BuildContext context,
   required AppTheme theme,
   required AppLocalizations strings,
@@ -50,7 +46,11 @@ void _showCupertinoNewMessageDialog({
         color: theme.colors.text.header,
       ),
     ),
-    content: _body(strings: strings, onMessageChanged: onMessageChanged),
+    content: _body(
+      controller: controller,
+      strings: strings,
+      onMessageChanged: onMessageChanged,
+    ),
     actions: _actions(
       theme: theme,
       strings: strings,
@@ -67,6 +67,7 @@ void _showCupertinoNewMessageDialog({
 );
 
 void _showMaterialNewMessageDialog({
+  required TextEditingController controller,
   required BuildContext context,
   required AppTheme theme,
   required AppLocalizations strings,
@@ -84,7 +85,11 @@ void _showMaterialNewMessageDialog({
         color: theme.colors.text.header,
       ),
     ),
-    content: _body(strings: strings, onMessageChanged: onMessageChanged),
+    content: _body(
+      controller: controller,
+      strings: strings,
+      onMessageChanged: onMessageChanged,
+    ),
     actions: _actions(
       theme: theme,
       strings: strings,
@@ -101,11 +106,17 @@ void _showMaterialNewMessageDialog({
 );
 
 Widget _body({
+  required TextEditingController controller,
   required AppLocalizations strings,
   required void Function(String) onMessageChanged,
 }) => AppTextField(
+  controller: controller,
   label: strings.root_new_message_dialog_label,
-  onChanged: onMessageChanged,
+  icon: AppImages.loadSvg('ic_cancel'),
+  onChanged: (text) {
+    onMessageChanged(text);
+    controller.clear();
+  },
 );
 
 List<Widget> _actions({

@@ -5,7 +5,8 @@
     "unspecified": "Не указано",
 
     "sign_in_welcome": "Приветствую в Poster!",
-    "sign_in_username": "Имя пользователя",
+    "sign_in_login": "Почта / имя пользователя",
+    "sign_in_password": "Пароль",
     "sign_in_button_text": "Войти",
 
     "root_tab_wall": "Стена",

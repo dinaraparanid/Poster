@@ -36,7 +36,7 @@ final class ProfileCoverStub extends StatelessWidget {
     child: Wrap(
       children: [
         Image.asset(
-          AppImages.loadPng('ic_avatar'),
+          AppImages.loadPng('ic_avatar').value,
           width: avatarSize.width,
           height: avatarSize.height,
         )

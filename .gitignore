@@ -51,3 +51,4 @@ pubspec.lock
 
 firebase.json
 lib/firebase_options.dart
+firepit-log.txt

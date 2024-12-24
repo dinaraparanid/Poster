@@ -164,7 +164,7 @@ final class ProfileInfo extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                AppImages.loadPng('ic_location'),
+                AppImages.loadPng('ic_location').value,
                 width: theme.dimensions.size.extraSmall,
                 height: theme.dimensions.size.extraSmall,
                 color: theme.colors.text.onCard,

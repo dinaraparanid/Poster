@@ -10,11 +10,17 @@ import 'package:poster/feature/root/presentation/widget/mod.dart';
 import 'package:poster/feature/wall/presentation/wall_screen.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-final class RootScreen extends StatelessWidget {
+final class RootScreen extends StatefulWidget {
+  const RootScreen({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _RootScreenState();
+}
+
+final class _RootScreenState extends State<RootScreen> {
   final bloc = di<RootBloc>();
   final theme = di<AppTheme>();
-
-  RootScreen({super.key});
+  final dialogTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,52 +29,52 @@ final class RootScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => bloc,
       child: BlocConsumer<RootBloc, RootState>(
-        listenWhen: (x, y) => x.effect != y.effect,
-        listener: (context, state) => onEffect(
-          context: context,
-          theme: theme,
-          strings: strings,
-          sendEnabled: state.isSendEnabled,
-          effect: state.effect,
-        ),
-        builder: (context, state) => Scaffold(
-          extendBody: true,
-          backgroundColor: theme.colors.background.primary,
-          floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-          floatingActionButton: const NewMessageFab(),
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(theme.dimensions.size.big),
-            child: const RootTopBar(),
+          listenWhen: (x, y) => x.effect != y.effect,
+          listener: (context, state) => onEffect(
+            context: context,
+            theme: theme,
+            strings: strings,
+            sendEnabled: state.isSendEnabled,
+            effect: state.effect,
           ),
-          body: body(state),
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(theme.dimensions.radius.small),
-                topRight: Radius.circular(theme.dimensions.radius.small),
+          builder: (context, state) => Scaffold(
+            extendBody: true,
+            backgroundColor: theme.colors.background.primary,
+            floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+            floatingActionButton: const NewMessageFab(),
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(theme.dimensions.size.big),
+              child: const RootTopBar(),
+            ),
+            body: body(state),
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(theme.dimensions.radius.small),
+                  topRight: Radius.circular(theme.dimensions.radius.small),
+                ),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(theme.dimensions.radius.small),
+                  topRight: Radius.circular(theme.dimensions.radius.small),
+                ),
+                child: UniversalPlatform.isIOS || UniversalPlatform.isMacOS
+                    ? cupertinoUi(theme, strings, state, bloc.add)
+                    : materialUi(theme, strings, state, bloc.add),
               ),
             ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(theme.dimensions.radius.small),
-                topRight: Radius.circular(theme.dimensions.radius.small),
-              ),
-              child: UniversalPlatform.isIOS || UniversalPlatform.isMacOS
-                ? cupertinoUi(theme, strings, state, bloc.add)
-                : materialUi(theme, strings, state, bloc.add),
-            ),
-          ),
-        )
+          )
       ),
     );
   }
 
   Widget materialUi(
-    AppTheme theme,
-    AppLocalizations strings,
-    RootState state,
-    void Function(RootEvent) onEvent,
-  ) => MaterialRootNavBar(
+      AppTheme theme,
+      AppLocalizations strings,
+      RootState state,
+      void Function(RootEvent) onEvent,
+      ) => MaterialRootNavBar(
     theme: theme,
     strings: strings,
     state: state,
@@ -76,11 +82,11 @@ final class RootScreen extends StatelessWidget {
   );
 
   Widget cupertinoUi(
-    AppTheme theme,
-    AppLocalizations strings,
-    RootState state,
-    void Function(RootEvent) onEvent,
-  ) => CupertinoRootNavBar(
+      AppTheme theme,
+      AppLocalizations strings,
+      RootState state,
+      void Function(RootEvent) onEvent,
+      ) => CupertinoRootNavBar(
     theme: theme,
     strings: strings,
     state: state,
@@ -102,6 +108,7 @@ final class RootScreen extends StatelessWidget {
     switch (effect) {
       case ShowNewMessageDialog():
         onShowNewMessageDialog(
+          controller: dialogTextController,
           context: context,
           theme: theme,
           strings: strings,

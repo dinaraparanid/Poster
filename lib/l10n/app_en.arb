@@ -5,7 +5,8 @@
     "unspecified": "Unspecified",
 
     "sign_in_welcome": "Welcome to Poster!",
-    "sign_in_username": "Username",
+    "sign_in_login": "Email / Username",
+    "sign_in_password": "Password",
     "sign_in_button_text": "Sign In",
 
     "root_tab_wall": "Wall",

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/theme/mod.dart';
 import 'package:poster/di/app_module.dart';
-import 'package:poster/feature/auth/presentation/auth_screen.dart';
+import 'package:poster/feature/auth/sign_in/presentation/sign_in_screen.dart';
 
 final class App extends StatelessWidget {
   final theme = di<AppTheme>();
@@ -21,6 +21,6 @@ final class App extends StatelessWidget {
         cursorColor: theme.colors.textField.primary,
       ),
     ),
-    home: AuthScreen(),
+    home: SignInScreen(), // TODO: общий AuthScreen (как root)
   );
 }

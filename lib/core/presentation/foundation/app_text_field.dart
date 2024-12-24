@@ -1,22 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:poster/core/presentation/foundation/image_asset.dart';
 import 'package:poster/core/presentation/theme/app.dart';
-import 'package:poster/core/presentation/theme/images.dart';
+import 'package:poster/core/presentation/utils/icon_tint.dart';
 import 'package:poster/di/app_module.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 const _cancelIconAnimDuration = Duration(milliseconds: 100);
+const _passwordObscuringCharacter = '*';
 
 final class AppTextField extends StatefulWidget {
   final String label;
+  final ImageAsset icon;
+  final bool obscureText;
+  final TextEditingController controller;
+
   final void Function(String) onChanged;
-  final void Function()? onCanceled;
+  final void Function()? onIconClicked;
 
   const AppTextField({
     super.key,
     required this.label,
+    required this.icon,
     required this.onChanged,
-    this.onCanceled,
+    required this.controller,
+    this.obscureText = false,
+    this.onIconClicked,
   });
 
   @override
@@ -25,19 +35,20 @@ final class AppTextField extends StatefulWidget {
 
 final class _AppTextField extends State<AppTextField> {
   final theme = di<AppTheme>();
-  final _controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) =>
     UniversalPlatform.isIOS || UniversalPlatform.isMacOS
-      ? cupertinoUi(theme)
-      : materialUi(theme);
+      ? CupertinoUi() : MaterialUi();
 
-  Widget materialUi(AppTheme theme) => TextField(
-    controller: _controller,
+  Widget MaterialUi() => TextField(
+    controller: widget.controller,
+    onChanged: widget.onChanged,
     style: theme.typography.body.copyWith(
       color: theme.colors.text.primary
     ),
+    obscureText: widget.obscureText,
+    obscuringCharacter: _passwordObscuringCharacter,
     cursorColor: theme.colors.textField.primary,
     decoration: InputDecoration(
       contentPadding: EdgeInsets.symmetric(
@@ -60,11 +71,11 @@ final class _AppTextField extends State<AppTextField> {
         color: theme.colors.textField.primary
       ),
       suffixIcon: AnimatedOpacity(
-        opacity: _controller.text.isEmpty ? 0.0 : 1.0,
+        opacity: widget.controller.text.isEmpty ? 0.0 : 1.0,
         duration: _cancelIconAnimDuration,
         child: Container(
           margin: EdgeInsets.only(right: theme.dimensions.padding.medium),
-          child: cancelIcon(theme),
+          child: CancelIcon(theme),
         ),
       ),
       suffixIconConstraints: BoxConstraints.expand(
@@ -72,15 +83,17 @@ final class _AppTextField extends State<AppTextField> {
         height: theme.dimensions.size.small,
       )
     ),
-    onChanged: widget.onChanged,
   );
 
-  Widget cupertinoUi(AppTheme theme) => CupertinoTextField(
-    controller: _controller,
+  Widget CupertinoUi() => CupertinoTextField(
+    controller: widget.controller,
+    onChanged: widget.onChanged,
     placeholder: widget.label,
     style: theme.typography.regular.copyWith(
       color: theme.colors.text.primary
     ),
+    obscureText: widget.obscureText,
+    obscuringCharacter: _passwordObscuringCharacter,
     cursorColor: theme.colors.textField.primary,
     decoration: BoxDecoration(
       border: Border.all(color: theme.colors.textField.primary),
@@ -88,13 +101,12 @@ final class _AppTextField extends State<AppTextField> {
         Radius.circular(theme.dimensions.radius.minimum)
       ),
     ),
-    onChanged: widget.onChanged,
     suffix: AnimatedOpacity(
-      opacity: _controller.text.isEmpty ? 0.0 : 1.0,
+      opacity: widget.controller.text.isEmpty ? 0.0 : 1.0,
       duration: _cancelIconAnimDuration,
       child: Container(
         margin: EdgeInsets.only(right: theme.dimensions.padding.medium),
-        child: cancelIcon(theme),
+        child: CancelIcon(theme),
       ),
     ),
     padding: EdgeInsets.symmetric(
@@ -103,16 +115,13 @@ final class _AppTextField extends State<AppTextField> {
     ),
   );
 
-  Widget cancelIcon(AppTheme theme) => GestureDetector(
-    onTap: () {
-      setState(_controller.clear);
-      widget.onCanceled?.call();
-    },
-    child: Image.asset(
-      AppImages.loadPng('ic_cancel'),
+  Widget CancelIcon(AppTheme theme) => GestureDetector(
+    onTap: () => setState(() => widget.onIconClicked?.call()),
+    child: SvgPicture.asset(
+      widget.icon.value,
       width: theme.dimensions.size.small,
       height: theme.dimensions.size.small,
-      color: theme.colors.textField.primary,
+      colorFilter: theme.colors.textField.primary.iconTint,
     ),
   );
 }

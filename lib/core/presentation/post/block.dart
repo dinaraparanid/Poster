@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/domain/post/entity/post.dart';
 import 'package:poster/core/presentation/foundation/clickable.dart';
 import 'package:poster/core/presentation/foundation/profile_cover_stub.dart';
@@ -114,7 +113,7 @@ final class PostBlock extends StatelessWidget {
         onClick: () => print('TODO: Share'),
         border: const CircleBorder(),
         child: Image.asset(
-          AppImages.loadPng('ic_share'),
+          AppImages.loadPng('ic_share').value,
           width: theme.dimensions.size.small,
           height: theme.dimensions.size.small,
         ),
@@ -133,7 +132,7 @@ final class PostBlock extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image.asset(
-              AppImages.loadPng('ic_like'),
+              AppImages.loadPng('ic_like').value,
               width: theme.dimensions.size.small,
               height: theme.dimensions.size.small,
             ),

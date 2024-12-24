@@ -1,8 +1,11 @@
 # Flutter-related
 **/Flutter/ephemeral/
 **/Pods/
-Runner/GoogleService-Info.plist
 
 # Xcode-related
 **/dgph
 **/xcuserdata/
+
+build
+Runner/GoogleService-Info.plist
+Podfile.lock

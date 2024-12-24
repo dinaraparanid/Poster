@@ -130,8 +130,8 @@ final class AppButtonColors {
 
   factory AppButtonColors._default() => AppButtonColors(
     primary: _MetallicSeaweed,
-    ripple: _MetallicSeaweed.withOpacity(0.25),
-    like: _DarkRaspberry.withOpacity(0.25),
+    ripple: _MetallicSeaweed.withValues(alpha: 0.25),
+    like: _DarkRaspberry.withValues(alpha: 0.25),
     disabled: _DarkJungleGreen,
     topBar: _ChineseBlack,
     fab: AppFabColors._default(),

@@ -865,7 +865,7 @@ class __$$ErrorImplCopyWithImpl<T, $Res>
 /// @nodoc
 
 class _$ErrorImpl<T> implements Error<T> {
-  const _$ErrorImpl(this.e);
+  const _$ErrorImpl([this.e]);
 
   @override
   final Exception? e;
@@ -982,7 +982,7 @@ class _$ErrorImpl<T> implements Error<T> {
 }
 
 abstract class Error<T> implements UiState<T> {
-  const factory Error(final Exception? e) = _$ErrorImpl<T>;
+  const factory Error([final Exception? e]) = _$ErrorImpl<T>;
 
   Exception? get e;
 

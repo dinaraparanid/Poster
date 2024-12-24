@@ -30,7 +30,7 @@ final class RootTopBarHeader extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Image.asset(
-        AppImages.loadPng('feed'),
+        AppImages.loadPng('feed').value,
         width: theme.dimensions.size.medium,
         height: theme.dimensions.size.medium,
         color: theme.colors.text.header,
