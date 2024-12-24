@@ -4,5 +4,6 @@ part 'sign_in_effect.freezed.dart';
 
 @freezed
 sealed class SignInEffect {
-  const factory SignInEffect.navigateToSignUp() = NavigateToSignUp;
+  const factory SignInEffect.signedUpClicked() = SignedUpClicked;
+  const factory SignInEffect.signedIn() = SignedIn;
 }

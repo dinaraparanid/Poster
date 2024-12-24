@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
-import 'package:poster/feature/auth/sign_in/presentation/bloc/mod.dart';
+import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 
 part 'sign_in_state.freezed.dart';
 

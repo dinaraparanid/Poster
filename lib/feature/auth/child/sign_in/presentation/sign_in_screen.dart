@@ -5,17 +5,18 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/theme/mod.dart';
 import 'package:poster/core/utils/functions/do_nothing.dart';
 import 'package:poster/di/app_module.dart';
-import 'package:poster/feature/auth/sign_in/presentation/bloc/mod.dart';
-import 'package:poster/feature/auth/sign_in/presentation/widget/mod.dart';
-import 'package:poster/feature/auth/sign_in/presentation/widget/password_input.dart';
+import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
+import 'package:poster/feature/auth/child/sign_in/presentation/widget/mod.dart';
+import 'package:poster/feature/auth/child/sign_in/presentation/widget/password_input.dart';
 import 'package:poster/feature/root/presentation/root_screen.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 final class SignInScreen extends StatelessWidget {
   final bloc = di<SignInBloc>();
   final theme = di<AppTheme>();
+  final void Function(SignInResult result) onBack;
 
-  SignInScreen({super.key});
+  SignInScreen({super.key, required this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,8 @@ final class SignInScreen extends StatelessWidget {
       child: BlocConsumer<SignInBloc, SignInState>(
         listenWhen: (x, y) => x.effect != y.effect,
         listener: (context, state) => switch (state.effect) {
-          NavigateToSignUp() => navigateToSignUp(context: context),
+          SignedUpClicked() => onBack(const SignInResult.navigateToSignUp()),
+          SignedIn() => onBack(const SignInResult.navigateToMain()),
           null => doNothing,
         },
         builder: (context, state) =>
@@ -113,12 +115,12 @@ final class SignInScreen extends StatelessWidget {
   void navigateToSignUp({required BuildContext context}) =>
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => RootScreen()), // TODO: SignUpScreen
+      MaterialPageRoute(builder: (_) => const RootScreen()), // TODO: SignUpScreen
     );
 
   void navigateToRoot({required BuildContext context}) =>
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => RootScreen()),
+      MaterialPageRoute(builder: (_) => const RootScreen()),
     );
 }

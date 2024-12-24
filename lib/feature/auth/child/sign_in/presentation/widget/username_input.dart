@@ -6,7 +6,7 @@ import 'package:poster/core/presentation/foundation/app_text_field.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
 import 'package:poster/di/app_module.dart';
-import 'package:poster/feature/auth/sign_in/presentation/bloc/mod.dart';
+import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 
 final class UsernameInput extends StatefulWidget {
   const UsernameInput({super.key});
