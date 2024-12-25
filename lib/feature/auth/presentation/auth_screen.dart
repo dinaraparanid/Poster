@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/utils/functions/do_nothing.dart';
 import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/sign_in_result.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/sign_in_screen.dart';
@@ -26,7 +25,7 @@ final class AuthScreen extends StatelessWidget {
               MaterialPageRoute(builder: (_) => const RootScreen()),
             ),
 
-            NavigateToSignUp() => doNothing, // TODO: SignUp
+            NavigateToSignUp() => print('TODO: Navigate to SignUp'),
           }
         ),
 

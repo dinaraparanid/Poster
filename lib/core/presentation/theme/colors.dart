@@ -94,12 +94,14 @@ final class AppTextColors {
   final Color primary;
   final Color onCard;
   final Color onButton;
+  final Color clickable;
 
   const AppTextColors({
     required this.header,
     required this.primary,
     required this.onCard,
     required this.onButton,
+    required this.clickable,
   });
 
   factory AppTextColors._default() => const AppTextColors(
@@ -107,6 +109,7 @@ final class AppTextColors {
     primary: _ChineseBlack,
     onCard: _Cultured,
     onButton: _Cultured,
+    clickable: _MoonstoneBlue,
   );
 }
 

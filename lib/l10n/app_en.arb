@@ -9,6 +9,8 @@
     "sign_in_password": "Password",
     "sign_in_button_text": "Sign In",
 
+    "sign_up_button_text": "Sign Up",
+
     "root_tab_wall": "Wall",
     "root_tab_feed": "Feed",
     "root_new_message_dialog_title": "New message",

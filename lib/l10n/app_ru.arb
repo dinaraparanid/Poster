@@ -9,6 +9,8 @@
     "sign_in_password": "Пароль",
     "sign_in_button_text": "Войти",
 
+    "sign_up_button_text": "Зарегистрироваться",
+
     "root_tab_wall": "Стена",
     "root_tab_feed": "Лента",
     "root_new_message_dialog_title": "Новое сообщение",

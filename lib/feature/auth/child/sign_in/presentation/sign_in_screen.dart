@@ -8,6 +8,7 @@ import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/widget/mod.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/widget/password_input.dart';
+import 'package:poster/feature/auth/child/sign_in/presentation/widget/sign_up_button.dart';
 import 'package:poster/feature/root/presentation/root_screen.dart';
 import 'package:universal_platform/universal_platform.dart';
 
@@ -85,6 +86,12 @@ final class SignInScreen extends StatelessWidget {
         SizedBox(height: theme.dimensions.padding.large),
 
         SignInButton(),
+
+        SizedBox(height: theme.dimensions.padding.medium),
+
+        SignUpButton(),
+
+        SizedBox(height: theme.dimensions.padding.medium),
       ],
     ),
   );
