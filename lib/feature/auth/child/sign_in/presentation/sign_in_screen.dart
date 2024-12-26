@@ -2,24 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:poster/core/presentation/foundation/platform_ui.dart';
 import 'package:poster/core/presentation/theme/mod.dart';
-import 'package:poster/core/utils/functions/do_nothing.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/widget/mod.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/widget/password_input.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/widget/sign_up_button.dart';
 import 'package:poster/feature/auth/presentation/widget/welcome_preview.dart';
-import 'package:universal_platform/universal_platform.dart';
 
 final class SignInScreen extends StatelessWidget {
   final SignInBloc bloc;
-  final void Function(SignInResult result) onBack;
-
-  const SignInScreen({
-    super.key,
-    required this.bloc,
-    required this.onBack,
-  });
+  const SignInScreen({super.key, required this.bloc});
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +21,9 @@ final class SignInScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (_) => bloc,
-      child: BlocConsumer<SignInBloc, SignInState>(
-        listenWhen: (x, y) => x.effect != y.effect,
-        listener: (context, state) => switch (state.effect) {
-          SignUpClicked() => onBack(const SignInResult.navigateToSignUp()),
-          SignedIn() => onBack(const SignInResult.navigateToMain()),
-          null => doNothing,
-        },
+      child: BlocBuilder<SignInBloc, SignInState>(
         builder: (context, state) =>
-          (UniversalPlatform.isIOS || UniversalPlatform.isMacOS ? CupertinoUi : MaterialUi)(
+          PlatformUi(cupertino: CupertinoUi, material: MaterialUi)(
             theme: theme,
             strings: strings,
             state: state,
@@ -76,7 +63,7 @@ final class SignInScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        WelcomePreview(),
+        const WelcomePreview(),
 
         SizedBox(height: theme.dimensions.padding.large),
 
@@ -90,7 +77,7 @@ final class SignInScreen extends StatelessWidget {
 
         SignInButton(onEvent: onEvent),
 
-        SizedBox(height: theme.dimensions.padding.medium),
+        SizedBox(height: theme.dimensions.padding.extraSmall),
 
         SignUpButton(onEvent: onEvent),
 

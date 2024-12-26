@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
-import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 
 part 'sign_in_state.freezed.dart';
 
@@ -11,7 +10,6 @@ abstract class SignInState with _$SignInState {
     @Default('') String password,
     @Default(false) bool isPasswordVisible,
     @Default(UiState.initial()) UiState<void> signedInUiState,
-    SignInEffect? effect,
   }) = _SignInState;
 }
 

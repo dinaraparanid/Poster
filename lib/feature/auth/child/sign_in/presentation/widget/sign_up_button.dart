@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:poster/core/presentation/foundation/clickable.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 
@@ -14,9 +15,14 @@ final class SignUpButton extends StatelessWidget {
     final theme = context.read<AppTheme>();
     final strings = AppLocalizations.of(context)!;
 
-    return GestureDetector( // TODO: InkWell
+    return AppClickable(
+      border: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(theme.dimensions.radius.medium)
+        ),
+      ),
       child: ButtonText(theme: theme, strings: strings),
-      onTap: () => onEvent(SignUpClick()),
+      onClick: () => onEvent(SignUpClick()),
     );
   }
 

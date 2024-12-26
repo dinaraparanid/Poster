@@ -4,20 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/foundation/platform_ui.dart';
 import 'package:poster/core/presentation/theme/app.dart';
-import 'package:poster/core/utils/functions/do_nothing.dart';
 import 'package:poster/feature/auth/child/sign_up/presentation/bloc/mod.dart';
 import 'package:poster/feature/auth/child/sign_up/presentation/widget/mod.dart';
 import 'package:poster/feature/auth/presentation/widget/welcome_preview.dart';
 
 final class SignUpScreen extends StatelessWidget {
   final SignUpBloc bloc;
-  final void Function(SignUpResult result) onBack;
-
-  const SignUpScreen({
-    super.key,
-    required this.bloc,
-    required this.onBack,
-  });
+  const SignUpScreen({super.key, required this.bloc});
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +19,7 @@ final class SignUpScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (_) => bloc,
-      child: BlocConsumer<SignUpBloc, SignUpState>(
-        listenWhen: (x, y) => x.effect != y.effect,
-        listener: (context, state) => switch (state.effect) {
-          BackClicked() => onBack(const SignUpResult.returnToSignIn()),
-          SignedUp() => onBack(const SignUpResult.navigateToMain()),
-          null => doNothing,
-        },
+      child: BlocBuilder<SignUpBloc, SignUpState>(
         builder: (context, state) => PopScope(
           canPop: false,
           onPopInvokedWithResult: (isPopped, _) => bloc.add(BackClick()),
@@ -77,7 +64,7 @@ final class SignUpScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        WelcomePreview(),
+        const WelcomePreview(),
 
         SizedBox(height: theme.dimensions.padding.large),
 

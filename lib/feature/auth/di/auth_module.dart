@@ -18,6 +18,7 @@ extension AuthModule on GetIt {
     registerLazySingleton<AuthBlocFactory>(() => AuthBlocFactory(
       signInBlocFactory: this(),
       signUpBlocFactory: this(),
+      router: this(),
     ));
   }
 }
