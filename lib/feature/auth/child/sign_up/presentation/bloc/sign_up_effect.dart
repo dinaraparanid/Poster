@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
 
 @immutable
-sealed class SignInEffect {}
+sealed class SignUpEffect {}
 
 @immutable
-final class SignUpClicked extends SignInEffect {
+final class BackClicked extends SignUpEffect {
   final int _id;
-  SignUpClicked() : _id = DateTime.now().millisecondsSinceEpoch;
+  BackClicked() : _id = DateTime.now().millisecondsSinceEpoch;
 
   @override
   bool operator ==(Object other) =>
     identical(this, other) ||
-      other is SignUpClicked &&
+      other is BackClicked &&
       runtimeType == other.runtimeType &&
       _id == other._id;
 
@@ -20,4 +20,4 @@ final class SignUpClicked extends SignInEffect {
 }
 
 @immutable
-final class SignedIn extends SignInEffect {}
+final class SignedUp extends SignUpEffect {}

@@ -1,42 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/domain/post/entity/post.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
 import 'package:poster/core/presentation/post/block.dart';
 import 'package:poster/core/presentation/theme/app.dart';
-import 'package:poster/di/app_module.dart';
 
 final class PostList extends StatelessWidget {
-  final theme = di<AppTheme>();
-
   final UiState<List<Post>> postsState;
   final void Function(int postId) onPostLike;
 
-  PostList({
+  const PostList({
     super.key,
     required this.postsState,
     required this.onPostLike,
   });
 
   @override
-  Widget build(BuildContext context) => switch (postsState) {
-    Initial<List<Post>>() => LoadingStub(theme: theme),
+  Widget build(BuildContext context) {
+    final theme = context.read<AppTheme>();
 
-    Loading<List<Post>>() => LoadingStub(theme: theme),
+    return switch (postsState) {
+      Initial<List<Post>>() => LoadingStub(theme: theme),
 
-    Refreshing<List<Post>>(value: final state) => switch (state) {
+      Loading<List<Post>>() => LoadingStub(theme: theme),
+
+      Refreshing<List<Post>>(value: final state) => switch (state) {
+        Data<List<Post>>(value: final posts) =>
+            Content(posts: posts, theme: theme, onPostLike: onPostLike),
+
+        _ => LoadingStub(theme: theme),
+      },
+
       Data<List<Post>>(value: final posts) =>
           Content(posts: posts, theme: theme, onPostLike: onPostLike),
 
-      _ => LoadingStub(theme: theme),
-    },
+      Success<List<Post>>() => Container(),
 
-    Data<List<Post>>(value: final posts) =>
-        Content(posts: posts, theme: theme, onPostLike: onPostLike),
-
-    Success<List<Post>>() => Container(),
-
-    Error<List<Post>>() => const Text('TODO: Error stub'),
-  };
+      Error<List<Post>>() => const Text('TODO: Error stub'),
+    };
+  }
 
   Widget Content({
     required List<Post> posts,

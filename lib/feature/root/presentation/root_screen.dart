@@ -18,12 +18,12 @@ final class RootScreen extends StatefulWidget {
 }
 
 final class _RootScreenState extends State<RootScreen> {
-  final bloc = di<RootBloc>();
-  final theme = di<AppTheme>();
+  final bloc = di<RootBloc>(); // TODO Factory
   final dialogTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.read<AppTheme>();
     final strings = AppLocalizations.of(context)!;
 
     return BlocProvider(
@@ -32,8 +32,6 @@ final class _RootScreenState extends State<RootScreen> {
           listenWhen: (x, y) => x.effect != y.effect,
           listener: (context, state) => onEffect(
             context: context,
-            theme: theme,
-            strings: strings,
             sendEnabled: state.isSendEnabled,
             effect: state.effect,
           ),
@@ -46,7 +44,7 @@ final class _RootScreenState extends State<RootScreen> {
               preferredSize: Size.fromHeight(theme.dimensions.size.big),
               child: const RootTopBar(),
             ),
-            body: body(state),
+            body: Body(state),
             bottomNavigationBar: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
@@ -59,9 +57,12 @@ final class _RootScreenState extends State<RootScreen> {
                   topLeft: Radius.circular(theme.dimensions.radius.small),
                   topRight: Radius.circular(theme.dimensions.radius.small),
                 ),
-                child: UniversalPlatform.isIOS || UniversalPlatform.isMacOS
-                    ? cupertinoUi(theme, strings, state, bloc.add)
-                    : materialUi(theme, strings, state, bloc.add),
+                child: (UniversalPlatform.isIOS || UniversalPlatform.isMacOS ? CupertinoUi : MaterialUi)(
+                  theme: theme,
+                  strings: strings,
+                  state: state,
+                  onEvent: bloc.add,
+                ),
               ),
             ),
           )
@@ -69,49 +70,45 @@ final class _RootScreenState extends State<RootScreen> {
     );
   }
 
-  Widget materialUi(
-      AppTheme theme,
-      AppLocalizations strings,
-      RootState state,
-      void Function(RootEvent) onEvent,
-      ) => MaterialRootNavBar(
+  Widget MaterialUi({
+    required AppTheme theme,
+    required AppLocalizations strings,
+    required RootState state,
+    required void Function(RootEvent) onEvent,
+  }) => MaterialRootNavBar(
     theme: theme,
     strings: strings,
     state: state,
     onTabClicked: (tab) => onEvent(TabClicked(tab: tab)),
   );
 
-  Widget cupertinoUi(
-      AppTheme theme,
-      AppLocalizations strings,
-      RootState state,
-      void Function(RootEvent) onEvent,
-      ) => CupertinoRootNavBar(
+  Widget CupertinoUi({
+    required AppTheme theme,
+    required AppLocalizations strings,
+    required RootState state,
+    required void Function(RootEvent) onEvent,
+  }) => CupertinoRootNavBar(
     theme: theme,
     strings: strings,
     state: state,
     onTabClicked: (tab) => onEvent(TabClicked(tab: tab)),
   );
 
-  Widget body(RootState state) => switch (state.selectedTab) {
+  Widget Body(RootState state) => switch (state.selectedTab) {
     Tabs.wall => WallScreen(),
     Tabs.feed => FeedScreen(),
   };
 
   void onEffect({
     required BuildContext context,
-    required AppTheme theme,
-    required AppLocalizations strings,
     required bool sendEnabled,
     required RootEffect? effect,
   }) {
     switch (effect) {
       case ShowNewMessageDialog():
-        onShowNewMessageDialog(
+        showNewMessageDialog(
           controller: dialogTextController,
           context: context,
-          theme: theme,
-          strings: strings,
           onMessageChanged: (msg) => bloc.add(UpdateMessage(message: msg)),
           onSend: () => bloc.add(SendMessage()),
           onCancel: () => bloc.add(UpdateNewMessageDialogVisibility(isVisible: false)),

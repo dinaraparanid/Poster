@@ -1,19 +1,19 @@
 sealed class SignInEvent {}
 
-final class LoginChanged extends SignInEvent {
+final class LoginChange extends SignInEvent {
   final String login;
-  LoginChanged({required this.login});
+  LoginChange({required this.login});
 }
 
-final class PasswordChanged extends SignInEvent {
+final class PasswordChange extends SignInEvent {
   final String password;
-  PasswordChanged({required this.password});
+  PasswordChange({required this.password});
 }
 
-final class LoginCleared extends SignInEvent {}
+final class LoginClear extends SignInEvent {}
 
-final class PasswordVisibilityChanged extends SignInEvent {}
+final class PasswordVisibilityChange extends SignInEvent {}
 
-final class SignInClicked extends SignInEvent {}
+final class SignInClick extends SignInEvent {}
 
-final class SignUpClicked extends SignInEvent {}
+final class SignUpClick extends SignInEvent {}

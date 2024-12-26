@@ -9,6 +9,5 @@ extension CoreModule on GetIt {
     registerProfileModule();
     registerPostModule();
     registerDio();
-    registerLazySingleton(() => AppTheme.create());
   }
 }

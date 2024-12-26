@@ -4,30 +4,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/foundation/button.dart';
 import 'package:poster/core/presentation/theme/app.dart';
-import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 
 final class SignInButton extends StatelessWidget {
-  final bloc = di<SignInBloc>();
-  final theme = di<AppTheme>();
+  final void Function(SignInEvent) onEvent;
 
-  SignInButton({super.key});
+  const SignInButton({super.key, required this.onEvent});
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.read<AppTheme>();
     final strings = AppLocalizations.of(context)!;
 
     return BlocBuilder<SignInBloc, SignInState>(
       builder: (context, state) => AppButton(
         enabled: state.isSignInEnabled,
-        onClick: () => bloc.add(SignInClicked()),
-        child: ButtonText(strings),
+        onClick: () => onEvent(SignInClick()),
+        child: ButtonText(theme: theme, strings: strings),
       ),
     );
   }
 
-  Text ButtonText(AppLocalizations strings) => Text(
-    strings.sign_in_button_text,
+  Text ButtonText({
+    required AppTheme theme,
+    required AppLocalizations strings,
+  }) => Text(
+    strings.auth_sign_in,
     style: theme.typography.regular.copyWith(
       color: theme.colors.text.onButton,
       fontWeight: FontWeight.w700,

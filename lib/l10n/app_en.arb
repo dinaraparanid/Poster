@@ -4,12 +4,13 @@
     "cancel": "Cancel",
     "unspecified": "Unspecified",
 
-    "sign_in_welcome": "Welcome to Poster!",
-    "sign_in_login": "Email / Username",
-    "sign_in_password": "Password",
-    "sign_in_button_text": "Sign In",
-
-    "sign_up_button_text": "Sign Up",
+    "auth_welcome": "Welcome to Poster!",
+    "auth_email": "Email",
+    "auth_username": "Username",
+    "auth_login": "Email / Username",
+    "auth_password": "Password",
+    "auth_sign_in": "Sign In",
+    "auth_sign_up": "Sign Up",
 
     "root_tab_wall": "Wall",
     "root_tab_feed": "Feed",
