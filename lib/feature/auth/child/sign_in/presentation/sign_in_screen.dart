@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/foundation/platform_ui.dart';
 import 'package:poster/core/presentation/theme/mod.dart';
+import 'package:poster/core/utils/functions/distinct_state.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/widget/mod.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/widget/password_input.dart';
@@ -21,7 +22,15 @@ final class SignInScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (_) => bloc,
-      child: BlocBuilder<SignInBloc, SignInState>(
+      child: BlocConsumer<SignInBloc, SignInState>(
+        listenWhen: distinctState((x) => x.isUserNotFoundOrDisabled || x.isNoConnection),
+        listener: (context, state) {
+          if (state.isUserNotFoundOrDisabled) {
+            // TODO: показать диалог + перейти на sign up
+          } else if (state.isNoConnection) {
+            // TODO: показать диалог
+          }
+        },
         builder: (context, state) =>
           PlatformUi(cupertino: CupertinoUi, material: MaterialUi)(
             theme: theme,
@@ -63,11 +72,13 @@ final class SignInScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        SizedBox(height: theme.dimensions.padding.enormous),
+
         const WelcomePreview(),
 
         SizedBox(height: theme.dimensions.padding.large),
 
-        LoginInput(onEvent: onEvent),
+        EmailInput(onEvent: onEvent),
 
         SizedBox(height: theme.dimensions.padding.medium),
 

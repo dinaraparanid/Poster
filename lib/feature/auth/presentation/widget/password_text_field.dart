@@ -8,6 +8,7 @@ import 'package:poster/core/utils/extension/bool_ext.dart';
 
 final class PasswordTextField extends StatefulWidget {
   final bool isPasswordVisible;
+  final String? error;
   final void Function(String) onChanged;
   final void Function() onPasswordVisibilityChanged;
 
@@ -16,6 +17,7 @@ final class PasswordTextField extends StatefulWidget {
     required this.isPasswordVisible,
     required this.onChanged,
     required this.onPasswordVisibilityChanged,
+    this.error,
   });
 
   @override
@@ -40,6 +42,7 @@ final class _PasswordTextFieldState extends State<PasswordTextField> {
       child: AppTextField(
         controller: controller,
         label: strings.auth_password,
+        error: widget.error,
         icon: AppImages.loadSvg(
           widget.isPasswordVisible ? 'ic_eye' : 'ic_eye_closed',
         ),

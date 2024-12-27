@@ -17,6 +17,7 @@ final class EmailInput extends StatelessWidget {
     return BlocBuilder<SignUpBloc, SignUpState>(
       builder: (context, state) => ClearableTextField(
         label: strings.auth_email,
+        error: state.isInvalidEmail ? strings.auth_email_error : null,
         onChanged: (email) => onEvent(EmailChange(email: email)),
         onClear: () => onEvent(EmailClear()),
       ),

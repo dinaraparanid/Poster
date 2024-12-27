@@ -5,9 +5,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 import 'package:poster/feature/auth/presentation/widget/clearable_text_field.dart';
 
-final class LoginInput extends StatelessWidget {
+final class EmailInput extends StatelessWidget {
   final void Function(SignInEvent) onEvent;
-  const LoginInput({super.key, required this.onEvent});
+  const EmailInput({super.key, required this.onEvent});
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +15,10 @@ final class LoginInput extends StatelessWidget {
 
     return BlocBuilder<SignInBloc, SignInState>(
       builder: (context, state) => ClearableTextField(
-        label: strings.auth_username,
-        onChanged: (username) => onEvent(LoginChange(login: username)),
-        onClear: () => onEvent(LoginClear()),
+        label: strings.auth_email,
+        error: state.isInvalidEmail ? strings.auth_email_error : null,
+        onChanged: (email) => onEvent(EmailChange(email: email)),
+        onClear: () => onEvent(EmailClear()),
       ),
     );
   }

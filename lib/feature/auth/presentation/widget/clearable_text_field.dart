@@ -6,6 +6,7 @@ import 'package:poster/core/presentation/theme/images.dart';
 
 final class ClearableTextField extends StatefulWidget {
   final String label;
+  final String? error;
   final void Function(String) onChanged;
   final void Function() onClear;
 
@@ -14,6 +15,7 @@ final class ClearableTextField extends StatefulWidget {
     required this.label,
     required this.onChanged,
     required this.onClear,
+    this.error,
   });
 
   @override
@@ -36,6 +38,7 @@ final class _ClearableTextFieldState extends State<ClearableTextField> {
       child: AppTextField(
         controller: controller,
         label: widget.label,
+        error: widget.error,
         icon: AppImages.loadSvg('ic_cancel'),
         onChanged: widget.onChanged,
         onIconClicked: () {

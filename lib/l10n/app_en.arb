@@ -7,10 +7,12 @@
     "auth_welcome": "Welcome to Poster!",
     "auth_email": "Email",
     "auth_username": "Username",
-    "auth_login": "Email / Username",
     "auth_password": "Password",
     "auth_sign_in": "Sign In",
     "auth_sign_up": "Sign Up",
+    "auth_email_error": "Invalid email",
+    "auth_password_error": "Invalid password",
+    "auth_password_weak": "Weak password",
 
     "root_tab_wall": "Wall",
     "root_tab_feed": "Feed",

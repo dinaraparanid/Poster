@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:poster/core/presentation/foundation/image_asset.dart';
+import 'package:poster/core/presentation/foundation/platform_ui.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/utils/icon_tint.dart';
-import 'package:universal_platform/universal_platform.dart';
+import 'package:poster/core/utils/functions/let.dart';
 
 const _cancelIconAnimDuration = Duration(milliseconds: 100);
 const _passwordObscuringCharacter = '*';
@@ -14,6 +15,7 @@ final class AppTextField extends StatefulWidget {
   final String label;
   final ImageAsset icon;
   final bool obscureText;
+  final String? error;
   final TextEditingController controller;
 
   final void Function(String) onChanged;
@@ -27,6 +29,7 @@ final class AppTextField extends StatefulWidget {
     required this.controller,
     this.obscureText = false,
     this.onIconClicked,
+    this.error,
   });
 
   @override
@@ -34,12 +37,10 @@ final class AppTextField extends StatefulWidget {
 }
 
 final class _AppTextField extends State<AppTextField> {
-
   @override
   Widget build(BuildContext context) {
     final theme = context.read<AppTheme>();
-    return UniversalPlatform.isIOS || UniversalPlatform.isMacOS
-      ? CupertinoUi(theme) : MaterialUi(theme);
+    return PlatformUi(cupertino: CupertinoUi, material: MaterialUi)(theme);
   }
 
   Widget MaterialUi(AppTheme theme) => TextField(
@@ -52,6 +53,7 @@ final class _AppTextField extends State<AppTextField> {
     obscuringCharacter: _passwordObscuringCharacter,
     cursorColor: theme.colors.textField.primary,
     decoration: InputDecoration(
+      errorText: widget.error,
       contentPadding: EdgeInsets.symmetric(
         vertical: theme.dimensions.padding.medium,
         horizontal: theme.dimensions.padding.medium,
@@ -86,33 +88,36 @@ final class _AppTextField extends State<AppTextField> {
     ),
   );
 
-  Widget CupertinoUi(AppTheme theme) => CupertinoTextField(
-    controller: widget.controller,
-    onChanged: widget.onChanged,
-    placeholder: widget.label,
-    style: theme.typography.regular.copyWith(
-      color: theme.colors.text.primary
-    ),
-    obscureText: widget.obscureText,
-    obscuringCharacter: _passwordObscuringCharacter,
-    cursorColor: theme.colors.textField.primary,
-    decoration: BoxDecoration(
-      border: Border.all(color: theme.colors.textField.primary),
-      borderRadius: BorderRadius.all(
-        Radius.circular(theme.dimensions.radius.minimum)
+  Widget CupertinoUi(AppTheme theme) => CupertinoFormRow(
+    error: widget.error?.let((e) => Text(e)),
+    child: CupertinoTextField(
+      controller: widget.controller,
+      onChanged: widget.onChanged,
+      placeholder: widget.label,
+      style: theme.typography.regular.copyWith(
+          color: theme.colors.text.primary
       ),
-    ),
-    suffix: AnimatedOpacity(
-      opacity: widget.controller.text.isEmpty ? 0.0 : 1.0,
-      duration: _cancelIconAnimDuration,
-      child: Container(
-        margin: EdgeInsets.only(right: theme.dimensions.padding.medium),
-        child: CancelIcon(theme),
+      obscureText: widget.obscureText,
+      obscuringCharacter: _passwordObscuringCharacter,
+      cursorColor: theme.colors.textField.primary,
+      decoration: BoxDecoration(
+        border: Border.all(color: theme.colors.textField.primary),
+        borderRadius: BorderRadius.all(
+            Radius.circular(theme.dimensions.radius.minimum)
+        ),
       ),
-    ),
-    padding: EdgeInsets.symmetric(
-      vertical: theme.dimensions.padding.medium,
-      horizontal: theme.dimensions.padding.medium,
+      suffix: AnimatedOpacity(
+        opacity: widget.controller.text.isEmpty ? 0.0 : 1.0,
+        duration: _cancelIconAnimDuration,
+        child: Container(
+          margin: EdgeInsets.only(right: theme.dimensions.padding.medium),
+          child: CancelIcon(theme),
+        ),
+      ),
+      padding: EdgeInsets.symmetric(
+        vertical: theme.dimensions.padding.medium,
+        horizontal: theme.dimensions.padding.medium,
+      ),
     ),
   );
 

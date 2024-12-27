@@ -7,10 +7,12 @@
     "auth_welcome": "Приветствую в Poster!",
     "auth_email": "Почта",
     "auth_username": "Имя пользователя",
-    "auth_login": "Почта / Имя пользователя",
     "auth_password": "Пароль",
     "auth_sign_in": "Войти",
     "auth_sign_up": "Зарегистрироваться",
+    "auth_email_error": "Некорректная почта",
+    "auth_password_error": "Некорректный пароль",
+    "auth_password_weak": "Слабый пароль",
 
     "root_tab_wall": "Стена",
     "root_tab_feed": "Лента",

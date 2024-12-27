@@ -1,8 +1,8 @@
 sealed class SignInEvent {}
 
-final class LoginChange extends SignInEvent {
-  final String login;
-  LoginChange({required this.login});
+final class EmailChange extends SignInEvent {
+  final String email;
+  EmailChange({required this.email});
 }
 
 final class PasswordChange extends SignInEvent {
@@ -10,7 +10,7 @@ final class PasswordChange extends SignInEvent {
   PasswordChange({required this.password});
 }
 
-final class LoginClear extends SignInEvent {}
+final class EmailClear extends SignInEvent {}
 
 final class PasswordVisibilityChange extends SignInEvent {}
 

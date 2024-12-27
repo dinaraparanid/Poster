@@ -25,12 +25,6 @@ final class WelcomePreview extends StatelessWidget {
 
   Widget PreviewImage({required AppTheme theme}) => Container(
     alignment: Alignment.center,
-    margin: EdgeInsets.fromLTRB(
-      theme.dimensions.padding.zero,
-      theme.dimensions.padding.enormous,
-      theme.dimensions.padding.zero,
-      theme.dimensions.padding.zero,
-    ),
     child: Image.asset(
       AppImages.loadPng('auth_preview').value,
       width: theme.dimensions.size.extraLarge,
