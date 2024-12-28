@@ -2,7 +2,11 @@
     "app_name": "Poster",
     "send": "Send",
     "cancel": "Cancel",
+    "ok": "OK",
     "unspecified": "Unspecified",
+
+    "no_connection_dialog_title": "No internet connection",
+    "no_connection_dialog_description": "Connect to the network or try again later",
 
     "auth_welcome": "Welcome to Poster!",
     "auth_email": "Email",
@@ -13,6 +17,15 @@
     "auth_email_error": "Invalid email",
     "auth_password_error": "Invalid password",
     "auth_password_weak": "Weak password",
+    "auth_dialog_title_profile_not_found": "Profile was disabled or deleted",
+    "auth_dialog_description_sign_up": "To sign in to {appName}, register the profile with different email",
+    "@auth_dialog_description_sign_up": {
+        "placeholders": {
+            "appName": {
+                "type": "String"
+            }
+        }
+    },
 
     "main_tab_wall": "Wall",
     "main_tab_feed": "Feed",

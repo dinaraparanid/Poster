@@ -71,5 +71,7 @@ final class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     );
 
     on<BackClick>((event, emit) => onBack(const SignUpResult.returnToSignIn()));
+
+    on<ClearError>((event, emit) => emit(state.copyWith(error: null)));
   }
 }

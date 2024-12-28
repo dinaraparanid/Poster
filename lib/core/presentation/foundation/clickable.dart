@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/presentation/theme/app.dart';
-import 'package:poster/di/app_module.dart';
 
 final class AppClickable extends StatelessWidget {
   final void Function() onClick;

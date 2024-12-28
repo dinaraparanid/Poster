@@ -19,3 +19,5 @@ final class SignInClick extends SignInEvent {}
 final class SignUpClick extends SignInEvent {}
 
 final class ShowRoot extends SignInEvent {}
+
+final class ClearError extends SignInEvent {}

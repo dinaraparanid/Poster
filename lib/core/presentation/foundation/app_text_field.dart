@@ -89,6 +89,7 @@ final class _AppTextField extends State<AppTextField> {
   );
 
   Widget CupertinoUi(AppTheme theme) => CupertinoFormRow(
+    padding: EdgeInsets.zero,
     error: widget.error?.let((e) => Text(e)),
     child: CupertinoTextField(
       controller: widget.controller,

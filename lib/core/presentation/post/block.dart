@@ -6,7 +6,6 @@ import 'package:poster/core/presentation/foundation/clickable.dart';
 import 'package:poster/core/presentation/foundation/profile_cover_stub.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
-import 'package:poster/di/app_module.dart';
 
 final class PostBlock extends StatelessWidget {
   final Post post;

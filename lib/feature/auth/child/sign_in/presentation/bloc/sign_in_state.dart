@@ -30,6 +30,8 @@ extension Properties on SignInState {
   bool get isUserNotFoundOrDisabled =>
     error == AuthError.userNotFound || error == AuthError.userDisabled;
 
+  bool get isAlertDialogRequired => isUserNotFoundOrDisabled || isNoConnection;
+
   bool get isGeneralError => error == AuthError.tooManyRequests ||
     error == AuthError.userTokenExpired || error == AuthError.unknown;
 }

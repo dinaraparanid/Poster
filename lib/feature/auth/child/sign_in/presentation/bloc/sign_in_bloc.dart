@@ -62,5 +62,7 @@ final class SignInBloc extends Bloc<SignInEvent, SignInState> {
     on<ShowRoot>(
       (event, emit) => onBack(const SignInResult.navigateToMain()),
     );
+
+    on<ClearError>((event, emit) => emit(state.copyWith(error: null)));
   }
 }

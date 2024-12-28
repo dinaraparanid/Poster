@@ -24,3 +24,5 @@ final class PasswordVisibilityChange extends SignUpEvent {}
 final class SignUpClick extends SignUpEvent {}
 
 final class BackClick extends SignUpEvent {}
+
+final class ClearError extends SignUpEvent {}

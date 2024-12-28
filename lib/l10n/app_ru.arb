@@ -2,7 +2,11 @@
     "app_name": "Poster",
     "send": "Отправить",
     "cancel": "Отмена",
+    "ok": "ОК",
     "unspecified": "Не указано",
+
+    "no_connection_dialog_title": "Нет соединения",
+    "no_connection_dialog_description": "Подключитесь к сети или попробуйте позже",
 
     "auth_welcome": "Приветствую в Poster!",
     "auth_email": "Почта",
@@ -13,6 +17,15 @@
     "auth_email_error": "Некорректная почта",
     "auth_password_error": "Некорректный пароль",
     "auth_password_weak": "Слабый пароль",
+    "auth_dialog_title_profile_not_found": "Профиль был заблокирован или удален",
+    "auth_dialog_description_sign_up": "Чтобы войти в {appName}, зарегистрируйте профиль с другой почтой",
+    "@auth_dialog_description_sign_up": {
+        "placeholders": {
+            "appName": {
+                "type": "String"
+            }
+        }
+    },
 
     "main_tab_wall": "Стена",
     "main_tab_feed": "Лента",

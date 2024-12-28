@@ -13,8 +13,8 @@ final class AuthRepositoryImpl extends AuthRepository {
   }) async {
     try {
       await FirebaseAuth
-          .instance
-          .signInWithEmailAndPassword(email: email, password: password);
+        .instance
+        .signInWithEmailAndPassword(email: email, password: password);
       return Either.right(null);
     } on FirebaseAuthException catch (e) {
       return Either.left(e.toAuthError());

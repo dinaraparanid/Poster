@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:poster/core/presentation/theme/strings.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 import 'package:poster/feature/auth/domain/error/auth_error.dart';
 import 'package:poster/feature/auth/presentation/widget/password_text_field.dart';
@@ -12,7 +12,7 @@ final class PasswordInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final strings = AppLocalizations.of(context)!;
+    final strings = context.strings;
     return BlocBuilder<SignInBloc, SignInState>(
       builder: (context, state) => PasswordTextField(
         isPasswordVisible: state.isPasswordVisible,
