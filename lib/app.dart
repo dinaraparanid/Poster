@@ -3,21 +3,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/theme/mod.dart';
 import 'package:poster/di/app_module.dart';
-import 'package:poster/feature/auth/presentation/bloc/auth_bloc_factory.dart';
+import 'package:poster/feature/root/presentation/bloc/root_bloc_factory.dart';
 import 'package:poster/navigation/app_router.dart';
 
 final class App extends StatelessWidget {
-  final authBlocFactory = di<AuthBlocFactory>();
+  final AppTheme theme;
+  final rootBlocFactory = di<RootBlocFactory>();
   final router = di<AppRouter>();
-  final theme = AppTheme.create();
 
-  App({super.key});
+  App({super.key, required this.theme});
 
   @override
   Widget build(BuildContext context) => RepositoryProvider(
     create: (_) => theme,
     child: BlocProvider(
-      create: (_) => authBlocFactory.create(),
+      create: (_) => rootBlocFactory.create(),
       child: MaterialApp.router(
         routerConfig: router.router,
         color: theme.colors.background.primary,

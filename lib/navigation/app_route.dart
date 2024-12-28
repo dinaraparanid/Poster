@@ -1,4 +1,5 @@
 enum AppRoute {
+  root(path: '/root'),
   auth(path: '/auth'),
   signIn(path: '/auth/sign_in'),
   signUp(path: '/auth/sign_up');

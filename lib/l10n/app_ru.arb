@@ -14,10 +14,10 @@
     "auth_password_error": "Некорректный пароль",
     "auth_password_weak": "Слабый пароль",
 
-    "root_tab_wall": "Стена",
-    "root_tab_feed": "Лента",
-    "root_new_message_dialog_title": "Новое сообщение",
-    "root_new_message_dialog_label": "Текст сообщения",
+    "main_tab_wall": "Стена",
+    "main_tab_feed": "Лента",
+    "main_new_message_dialog_title": "Новое сообщение",
+    "main_new_message_dialog_label": "Текст сообщения",
 
     "wall_age_undefined": "Лет: ?",
     "wall_age": "{value, plural, one{1 Год} two{2 Года} few{{value} Года} other{{value} Лет}}",

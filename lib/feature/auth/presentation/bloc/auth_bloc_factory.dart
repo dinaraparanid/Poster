@@ -1,6 +1,7 @@
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/mod.dart';
 import 'package:poster/feature/auth/child/sign_up/presentation/bloc/mod.dart';
 import 'package:poster/feature/auth/presentation/bloc/auth_bloc.dart';
+import 'package:poster/feature/auth/presentation/bloc/auth_result.dart';
 import 'package:poster/navigation/app_router.dart';
 
 final class AuthBlocFactory {
@@ -16,9 +17,10 @@ final class AuthBlocFactory {
     _signUpBlocFactory = signUpBlocFactory,
     _router = router;
 
-  AuthBloc create() => AuthBloc(
+  AuthBloc create({required void Function(AuthResult) onBack}) => AuthBloc(
     signInBlocFactory: _signInBlocFactory,
     signUpBlocFactory: _signUpBlocFactory,
     router: _router,
+    onBack: onBack,
   );
 }

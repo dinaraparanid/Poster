@@ -50,7 +50,7 @@ final class SignInBloc extends Bloc<SignInEvent, SignInState> {
       (event, emit) => loginUseCase.execute(
         email: state.email,
         password: state.password,
-        onSuccess: () => add(ShowMain()),
+        onSuccess: () => add(ShowRoot()),
         onFailure: (e) => emit(state.copyWith(error: e)),
       ),
     );
@@ -59,7 +59,7 @@ final class SignInBloc extends Bloc<SignInEvent, SignInState> {
       (event, emit) => onBack(const SignInResult.navigateToSignUp()),
     );
 
-    on<ShowMain>(
+    on<ShowRoot>(
       (event, emit) => onBack(const SignInResult.navigateToMain()),
     );
   }

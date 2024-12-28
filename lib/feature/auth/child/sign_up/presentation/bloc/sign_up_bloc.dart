@@ -61,15 +61,13 @@ final class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
     );
 
     on<SignUpClick>(
-      (event, emit) {
-        signUpUseCase.execute(
-          email: state.email,
-          username: state.username,
-          password: state.password,
-          onSuccess: () => onBack(const SignUpResult.navigateToMain()),
-          onFailure: (e) => emit(state.copyWith(error: e)),
-        );
-      }
+      (event, emit) => signUpUseCase.execute(
+        email: state.email,
+        username: state.username,
+        password: state.password,
+        onSuccess: () => onBack(const SignUpResult.navigateToMain()),
+        onFailure: (e) => emit(state.copyWith(error: e)),
+      ),
     );
 
     on<BackClick>((event, emit) => onBack(const SignUpResult.returnToSignIn()));

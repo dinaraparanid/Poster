@@ -14,10 +14,10 @@
     "auth_password_error": "Invalid password",
     "auth_password_weak": "Weak password",
 
-    "root_tab_wall": "Wall",
-    "root_tab_feed": "Feed",
-    "root_new_message_dialog_title": "New message",
-    "root_new_message_dialog_label": "Message text",
+    "main_tab_wall": "Wall",
+    "main_tab_feed": "Feed",
+    "main_new_message_dialog_title": "New message",
+    "main_new_message_dialog_label": "Message text",
 
     "wall_age_undefined": "Years: unspecified",
     "wall_age": "{value, plural, one{1 Year}  other{{value} Years}}",
