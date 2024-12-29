@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
-import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/main/presentation/bloc/mod.dart';
 
 final class NewMessageFab extends StatelessWidget {
-  const NewMessageFab({super.key});
+  final void Function(MainEvent) onEvent;
+  const NewMessageFab({super.key, required this.onEvent});
 
   @override
   Widget build(BuildContext context) {
-    final bloc = di<MainBloc>();
-    final theme = di<AppTheme>();
+    final theme = context.read<AppTheme>();
 
     return BlocBuilder<MainBloc, MainState>(
       builder: (context, state) => FloatingActionButton(
         backgroundColor: theme.colors.button.fab.background,
-        onPressed: () => bloc.add(
+        onPressed: () => onEvent(
           UpdateNewMessageDialogVisibility(isVisible: true)
         ),
         shape: const CircleBorder(),

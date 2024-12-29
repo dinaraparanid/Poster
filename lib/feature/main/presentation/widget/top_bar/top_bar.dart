@@ -1,31 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/presentation/foundation/clickable.dart';
+import 'package:poster/core/presentation/foundation/platform_ui.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
-import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/main/presentation/bloc/mod.dart';
 import 'package:poster/feature/main/presentation/widget/mod.dart';
-import 'package:universal_platform/universal_platform.dart';
 
 final class MainTopBar extends StatelessWidget {
-  const MainTopBar({super.key});
+  final void Function(MainEvent) onEvent;
+  const MainTopBar({super.key, required this.onEvent});
 
   @override
   Widget build(BuildContext context) {
-    final bloc = di<MainBloc>();
-    final theme = di<AppTheme>();
+    final theme = context.read<AppTheme>();
 
     return BlocBuilder<MainBloc, MainState>(
-      builder: (context, state) {
-        final hasIncoming = state.hasIncomingAnnouncements;
-        void onClick() => bloc.add(AnnouncementsClicked());
-
-        return UniversalPlatform.isIOS || UniversalPlatform.isMacOS
-          ? CupertinoUi(hasIncoming: hasIncoming, theme: theme, onClick: onClick)
-          : MaterialUi(hasIncoming: hasIncoming, theme: theme, onClick: onClick);
-      },
+      builder: (context, state) =>
+        PlatformUi(cupertino: CupertinoUi, material: MaterialUi)(
+          hasIncoming: state.hasIncomingAnnouncements,
+          theme: theme,
+          onClick: () => onEvent(AnnouncementsClicked()),
+        ),
     );
   }
 
@@ -38,6 +36,10 @@ final class MainTopBar extends StatelessWidget {
     centerTitle: true,
     backgroundColor: theme.colors.background.primary,
     scrolledUnderElevation: 0.0,
+    systemOverlayStyle: SystemUiOverlayStyle(
+      systemNavigationBarColor: theme.colors.navBar.background,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ),
     actions: [
       AnnouncementsIcon(
         hasIncoming: hasIncoming,

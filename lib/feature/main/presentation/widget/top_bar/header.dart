@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
-import 'package:poster/di/app_module.dart';
+import 'package:poster/core/presentation/theme/strings.dart';
 import 'package:poster/feature/main/presentation/bloc/mod.dart';
 
 final class MainTopBarHeader extends StatelessWidget {
@@ -11,8 +11,8 @@ final class MainTopBarHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = di<AppTheme>();
-    final strings = AppLocalizations.of(context)!;
+    final theme = context.read<AppTheme>();
+    final strings = context.strings;
 
     return BlocBuilder<MainBloc, MainState>(
       builder: (context, state) => switch (state.selectedTab) {

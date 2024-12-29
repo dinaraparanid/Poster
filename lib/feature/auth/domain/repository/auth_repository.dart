@@ -2,6 +2,8 @@ import 'package:fpdart/fpdart.dart';
 import 'package:poster/feature/auth/domain/error/auth_error.dart';
 
 abstract class AuthRepository {
+  Stream<bool> get signedInChanges;
+
   Future<Either<AuthError, void>> signIn({
     required String email,
     required String password,

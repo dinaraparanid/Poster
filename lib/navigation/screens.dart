@@ -4,3 +4,7 @@ export 'package:poster/feature/auth/child/sign_up/presentation/bloc/sign_up_bloc
 export 'package:poster/feature/auth/child/sign_up/presentation/sign_up_screen.dart';
 export 'package:poster/feature/auth/presentation/auth_screen.dart';
 export 'package:poster/feature/auth/presentation/bloc/auth_bloc.dart';
+export 'package:poster/feature/main/presentation/bloc/main_bloc.dart';
+export 'package:poster/feature/main/presentation/main_screen.dart';
+export 'package:poster/feature/root/presentation/bloc/root_bloc.dart';
+export 'package:poster/feature/root/presentation/root_screen.dart';

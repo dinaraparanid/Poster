@@ -7,6 +7,8 @@ import 'package:poster/feature/auth/child/sign_up/presentation/bloc/sign_up_bloc
 import 'package:poster/feature/auth/domain/repository/auth_repository.dart';
 import 'package:poster/feature/auth/domain/use_case/validate_email_use_case.dart';
 import 'package:poster/feature/auth/presentation/bloc/auth_bloc_factory.dart';
+import 'package:poster/feature/main/presentation/bloc/main_bloc_factory.dart';
+import 'package:poster/feature/root/domain/use_case/check_signed_in_use_case.dart';
 import 'package:poster/feature/root/presentation/bloc/root_bloc_factory.dart';
 import 'package:poster/navigation/app_router.dart';
 import 'package:test/test.dart';
@@ -17,6 +19,8 @@ void main() {
 
     expect(canRetrieve<Dio>(), true);
     expect(canRetrieve<AppRouter>(), true);
+
+    expect(canRetrieve<CheckSignedInUseCase>(), true);
     expect(canRetrieve<RootBlocFactory>(), true);
 
     expect(canRetrieve<SignInUseCase>(), true);
@@ -28,6 +32,8 @@ void main() {
     expect(canRetrieve<ValidateEmailUseCase>(), true);
     expect(canRetrieve<AuthRepository>(), true);
     expect(canRetrieve<AuthBlocFactory>(), true);
+
+    expect(canRetrieve<MainBlocFactory>(), true);
   });
 }
 

@@ -7,6 +7,10 @@ final class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl();
 
   @override
+  Stream<bool> get signedInChanges =>
+    FirebaseAuth.instance.authStateChanges().map((x) => x != null).distinct();
+
+  @override
   Future<Either<AuthError, void>> signIn({
     required String email,
     required String password,

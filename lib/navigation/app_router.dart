@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:poster/feature/root/presentation/bloc/root_bloc.dart';
-import 'package:poster/feature/root/presentation/root_screen.dart';
 import 'package:poster/navigation/app_route.dart';
 import 'package:poster/navigation/screens.dart';
 
@@ -37,6 +35,11 @@ final class AppRouter {
           transitionsBuilder: (_, animation, __, child) =>
             _screenFadeTransition(animation: animation, child: child),
         ),
+      ),
+      GoRoute(
+        path: AppRoute.main.path,
+        name: AppRoute.main.name,
+        builder: (context, state) => MainScreen(bloc: state.extra as MainBloc),
       ),
     ],
   );
