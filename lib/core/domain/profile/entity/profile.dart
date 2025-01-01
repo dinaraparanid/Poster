@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:poster/core/utils/functions/let.dart';
 
 part 'profile.freezed.dart';
 part 'profile.g.dart';
@@ -6,11 +7,11 @@ part 'profile.g.dart';
 @freezed
 abstract class Profile with _$Profile {
   const factory Profile({
-    required String username,
-    String? birthdate,
-    int? followers,
-    int? following,
-    String? location,
+    @JsonKey(name: 'username') required String username,
+    @JsonKey(name: 'email') required String email,
+    @JsonKey(name: 'avatar') String? avatar,
+    @JsonKey(name: 'birthdate') int? birthdayTimestamp,
+    @JsonKey(name: 'location') String? location,
   }) = _Profile;
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
@@ -18,10 +19,11 @@ abstract class Profile with _$Profile {
 }
 
 extension Properties on Profile {
-  int? get age {
-    if (birthdate == null) return null;
-    final born = DateTime.parse(birthdate!);
+  DateTime? get birthdate =>
+    birthdayTimestamp?.let(DateTime.fromMillisecondsSinceEpoch);
+
+  int? get age => birthdate?.let((date) {
     final now = DateTime.now();
-    return now.difference(born).inDays ~/ 365;
-  }
+    return now.difference(date).inDays ~/ 365;
+  });
 }

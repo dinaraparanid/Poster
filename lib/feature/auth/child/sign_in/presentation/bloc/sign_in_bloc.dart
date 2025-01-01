@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/utils/extension/bool_ext.dart';
+import 'package:poster/core/utils/functions/do_nothing.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/sign_in_event.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/sign_in_result.dart';
 import 'package:poster/feature/auth/child/sign_in/presentation/bloc/sign_in_state.dart';
@@ -50,7 +51,7 @@ final class SignInBloc extends Bloc<SignInEvent, SignInState> {
       (event, emit) => loginUseCase.execute(
         email: state.email,
         password: state.password,
-        onSuccess: () => add(ShowRoot()),
+        onSuccess: doNothing,
         onFailure: (e) => emit(state.copyWith(error: e)),
       ),
     );

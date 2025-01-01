@@ -10,18 +10,12 @@ enum Tabs { wall, feed }
 @freezed
 abstract class MainState with _$MainState {
   const factory MainState({
-    required UiState<Profile> profileState,
-    required Tabs selectedTab,
-    required bool hasIncomingAnnouncements,
+    @Default(Initial()) UiState<Profile> profileState,
+    @Default(Tabs.wall) Tabs selectedTab,
+    @Default(false) bool hasIncomingAnnouncements,
     MainEffect? effect,
     String? message,
   }) = _MainState;
-
-  factory MainState.initial() => const MainState(
-    profileState: Initial(),
-    selectedTab: Tabs.wall,
-    hasIncomingAnnouncements: false,
-  );
 }
 
 extension Properties on MainState {

@@ -5,7 +5,10 @@ import 'package:poster/feature/auth/child/sign_up/presentation/bloc/mod.dart';
 
 extension SignUpModule on GetIt {
   List<Type> registerSignUpModule() => [
-    provideSingleton<SignUpUseCase>(() => SignUpUseCase(authRepository: this())),
+    provideSingleton<SignUpUseCase>(() => SignUpUseCase(
+      authRepository: this(),
+      profileRepository: this(),
+    )),
     provideSingleton<SignUpBlocFactory>(() => SignUpBlocFactory(
       signUpUseCase: this(),
       validateEmailUseCase: this(),

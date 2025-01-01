@@ -138,7 +138,7 @@ final class ProfileInfo extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            strings.wall_followers(profile.followers ?? 0),
+            strings.wall_followers(0), // TODO: followers
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
             style: theme.typography.caption.copyWith(
@@ -149,7 +149,7 @@ final class ProfileInfo extends StatelessWidget {
 
         Expanded(
           child: Text(
-            strings.wall_following(profile.following ?? 0),
+            strings.wall_following(0), // TODO: following
             textAlign: TextAlign.center,
             overflow: TextOverflow.ellipsis,
             style: theme.typography.caption.copyWith(

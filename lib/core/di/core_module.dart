@@ -4,9 +4,9 @@ import 'package:poster/core/data/post/di/post_module.dart';
 import 'package:poster/core/data/profile/di/profile_module.dart';
 
 extension CoreModule on GetIt {
-  void registerCoreModule() {
-    registerProfileModule();
+  List<Type> registerCoreModule() {
     registerPostModule();
     registerDio();
+    return [...registerProfileModule()];
   }
 }

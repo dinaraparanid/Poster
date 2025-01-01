@@ -5,7 +5,10 @@ import 'package:poster/feature/auth/child/sign_in/domain/use_case/sign_in_use_ca
 
 extension SignInModule on GetIt {
   List<Type> registerSignInModule() => [
-    provideSingleton<SignInUseCase>(() => SignInUseCase(authRepository: this())),
+    provideSingleton<SignInUseCase>(() => SignInUseCase(
+      authRepository: this(),
+      profileRepository: this(),
+    )),
     provideSingleton<SignInBlocFactory>(() => SignInBlocFactory(
       loginUseCase: this(),
       validateEmailUseCase: this(),
