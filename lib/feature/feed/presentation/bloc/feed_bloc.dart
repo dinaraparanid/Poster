@@ -45,7 +45,8 @@ final class FeedBloc extends Bloc<FeedEvent, FeedState> {
         final username = state.profileState.getOrNull?.username;
         if (username == null) return;
 
-        await postRepository.likePost(username: username, messageId: event.postId);
+        // TODO: like
+        //await postRepository.likePost(username: username, messageId: event.postId);
         // TODO: error handling
         add(Refresh());
       }

@@ -17,11 +17,11 @@ final class ProfileRepositoryImpl extends ProfileRepository {
   Future<Profile?> get profile => _store.profile;
 
   @override
-  Future<void> createProfile({
+  Future<Either<Exception, void>> createProfile({
     required String username,
     required String email,
   }) => _api.createProfile(username: username, email: email)
-    .then(_store.storeProfile);
+    .then((res) => res.map(_store.storeProfile));
 
   @override
   Future<Either<Exception, void>> saveProfile({required String email}) async {

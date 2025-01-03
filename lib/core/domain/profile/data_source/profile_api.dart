@@ -1,7 +1,8 @@
+import 'package:fpdart/fpdart.dart';
 import 'package:poster/core/domain/profile/entity/profile.dart';
 
 mixin ProfileApi {
-  Future<Profile> createProfile({
+  Future<Either<Exception, Profile>> createProfile({
     required String username,
     required String email,
   });

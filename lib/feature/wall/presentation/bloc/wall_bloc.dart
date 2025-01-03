@@ -42,7 +42,8 @@ final class WallBloc extends Bloc<WallEvent, WallState> {
         final username = state.profileState.getOrNull?.username;
         if (username == null) return;
 
-        await postRepository.likePost(username: username, messageId: event.postId);
+        // TODO: like
+        // await postRepository.likePost(username: username, messageId: event.postId);
         // TODO: error handling
         add(Refresh());
       }
@@ -55,13 +56,14 @@ final class WallBloc extends Bloc<WallEvent, WallState> {
     final username = state.profileState.getOrNull?.username;
     if (username == null) return;
 
-    final res = await postRepository.wallPosts(username: username);
+    final res = await postRepository.wallPostsPage(email: username);
 
     final postsState = res.fold(
       (e) => Error<List<Post>>(e),
       (posts) => posts.toUiState(),
     );
 
-    emit(state.copyWith(postsState: postsState));
+    // TODO: Paging
+    // emit(state.copyWith(postsState: postsState));
   }
 }

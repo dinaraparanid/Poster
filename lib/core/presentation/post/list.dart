@@ -7,7 +7,7 @@ import 'package:poster/core/presentation/theme/app.dart';
 
 final class PostList extends StatelessWidget {
   final UiState<List<Post>> postsState;
-  final void Function(int postId) onPostLike;
+  final void Function(String postId) onPostLike;
 
   const PostList({
     super.key,
@@ -43,7 +43,7 @@ final class PostList extends StatelessWidget {
   Widget Content({
     required List<Post> posts,
     required AppTheme theme,
-    required void Function (int postId) onPostLike,
+    required void Function (String postId) onPostLike,
   }) => ListView.separated(
     itemCount: posts.length,
     padding: EdgeInsets.only(

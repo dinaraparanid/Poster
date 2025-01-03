@@ -19,11 +19,13 @@ final class SignUpUseCase {
     required void Function(AuthError) onFailure,
   }) => _authRepository
     .signUp(email: email, username: username, password: password)
-    .then((res) => res.fold(
+    .then((signUpRes) => signUpRes.fold(
       (e) => onFailure(e),
-      (_) async {
-        await _profileRepository.createProfile(username: username, email: email);
-        onSuccess();
-      },
+      (_) => _profileRepository
+        .createProfile(username: username, email: email)
+        .then((createRes) => createRes.fold(
+          (_) => AuthError.unknown,
+          (_) => onSuccess(),
+        )),
     ));
 }

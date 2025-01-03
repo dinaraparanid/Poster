@@ -12,7 +12,7 @@ final class CreatePostUseCase {
     required void Function() onFailure,
     required void Function() onSuccess,
   }) => _postRepository.createPost(
-    username: username,
+    email: username,
     text: message,
   ).then((res) => res.fold(
     (_) => onFailure(),

@@ -1,17 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:poster/core/domain/profile/data_source/profile_api.dart';
 import 'package:poster/core/domain/profile/entity/profile.dart';
 import 'package:poster/core/utils/functions/let.dart';
+import 'package:poster/core/utils/functions/try_future.dart';
 
 const _collectionProfile = 'profiles';
-const _fieldEmail = 'email';
 
 final class ProfileApiImpl with ProfileApi {
   @override
-  Future<Profile> createProfile({
+  Future<Either<Exception, Profile>> createProfile({
     required String username,
     required String email,
-  }) async {
+  }) => tryFuture(() async {
     final profile = Profile(username: username, email: email);
 
     await FirebaseFirestore.instance
@@ -19,13 +20,13 @@ final class ProfileApiImpl with ProfileApi {
       .add(profile.toJson());
 
     return profile;
-  }
+  });
 
   @override
   Future<Profile?> getProfileByEmail({required String email}) =>
     FirebaseFirestore.instance
       .collection(_collectionProfile)
-      .where(_fieldEmail, isEqualTo: email)
+      .where(Profile.fieldEmail, isEqualTo: email)
       .get()
       .then((snapshot) =>
         snapshot.docs.firstOrNull?.data().let(Profile.fromJson)

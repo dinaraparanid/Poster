@@ -8,9 +8,12 @@ final class LoadPostsUseCase {
   LoadPostsUseCase({required PostRepository postRepository}) :
     _postRepository = postRepository;
 
-  Future<UiState<List<Post>>> loadPosts() =>
-    _postRepository.feedPosts.then((res) => res.fold(
-      (e) => Error<List<Post>>(e),
-      (posts) => posts.toUiState(),
-    ));
+  Future<UiState<List<Post>>> loadPosts() {
+    // TODO: Paging
+    // _postRepository.feedPostsPage.then((res) => res.fold(
+    //   (e) => Error<List<Post>>(e),
+    //   (posts) => posts.toUiState(),
+    // ));
+    return Future(() => const UiState.initial());
+  }
 }

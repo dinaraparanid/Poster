@@ -5,8 +5,10 @@ part 'user.g.dart';
 
 @freezed
 abstract class User with _$User {
+  static const fieldUserEmail = 'user_email';
+
   const factory User({
-    required String username,
+    @JsonKey(name: User.fieldUserEmail) required String email,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

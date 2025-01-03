@@ -6,12 +6,18 @@ part 'profile.g.dart';
 
 @freezed
 abstract class Profile with _$Profile {
+  static const fieldUsername = 'username';
+  static const fieldEmail = 'email';
+  static const fieldAvatar = 'avatar';
+  static const fieldBirthdayTimestamp = 'birthdate';
+  static const fieldLocation = 'location';
+
   const factory Profile({
-    @JsonKey(name: 'username') required String username,
-    @JsonKey(name: 'email') required String email,
-    @JsonKey(name: 'avatar') String? avatar,
-    @JsonKey(name: 'birthdate') int? birthdayTimestamp,
-    @JsonKey(name: 'location') String? location,
+    @JsonKey(name: Profile.fieldUsername) required String username,
+    @JsonKey(name: Profile.fieldEmail) required String email,
+    @JsonKey(name: Profile.fieldAvatar) String? avatar,
+    @JsonKey(name: Profile.fieldBirthdayTimestamp) int? birthdayTimestamp,
+    @JsonKey(name: Profile.fieldLocation) String? location,
   }) = _Profile;
 
   factory Profile.fromJson(Map<String, dynamic> json) =>

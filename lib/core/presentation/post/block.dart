@@ -79,7 +79,7 @@ final class PostBlock extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            post.author,
+            post.data.author,
             style: theme.typography.body.copyWith(
               color: theme.colors.text.primary,
             ),
@@ -99,7 +99,7 @@ final class PostBlock extends StatelessWidget {
   );
 
   Widget PostText({required AppTheme theme}) => Text(
-    post.text,
+    post.data.text,
     style: theme.typography.body.copyWith(
       color: theme.colors.text.primary,
     ),

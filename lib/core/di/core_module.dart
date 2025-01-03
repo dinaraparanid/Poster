@@ -7,12 +7,12 @@ import 'package:poster/core/data/profile/di/profile_module.dart';
 
 extension CoreModule on GetIt {
   List<Type> registerCoreModule() {
-    registerPostModule();
     registerDio();
     return [
       ...registerProfileModule(),
       ...registerCloudinaryModule(),
       ...registerImageModule(),
+      ...registerPostModule(),
     ];
   }
 }
