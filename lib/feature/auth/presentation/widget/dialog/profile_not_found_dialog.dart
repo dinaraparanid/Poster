@@ -13,8 +13,8 @@ void showProfileNotFoundDialog({
   showAppDialog(
     context: context,
     title: strings.auth_dialog_title_profile_not_found,
-    body: Text(strings.auth_dialog_description_sign_up(strings.app_name)),
-    actions: [
+    bodyBuilder: (_, __) => Text(strings.auth_dialog_description_sign_up(strings.app_name)),
+    actionsBuilder: (_, __) => [
       AppDialogAction(text: strings.cancel, onClick: onCancel),
       AppDialogAction(text: strings.ok, onClick: onOk, isDefaultAction: true),
     ],

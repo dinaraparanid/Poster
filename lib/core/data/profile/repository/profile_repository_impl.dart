@@ -23,6 +23,9 @@ final class ProfileRepositoryImpl extends ProfileRepository {
   Future<Profile?> get profile => _store.profile;
 
   @override
+  Stream<Profile?> get profileChanges => _store.profileChanges;
+
+  @override
   Future<Either<Exception, void>> createProfile({
     required String username,
     required String email,

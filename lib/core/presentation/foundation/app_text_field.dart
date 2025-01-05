@@ -10,11 +10,13 @@ import 'package:poster/core/utils/functions/let.dart';
 
 const _cancelIconAnimDuration = Duration(milliseconds: 100);
 const _passwordObscuringCharacter = '*';
+const _defaultMaxLines = 1;
 
 final class AppTextField extends StatefulWidget {
   final String label;
   final ImageAsset icon;
   final bool obscureText;
+  final int maxLines;
   final String? error;
   final TextEditingController controller;
 
@@ -28,6 +30,7 @@ final class AppTextField extends StatefulWidget {
     required this.onChanged,
     required this.controller,
     this.obscureText = false,
+    this.maxLines = _defaultMaxLines,
     this.onIconClicked,
     this.error,
   });
@@ -52,6 +55,8 @@ final class _AppTextField extends State<AppTextField> {
     obscureText: widget.obscureText,
     obscuringCharacter: _passwordObscuringCharacter,
     cursorColor: theme.colors.textField.primary,
+    minLines: 1,
+    maxLines: widget.maxLines,
     decoration: InputDecoration(
       errorText: widget.error,
       contentPadding: EdgeInsets.symmetric(
@@ -101,6 +106,8 @@ final class _AppTextField extends State<AppTextField> {
       obscureText: widget.obscureText,
       obscuringCharacter: _passwordObscuringCharacter,
       cursorColor: theme.colors.textField.primary,
+      minLines: 1,
+      maxLines: widget.maxLines,
       decoration: BoxDecoration(
         border: Border.all(color: theme.colors.textField.primary),
         borderRadius: BorderRadius.all(

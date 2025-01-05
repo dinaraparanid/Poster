@@ -7,6 +7,8 @@ import 'package:poster/core/domain/profile/entity/profile.dart';
 abstract class ProfileRepository {
   Future<Profile?> get profile;
 
+  Stream<Profile?> get profileChanges;
+
   Future<Either<Exception, void>> createProfile({
     required String username,
     required String email,

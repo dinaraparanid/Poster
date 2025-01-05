@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:poster/core/domain/profile/entity/profile.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
+import 'package:poster/core/utils/extension/string_ext.dart';
 import 'package:poster/feature/main/presentation/bloc/main_effect.dart';
 
 part 'main_state.freezed.dart';
@@ -19,5 +20,5 @@ abstract class MainState with _$MainState {
 }
 
 extension Properties on MainState {
-  bool get isSendEnabled => message?.isNotEmpty == true;
+  bool get isSendEnabled => message?.isNotBlank == true;
 }

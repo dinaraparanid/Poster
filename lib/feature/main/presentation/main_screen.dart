@@ -4,6 +4,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:poster/core/presentation/foundation/platform_ui.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/strings.dart';
+import 'package:poster/core/utils/extension/string_ext.dart';
+import 'package:poster/core/utils/functions/distinct_state.dart';
 import 'package:poster/core/utils/functions/do_nothing.dart';
 import 'package:poster/feature/feed/presentation/feed_screen.dart';
 import 'package:poster/feature/main/presentation/bloc/mod.dart';
@@ -31,10 +33,9 @@ final class _MainScreenState extends State<MainScreen> {
     return BlocProvider(
       create: (context) => widget.bloc,
       child: BlocConsumer<MainBloc, MainState>(
-        listenWhen: (x, y) => x.effect != y.effect,
+        listenWhen: distinctState((x) => x.effect),
         listener: (context, state) => onEffect(
           context: context,
-          sendEnabled: state.isSendEnabled,
           effect: state.effect,
         ),
         builder: (context, state) => Scaffold(
@@ -99,7 +100,6 @@ final class _MainScreenState extends State<MainScreen> {
 
   void onEffect({
     required BuildContext context,
-    required bool sendEnabled,
     required MainEffect? effect,
   }) {
     switch (effect) {
@@ -107,13 +107,16 @@ final class _MainScreenState extends State<MainScreen> {
         showNewMessageDialog(
           controller: dialogTextController,
           context: context,
+          canSend: () => dialogTextController.text.isNotBlank,
           onMessageChanged: (msg) => onEvent(UpdateMessage(message: msg)),
+          onMessageCleared: () => onEvent(ClearMessage()),
           onSend: () => onEvent(SendMessage()),
           onCancel: () => onEvent(UpdateNewMessageDialogVisibility(isVisible: false)),
         );
 
+      case ShowSendMessageFailureSnackbar(): doNothing; // TODO
+      case ShowSendMessageSuccessSnackbar(): doNothing; // TODO
       case null: doNothing;
-      case None(): doNothing;
     }
   }
 }

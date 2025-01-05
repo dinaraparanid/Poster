@@ -13,8 +13,8 @@ void showNoConnectionDialog({
   showAppDialog(
     context: context,
     title: strings.no_connection_dialog_title,
-    body: Text(strings.no_connection_dialog_description),
-    actions: [
+    bodyBuilder: (_, __) => Text(strings.no_connection_dialog_description),
+    actionsBuilder: (_, __) => [
       AppDialogAction(text: strings.ok, onClick: onOk, isDefaultAction: true),
     ],
   );
