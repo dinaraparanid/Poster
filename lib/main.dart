@@ -1,5 +1,4 @@
-import 'firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:poster/core/data/firebase/init_firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -12,7 +11,7 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: binding);
 
   di.registerAppModule();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await initFirebase();
 
   final theme = AppTheme.create();
 

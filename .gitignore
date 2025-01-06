@@ -50,7 +50,7 @@ pubspec.lock
 *.g.dart
 
 firebase.json
-lib/firebase_options.dart
+lib/core/data/firebase/firebase_options.dart
 firepit-log.txt
-
+poster-push-key.json
 .env

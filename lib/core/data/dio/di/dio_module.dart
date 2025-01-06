@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:poster/core/data/dio/dio.dart';
+import 'package:poster/core/di/provide_singleton.dart';
 
 extension DioModule on GetIt {
-  void registerDio() => registerLazySingleton(AppDio);
+  List<Type> registerDio() => [provideSingleton(AppDio)];
 }
