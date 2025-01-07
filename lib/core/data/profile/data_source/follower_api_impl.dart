@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:poster/core/data/firestore/utils/firestore_ext.dart';
+import 'package:poster/core/data/firebase/firestore/utils/firestore_ext.dart';
 import 'package:poster/core/data/paging/firestore_paging.dart';
-import 'package:poster/core/data/paging/page_mapper.dart';
 import 'package:poster/core/domain/paging/page_data.dart';
 import 'package:poster/core/domain/paging/paging_config.dart';
 import 'package:poster/core/domain/profile/data_source/follower_api.dart';
@@ -45,18 +44,11 @@ final class FollowerApiImpl with FollowerApi {
     required String profileEmail,
     int page = PagingConfig.initialPage,
     int perPage = PagingConfig.defaultPageSize,
-  }) => tryFuture(() async {
-    final snapshots = await FirebaseFirestore.instance
-      .collection(_collectionFollowers)
-      .where(FollowingData.fieldProfileEmail, isEqualTo: profileEmail)
-      .pageAt(page: page, perPage: perPage);
-
-    return snapshots.toPageData(
-      page: page,
-      perPage: perPage,
-      transform: (q) => q.toFollowingData(),
-    );
-  });
+  }) => tryFuture(() => FirebaseFirestore.instance
+    .collection(_collectionFollowers)
+    .where(FollowingData.fieldProfileEmail, isEqualTo: profileEmail)
+    .pageAt(page: page, perPage: perPage, transform: (q) => q.toFollowingData())
+  );
 }
 
 extension _FollowingMapper on QueryDocumentSnapshot<Map<String, dynamic>> {

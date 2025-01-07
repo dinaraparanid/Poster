@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
 import 'package:poster/feature/main/domain/use_case/send_message_use_case.dart';
+import 'package:poster/feature/main/domain/use_case/subscribe_on_incoming_announcements_use_case.dart';
 import 'package:poster/feature/main/domain/use_case/subscribe_on_profile_changes_use_case.dart';
 import 'package:poster/feature/main/presentation/bloc/main_effect.dart';
 import 'package:poster/feature/main/presentation/bloc/main_event.dart';
@@ -9,10 +10,17 @@ import 'package:poster/feature/main/presentation/bloc/main_state.dart';
 final class MainBloc extends Bloc<MainEvent, MainState> {
   MainBloc({
     required SubscribeOnProfileChangesUseCase profileChangesUseCase,
+    required SubscribeOnIncomingAnnouncementsUseCase incomingAnnouncementsUseCase,
     required SendMessageUseCase sendMessageUseCase,
   }) : super(const MainState()) {
     on<UpdateProfile>(
       (event, emit) => emit(state.copyWith(profileState: event.profileState)),
+    );
+
+    on<UpdateIncomingAnnouncements>(
+      (event, emit) => emit(state.copyWith(
+        hasIncomingAnnouncements: event.hasIncomingAnnouncements,
+      )),
     );
 
     on<TabClicked>(
@@ -57,6 +65,11 @@ final class MainBloc extends Bloc<MainEvent, MainState> {
 
     profileChangesUseCase.subscribe(
       onChanged: (profileState) => add(UpdateProfile(profileState: profileState))
+    );
+
+    incomingAnnouncementsUseCase.subscribe(
+      onChanged: (hasAnnouncements) =>
+        add(UpdateIncomingAnnouncements(hasIncomingAnnouncements: hasAnnouncements))
     );
   }
 }

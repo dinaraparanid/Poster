@@ -9,6 +9,11 @@ final class UpdateProfile extends MainEvent {
   UpdateProfile({required this.profileState});
 }
 
+final class UpdateIncomingAnnouncements extends MainEvent {
+  final bool hasIncomingAnnouncements;
+  UpdateIncomingAnnouncements({required this.hasIncomingAnnouncements});
+}
+
 final class TabClicked extends MainEvent {
   final Tabs tab;
   TabClicked({required this.tab});

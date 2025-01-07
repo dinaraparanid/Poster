@@ -1,16 +1,15 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive_ce/hive.dart';
 import 'package:poster/core/domain/paging/page_data.dart';
 import 'package:poster/core/domain/paging/paging_utils.dart';
 
-extension PageMapper on QuerySnapshot<Map<String, dynamic>> {
-  PageData<T> toPageData<T>({
+extension HivePaging<T> on Box<T> {
+  PageData<T> pageAt({
     required int page,
     required int perPage,
-    required T Function(QueryDocumentSnapshot<Map<String, dynamic>> doc) transform,
   }) {
-    final entities = docs
-      .take(perPage)
-      .map(transform)
+    final entities = values
+      .skip(PagingUtils.pageOffset(page: page, perPage: perPage))
+      .take(PagingUtils.pageSizeWithNext(perPage: perPage))
       .toList(growable: false);
 
     final prev = PagingUtils.previousPage(page: page);
@@ -18,7 +17,7 @@ extension PageMapper on QuerySnapshot<Map<String, dynamic>> {
     final next = PagingUtils.nextPage(
       page: page,
       perPage: perPage,
-      snapshotsSize: size,
+      entitiesSize: entities.length,
     );
 
     return PageData(data: entities, prev: prev, next: next);

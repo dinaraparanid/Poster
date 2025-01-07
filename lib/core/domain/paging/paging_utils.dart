@@ -13,15 +13,15 @@ final class PagingUtils {
 
   static int? previousPage({required int page}) {
     assert(page >= PagingConfig.initialPage);
-    return max(PagingConfig.initialPage, page - 1);
+    return page == PagingConfig.initialPage ? null : page - 1;
   }
 
   static int? nextPage({
     required int page,
     required int perPage,
-    required int snapshotsSize,
+    required int entitiesSize,
   }) {
     assert(page >= PagingConfig.initialPage);
-    return snapshotsSize > perPage ? page + 1 : null;
+    return entitiesSize > perPage ? page + 1 : null;
   }
 }

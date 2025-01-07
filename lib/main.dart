@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:poster/app.dart';
+import 'package:poster/core/data/hive/init_hive.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/di/app_module.dart';
 
@@ -12,6 +13,7 @@ void main() async {
 
   di.registerAppModule();
   await initFirebase();
+  await initHive();
 
   final theme = AppTheme.create();
 

@@ -1,22 +1,28 @@
 import 'dart:convert';
-import 'package:cloudinary/cloudinary.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:poster/core/data/env/env.dart';
-import 'package:poster/core/data/firebase/fcm_token_store.dart';
+import 'package:poster/core/data/firebase/fcm/fcm_token_store.dart';
+import 'package:poster/core/data/firebase/fcm/remote_notification_mapper.dart';
+import 'package:poster/core/data/notification/notification_repository_impl.dart';
+import 'package:poster/core/domain/notification/repository/notification_repository.dart';
 import 'package:poster/core/utils/extension/bool_ext.dart';
 import 'package:poster/core/utils/functions/let.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 @pragma('vm:entry-point')
-Future<void> _handleBackgroundMessage(RemoteMessage message) async {
-  // TODO: handle message if necessary
+Future<void> _processBackgroundMessage(RemoteMessage message) async {
+  final notification = message.notification;
+  if (notification == null) return;
+  await NotificationRepositoryImpl().storeRemoteNotification(notification: notification);
 }
 
 final class FCMNotificationHandler {
   static const _androidChannelId = 'poster_notifications';
   static const _androidChannelName = 'Poster Notifications';
 
+  final NotificationRepository _notificationRepository;
   final FCMTokenStore _tokenStore;
   final Dio _dio;
 
@@ -30,9 +36,12 @@ final class FCMNotificationHandler {
   late final _localNotifications = FlutterLocalNotificationsPlugin();
 
   FCMNotificationHandler({
+    required NotificationRepository notificationRepository,
     required FCMTokenStore tokenStore,
     required Dio dio,
-  }) : _tokenStore = tokenStore, _dio = dio;
+  }) : _notificationRepository = notificationRepository,
+    _tokenStore = tokenStore,
+    _dio = dio;
 
   Future<void> setupNotifications() async {
     // TODO: APNs are paid for iOS / MacOS
@@ -55,13 +64,14 @@ final class FCMNotificationHandler {
       sound: true,
     );
 
-    _messaging.getInitialMessage().then(handleMessage);
-    FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
-    FirebaseMessaging.onBackgroundMessage(_handleBackgroundMessage);
+    _messaging.getInitialMessage().then(processMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen(processMessage);
+    FirebaseMessaging.onBackgroundMessage(_processBackgroundMessage);
 
     FirebaseMessaging.onMessage.listen((msg) async {
       final notification = msg.notification;
       if (notification == null) return;
+      processMessage(msg);
 
       _localNotifications.show(
         notification.hashCode,
@@ -84,7 +94,7 @@ final class FCMNotificationHandler {
       settings,
       onDidReceiveNotificationResponse: (response) {
         final message = RemoteMessage.fromMap(jsonDecode(response.payload!));
-        handleMessage(message);
+        processMessage(message);
       }
     );
 
@@ -93,8 +103,10 @@ final class FCMNotificationHandler {
       ?.createNotificationChannel(_androidChannel);
   }
 
-  Future<void> handleMessage(RemoteMessage? message) async {
-    // TODO: handle message if necessary
+  Future<void> processMessage(RemoteMessage? message) async {
+    final notification = message?.notification;
+    if (notification == null) return;
+    await _notificationRepository.storeRemoteNotification(notification: notification);
   }
 
   Future<AndroidNotificationDetails> fetchAndroidNotificationDetails({
@@ -122,4 +134,9 @@ final class FCMNotificationHandler {
       styleInformation: androidStyle,
     );
   }
+}
+
+extension _RemoteNotifications on NotificationRepository {
+  Future<void> storeRemoteNotification({required RemoteNotification notification}) =>
+    storeNotification(notification.toEntity());
 }

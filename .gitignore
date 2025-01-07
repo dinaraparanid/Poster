@@ -48,6 +48,7 @@ pubspec.lock
 
 *.freezed.dart
 *.g.dart
+*.g.yaml
 
 firebase.json
 lib/core/data/firebase/firebase_options.dart
