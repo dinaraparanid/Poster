@@ -7,7 +7,7 @@ abstract class NotificationRepository {
 
   Future<void> removeNotification(Notification notification);
 
-  Future<PageData<Notification>> notificationsPage({
+  Future<PageData<int, Notification>> notificationsPage({
     int page = PagingConfig.initialPage,
     int perPage = PagingConfig.defaultPageSize,
   });

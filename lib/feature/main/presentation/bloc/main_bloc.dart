@@ -1,18 +1,24 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
+import 'package:poster/feature/feed/presentation/bloc/feed_bloc.dart';
+import 'package:poster/feature/feed/presentation/bloc/feed_bloc_factory.dart';
 import 'package:poster/feature/main/domain/use_case/send_message_use_case.dart';
 import 'package:poster/feature/main/domain/use_case/subscribe_on_incoming_announcements_use_case.dart';
-import 'package:poster/feature/main/domain/use_case/subscribe_on_profile_changes_use_case.dart';
+import 'package:poster/core/domain/profile/use_case/subscribe_on_profile_changes_use_case.dart';
 import 'package:poster/feature/main/presentation/bloc/main_effect.dart';
 import 'package:poster/feature/main/presentation/bloc/main_event.dart';
 import 'package:poster/feature/main/presentation/bloc/main_state.dart';
 
 final class MainBloc extends Bloc<MainEvent, MainState> {
+  final FeedBlocFactory _feedBlocFactory;
+
   MainBloc({
     required SubscribeOnProfileChangesUseCase profileChangesUseCase,
     required SubscribeOnIncomingAnnouncementsUseCase incomingAnnouncementsUseCase,
     required SendMessageUseCase sendMessageUseCase,
-  }) : super(const MainState()) {
+    required FeedBlocFactory feedBlocFactory,
+  }) : _feedBlocFactory = feedBlocFactory,
+    super(const MainState()) {
     on<UpdateProfile>(
       (event, emit) => emit(state.copyWith(profileState: event.profileState)),
     );
@@ -72,4 +78,6 @@ final class MainBloc extends Bloc<MainEvent, MainState> {
         add(UpdateIncomingAnnouncements(hasIncomingAnnouncements: hasAnnouncements))
     );
   }
+
+  FeedBloc createFeedBloc() => _feedBlocFactory.create();
 }

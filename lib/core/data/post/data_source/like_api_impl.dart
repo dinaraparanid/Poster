@@ -36,14 +36,19 @@ final class LikeApiImpl with LikeApi {
     );
 
   @override
-  Future<Either<Exception, PageData<User>>> usersLikedPostPage({
+  Future<Either<Exception, PageData<String, User>>> usersLikedPostPage({
     required String postId,
-    int page = PagingConfig.initialPage,
+    String? lastEmail,
     int perPage = PagingConfig.defaultPageSize,
   }) => tryFuture(() => FirebaseFirestore.instance
     .collection(_collectionPostsLikes)
     .where(Like.fieldPostId, isEqualTo: postId)
-    .pageAt(page: page, perPage: perPage, transform: (q) => q.toUser())
+    .pageAt(
+      lastElementKey: lastEmail,
+      perPage: perPage,
+      extractKey: (u) => u.email,
+      transform: (q) => q.toUser(),
+    )
   );
 }
 

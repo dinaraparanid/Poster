@@ -27,25 +27,35 @@ final class PostApiImpl with PostApi {
   });
 
   @override
-  Future<Either<Exception, PageData<Post>>> feedPostsPage({
-    int page = PagingConfig.initialPage,
+  Future<Either<Exception, PageData<int, Post>>> feedPostsPage({
+    int? prevTimestamp,
     int perPage = PagingConfig.defaultPageSize,
   }) => tryFuture(() => FirebaseFirestore.instance
     .collection(_collectionPosts)
     .orderBy(PostData.fieldTimestamp, descending: true)
-    .pageAt(page: page, perPage: perPage, transform: (q) => q.toPost())
+    .pageAt(
+      lastElementKey: prevTimestamp,
+      perPage: perPage,
+      extractKey: (p) => p.data.timestamp,
+      transform: (q) => q.toPost(),
+    )
   );
 
   @override
-  Future<Either<Exception, PageData<Post>>> wallPostsPage({
+  Future<Either<Exception, PageData<int, Post>>> wallPostsPage({
     required String email,
-    int page = PagingConfig.initialPage,
+    int? prevTimestamp,
     int perPage = PagingConfig.defaultPageSize,
   }) => tryFuture(() => FirebaseFirestore.instance
     .collection(_collectionPosts)
     .orderBy(PostData.fieldTimestamp, descending: true)
     .where(PostData.fieldAuthorEmail, isEqualTo: email)
-    .pageAt(page: page, perPage: perPage, transform: (q) => q.toPost())
+    .pageAt(
+      lastElementKey: prevTimestamp,
+      perPage: perPage,
+      extractKey: (p) => p.data.timestamp,
+      transform: (q) => q.toPost(),
+    )
   );
 }
 

@@ -47,6 +47,7 @@ final class _MainScreenState extends State<MainScreen> {
             preferredSize: Size.fromHeight(theme.dimensions.size.big),
             child: MainTopBar(onEvent: onEvent),
           ),
+          body: Body(state),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
@@ -94,8 +95,8 @@ final class _MainScreenState extends State<MainScreen> {
   );
 
   Widget Body(MainState state) => switch (state.selectedTab) {
-    Tabs.wall => WallScreen(),
-    Tabs.feed => FeedScreen(),
+    Tabs.wall => const Text('TODO: WallScreen'),//WallScreen(),
+    Tabs.feed => FeedScreen(bloc: widget.bloc.createFeedBloc()),
   };
 
   void onEffect({

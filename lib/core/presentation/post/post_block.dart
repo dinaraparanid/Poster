@@ -42,13 +42,9 @@ final class PostBlock extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoRow(theme: theme),
-
           SizedBox(height: theme.dimensions.size.extraSmall),
-
           PostText(theme: theme),
-
           SizedBox(height: theme.dimensions.size.extraSmall),
-
           ActionsRow(theme: theme),
         ],
       ),

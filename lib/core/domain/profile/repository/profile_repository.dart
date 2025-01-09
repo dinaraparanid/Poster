@@ -26,9 +26,9 @@ abstract class ProfileRepository {
     required String followerEmail,
   });
 
-  Future<Either<Exception, PageData<FollowingData>>> subscribersPage({
+  Future<Either<Exception, PageData<String, FollowingData>>> subscribersPage({
     required String profileEmail,
-    int page = PagingConfig.initialPage,
+    String? prevFollowerEmail,
     int perPage = PagingConfig.defaultPageSize,
   });
 }

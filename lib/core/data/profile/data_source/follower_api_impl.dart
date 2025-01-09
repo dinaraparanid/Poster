@@ -40,14 +40,20 @@ final class FollowerApiImpl with FollowerApi {
   });
 
   @override
-  Future<Either<Exception, PageData<FollowingData>>> subscribersPage({
+  Future<Either<Exception, PageData<String, FollowingData>>> subscribersPage({
     required String profileEmail,
-    int page = PagingConfig.initialPage,
+    String? prevFollowerEmail,
     int perPage = PagingConfig.defaultPageSize,
   }) => tryFuture(() => FirebaseFirestore.instance
     .collection(_collectionFollowers)
     .where(FollowingData.fieldProfileEmail, isEqualTo: profileEmail)
-    .pageAt(page: page, perPage: perPage, transform: (q) => q.toFollowingData())
+    .orderBy(FollowingData.fieldFollowerEmail)
+    .pageAt(
+      lastElementKey: prevFollowerEmail,
+      perPage: perPage,
+      extractKey: (f) => f.followerEmail,
+      transform: (q) => q.toFollowingData(),
+    )
   );
 }
 

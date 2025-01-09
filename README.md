@@ -1,6 +1,10 @@
 **Poster**
 -----------------
 
+## **Developer**
+
+[Paranid5](https://github.com/dinaraparanid)
+
 ## **About App**
 Multiplatform mini-social-network application
 that allows to share posts, written in Flutter.

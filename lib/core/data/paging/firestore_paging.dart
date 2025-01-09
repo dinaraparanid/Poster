@@ -1,41 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:poster/core/domain/paging/page_data.dart';
 import 'package:poster/core/domain/paging/paging_utils.dart';
+import 'package:poster/core/utils/functions/let.dart';
 
 extension FirestorePaging on Query<Map<String, dynamic>> {
-  Future<PageData<T>> pageAt<T>({
-    required int page,
+  Future<PageData<K, T>> pageAt<K, T>({
+    required K? lastElementKey,
     required int perPage,
+    required K Function(T) extractKey,
     required T Function(QueryDocumentSnapshot<Map<String, dynamic>> doc) transform,
-  }) => startAt([PagingUtils.pageOffset(page: page, perPage: perPage)])
+  }) => (lastElementKey?.let((key) => startAfter([key])) ?? this)
     .limit(PagingUtils.pageSizeWithNext(perPage: perPage))
     .get()
     .then((snapshot) => snapshot.toPageData(
-      page: page,
+      lastElementKey: lastElementKey,
       perPage: perPage,
+      extractKey: extractKey,
       transform: transform,
   ));
 }
 
 extension _PageMapper on QuerySnapshot<Map<String, dynamic>> {
-  PageData<T> toPageData<T>({
-    required int page,
+  PageData<K, T> toPageData<K, T>({
+    required K? lastElementKey,
     required int perPage,
+    required K Function(T) extractKey,
     required T Function(QueryDocumentSnapshot<Map<String, dynamic>> doc) transform,
   }) {
     final entities = docs
-        .take(perPage)
-        .map(transform)
-        .toList(growable: false);
+      .take(perPage)
+      .map(transform)
+      .toList(growable: false);
 
-    final prev = PagingUtils.previousPage(page: page);
-
-    final next = PagingUtils.nextPage(
-      page: page,
-      perPage: perPage,
-      entitiesSize: size,
+    return PageData(
+      data: entities,
+      prev: lastElementKey,
+      next: entities.lastOrNull?.let(extractKey),
     );
-
-    return PageData(data: entities, prev: prev, next: next);
   }
 }

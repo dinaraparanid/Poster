@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/presentation/post/list.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/wall/presentation/bloc/mod.dart';
@@ -27,12 +26,13 @@ final class WallScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ProfileContainer(),
-                Expanded(
-                  child: PostList(
-                    postsState: state.postsState,
-                    onPostLike: (id) => bloc.add(Like(postId: id)),
-                  )
-                ),
+                // TODO:
+                // Expanded(
+                //   child: PostList(
+                //     postsState: state.postsState,
+                //     onPostLike: (id) => bloc.add(Like(postId: id)),
+                //   )
+                // ),
               ],
             ),
           ),

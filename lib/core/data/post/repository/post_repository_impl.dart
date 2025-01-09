@@ -24,17 +24,24 @@ final class PostRepositoryImpl extends PostRepository {
   }) => _postApi.createPost(email: email, text: text);
 
   @override
-  Future<Either<Exception, PageData<Post>>> feedPostsPage({
-    int page = PagingConfig.initialPage,
+  Future<Either<Exception, PageData<int, Post>>> feedPostsPage({
+    int? prevTimestamp,
     int perPage = PagingConfig.defaultPageSize,
-  }) => _postApi.feedPostsPage(page: page, perPage: perPage);
+  }) => _postApi.feedPostsPage(
+    prevTimestamp: prevTimestamp,
+    perPage: perPage,
+  );
 
   @override
-  Future<Either<Exception, PageData<Post>>> wallPostsPage({
+  Future<Either<Exception, PageData<int, Post>>> wallPostsPage({
     required String email,
-    int page = PagingConfig.initialPage,
+    int? prevTimestamp,
     int perPage = PagingConfig.defaultPageSize,
-  }) => _postApi.wallPostsPage(email: email, page: page, perPage: perPage);
+  }) => _postApi.wallPostsPage(
+    email: email,
+    prevTimestamp: prevTimestamp,
+    perPage: perPage,
+  );
 
   @override
   Future<Either<Exception, Like>> likePost({
@@ -48,9 +55,13 @@ final class PostRepositoryImpl extends PostRepository {
   }) => _likeApi.usersLikedPostCount(postId: postId);
 
   @override
-  Future<Either<Exception, PageData<User>>> usersLikedPostPage({
+  Future<Either<Exception, PageData<String, User>>> usersLikedPostPage({
     required String postId,
-    int page = PagingConfig.initialPage,
+    String? lastEmail,
     int perPage = PagingConfig.defaultPageSize,
-  }) => _likeApi.usersLikedPostPage(postId: postId, page: page, perPage: perPage);
+  }) => _likeApi.usersLikedPostPage(
+    postId: postId,
+    lastEmail: lastEmail,
+    perPage: perPage,
+  );
 }

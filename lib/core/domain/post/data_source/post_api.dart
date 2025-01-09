@@ -9,14 +9,14 @@ mixin PostApi {
     required String text,
   });
 
-  Future<Either<Exception, PageData<Post>>> feedPostsPage({
-    int page = PagingConfig.initialPage,
+  Future<Either<Exception, PageData<int, Post>>> feedPostsPage({
+    int? prevTimestamp,
     int perPage = PagingConfig.defaultPageSize,
   });
 
-  Future<Either<Exception, PageData<Post>>> wallPostsPage({
+  Future<Either<Exception, PageData<int, Post>>> wallPostsPage({
     required String email,
-    int page = PagingConfig.initialPage,
+    int? prevTimestamp,
     int perPage = PagingConfig.defaultPageSize,
   });
 }

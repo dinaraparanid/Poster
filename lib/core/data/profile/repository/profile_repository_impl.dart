@@ -53,13 +53,13 @@ final class ProfileRepositoryImpl extends ProfileRepository {
   }) => _followerApi.unsubscribe(profileEmail: profileEmail, followerEmail: followerEmail);
 
   @override
-  Future<Either<Exception, PageData<FollowingData>>> subscribersPage({
+  Future<Either<Exception, PageData<String, FollowingData>>> subscribersPage({
     required String profileEmail,
-    int page = PagingConfig.initialPage,
+    String? prevFollowerEmail,
     int perPage = PagingConfig.defaultPageSize,
   }) => _followerApi.subscribersPage(
     profileEmail: profileEmail,
-    page: page,
+    prevFollowerEmail: prevFollowerEmail,
     perPage: perPage,
   );
 }

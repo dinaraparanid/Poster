@@ -25,7 +25,7 @@ final class NotificationRepositoryImpl extends NotificationRepository {
   }
 
   @override
-  Future<PageData<Notification>> notificationsPage({
+  Future<PageData<int, Notification>> notificationsPage({
     int page = PagingConfig.initialPage,
     int perPage = PagingConfig.defaultPageSize,
   }) async {

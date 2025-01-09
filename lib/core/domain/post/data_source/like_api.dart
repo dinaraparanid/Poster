@@ -14,9 +14,9 @@ mixin LikeApi {
     required String postId,
   });
 
-  Future<Either<Exception, PageData<User>>> usersLikedPostPage({
+  Future<Either<Exception, PageData<String, User>>> usersLikedPostPage({
     required String postId,
-    int page = PagingConfig.initialPage,
+    String? lastEmail,
     int perPage = PagingConfig.defaultPageSize,
   });
 }
