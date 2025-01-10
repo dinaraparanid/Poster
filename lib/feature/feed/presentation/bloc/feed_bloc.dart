@@ -13,11 +13,11 @@ final class FeedBloc extends Bloc<FeedEvent, FeedState> {
 
   FeedBloc({
     required SubscribeOnProfileChangesUseCase profileChangesUseCase,
-    required FeedPostPagingSourceFactory feedPostPagingSourceFactory,
+    required FeedPostPagingSourceFactory pagingSourceFactory,
   }) : pager = paging_lib.Pager(
-      config: const paging_lib.PagingConfig(pageSize: PagingConfig.defaultPageSize),
-      pagingSourceFactory: () => feedPostPagingSourceFactory.create(),
-    ), super(FeedState.initial()) {
+    config: const paging_lib.PagingConfig(pageSize: PagingConfig.defaultPageSize),
+    pagingSourceFactory: () => pagingSourceFactory.create(),
+  ), super(FeedState.initial()) {
 
     on<Refresh>((event, emit) => pager.refresh());
 

@@ -10,7 +10,7 @@ final class FeedPostPagingSource extends PagingSource<int, Post> {
     _repository = repository;
 
   @override
-  Future<LoadResult<int, Post>> load(LoadParams<int> params) async =>
+  Future<LoadResult<int, Post>> load(LoadParams<int> params) =>
     _repository
       .feedPostsPage(prevTimestamp: params.key)
       .then((x) => x.toLoadResult());

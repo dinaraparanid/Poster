@@ -95,7 +95,7 @@ final class _MainScreenState extends State<MainScreen> {
   );
 
   Widget Body(MainState state) => switch (state.selectedTab) {
-    Tabs.wall => const Text('TODO: WallScreen'),//WallScreen(),
+    Tabs.wall => WallScreen(bloc: widget.bloc.createWallBloc()),
     Tabs.feed => FeedScreen(bloc: widget.bloc.createFeedBloc()),
   };
 

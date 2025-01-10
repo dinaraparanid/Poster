@@ -14,6 +14,6 @@ final class FeedBlocFactory {
 
   FeedBloc create() => FeedBloc(
     profileChangesUseCase: _profileChangesUseCase,
-    feedPostPagingSourceFactory: _feedPostPagingSourceFactory,
+    pagingSourceFactory: _feedPostPagingSourceFactory,
   );
 }

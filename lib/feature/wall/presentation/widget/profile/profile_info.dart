@@ -6,7 +6,7 @@ import 'package:poster/core/domain/profile/entity/profile.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/core/presentation/theme/images.dart';
-import 'package:poster/di/app_module.dart';
+import 'package:poster/core/presentation/theme/strings.dart';
 import 'package:poster/feature/wall/presentation/bloc/mod.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -16,13 +16,12 @@ const _dividerWidth = 1.0;
 const _dividerHeight = 24.0;
 
 final class ProfileInfo extends StatelessWidget {
-  final theme = di<AppTheme>();
-
-  ProfileInfo({super.key});
+  const ProfileInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final strings = AppLocalizations.of(context)!;
+    final theme = context.read<AppTheme>();
+    final strings = context.strings;
 
     return BlocBuilder<WallBloc, WallState>(
       builder: (context, state) {
@@ -60,7 +59,7 @@ final class ProfileInfo extends StatelessWidget {
       gradient: theme.colors.gradient.profileCard,
       borderRadius: BorderRadius.all(
         Radius.circular(theme.dimensions.radius.small),
-      )
+      ),
     ),
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -196,7 +195,7 @@ final class ProfileInfo extends StatelessWidget {
         color: theme.colors.background.divider,
         borderRadius: BorderRadius.all(
           Radius.circular(theme.dimensions.radius.extraSmall),
-        )
+        ),
       ),
     ),
   );
@@ -224,7 +223,7 @@ final class ProfileInfo extends StatelessWidget {
           gradient: theme.colors.gradient.profileCard,
           borderRadius: BorderRadius.all(
             Radius.circular(theme.dimensions.radius.small),
-          )
+          ),
         ),
       ),
     ),

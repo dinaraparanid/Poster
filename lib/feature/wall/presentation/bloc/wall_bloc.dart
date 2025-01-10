@@ -1,40 +1,28 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poster/core/domain/paging/paging_config.dart';
 import 'package:poster/core/domain/post/entity/post.dart';
-import 'package:poster/core/domain/post/repository/post_repository.dart';
-import 'package:poster/core/domain/profile/repository/profile_repository.dart';
+import 'package:poster/core/domain/profile/use_case/subscribe_on_profile_changes_use_case.dart';
 import 'package:poster/core/presentation/foundation/ui_state.dart';
+import 'package:poster/feature/wall/data/wall_post_paging_source_factory.dart';
 import 'package:poster/feature/wall/presentation/bloc/wall_event.dart';
 import 'package:poster/feature/wall/presentation/bloc/wall_state.dart';
+import 'package:super_paging/super_paging.dart' as paging_lib;
 
 final class WallBloc extends Bloc<WallEvent, WallState> {
-  final ProfileRepository profileRepository;
-  final PostRepository postRepository;
+  final paging_lib.Pager<int, Post> pager;
 
   WallBloc({
-    required this.profileRepository,
-    required this.postRepository,
-  }) : super(WallState.initial()) {
-    on<Create>(
-      (event, emit) async {
-        final profile = await profileRepository.profile;
+    required SubscribeOnProfileChangesUseCase profileChangesUseCase,
+    required WallPostPagingSourceFactory pagingSourceFactory,
+  }) : pager = paging_lib.Pager(
+    config: const paging_lib.PagingConfig(pageSize: PagingConfig.defaultPageSize),
+    pagingSourceFactory: () => pagingSourceFactory.create(),
+  ), super(WallState.initial()) {
 
-        if (profile != null) {
-          emit(state.copyWith(profileState: profile.toUiState()));
-          await _loadPosts(emit);
-        } else {
-          emit(state.copyWith(
-            profileState: const Error(null),
-            postsState: const Error(null),
-          ));
-        }
-      }
-    );
+    on<Refresh>((event, emit) => pager.refresh());
 
-    on<Refresh>(
-      (event, emit) async {
-        emit(state.copyWith(postsState: Refreshing(value: state.postsState)));
-        await _loadPosts(emit);
-      },
+    on<UpdateProfile>(
+      (event, emit) => emit(state.copyWith(profileState: event.profileState)),
     );
 
     on<Like>(
@@ -49,21 +37,8 @@ final class WallBloc extends Bloc<WallEvent, WallState> {
       }
     );
 
-    add(Create());
-  }
-
-  Future<void> _loadPosts(Emitter<WallState> emit) async {
-    final username = state.profileState.getOrNull?.username;
-    if (username == null) return;
-
-    final res = await postRepository.wallPostsPage(email: username);
-
-    final postsState = res.fold(
-      (e) => Error<List<Post>>(e),
-      (posts) => posts.toUiState(),
+    profileChangesUseCase.subscribe(
+      onChanged: (profileState) => add(UpdateProfile(profileState: profileState))
     );
-
-    // TODO: Paging
-    // emit(state.copyWith(postsState: postsState));
   }
 }

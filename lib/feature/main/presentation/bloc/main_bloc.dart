@@ -8,17 +8,23 @@ import 'package:poster/core/domain/profile/use_case/subscribe_on_profile_changes
 import 'package:poster/feature/main/presentation/bloc/main_effect.dart';
 import 'package:poster/feature/main/presentation/bloc/main_event.dart';
 import 'package:poster/feature/main/presentation/bloc/main_state.dart';
+import 'package:poster/feature/wall/presentation/bloc/wall_bloc.dart';
+import 'package:poster/feature/wall/presentation/bloc/wall_bloc_factory.dart';
 
 final class MainBloc extends Bloc<MainEvent, MainState> {
   final FeedBlocFactory _feedBlocFactory;
+  final WallBlocFactory _wallBlocFactory;
 
   MainBloc({
     required SubscribeOnProfileChangesUseCase profileChangesUseCase,
     required SubscribeOnIncomingAnnouncementsUseCase incomingAnnouncementsUseCase,
     required SendMessageUseCase sendMessageUseCase,
     required FeedBlocFactory feedBlocFactory,
+    required WallBlocFactory wallBlocFactory,
   }) : _feedBlocFactory = feedBlocFactory,
+    _wallBlocFactory = wallBlocFactory,
     super(const MainState()) {
+
     on<UpdateProfile>(
       (event, emit) => emit(state.copyWith(profileState: event.profileState)),
     );
@@ -80,4 +86,5 @@ final class MainBloc extends Bloc<MainEvent, MainState> {
   }
 
   FeedBloc createFeedBloc() => _feedBlocFactory.create();
+  WallBloc createWallBloc() => _wallBlocFactory.create();
 }

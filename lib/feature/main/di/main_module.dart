@@ -17,6 +17,7 @@ extension MainModule on GetIt {
       incomingAnnouncementsUseCase: this(),
       sendMessageUseCase: this(),
       feedBlocFactory: this(),
+      wallBlocFactory: this(),
     )),
   ];
 }

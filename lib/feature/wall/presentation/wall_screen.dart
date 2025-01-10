@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:poster/core/presentation/post/post_paging_list.dart';
 import 'package:poster/core/presentation/theme/app.dart';
-import 'package:poster/di/app_module.dart';
 import 'package:poster/feature/wall/presentation/bloc/mod.dart';
 import 'package:poster/feature/wall/presentation/widget/profile/profile_container.dart';
 
 final class WallScreen extends StatelessWidget {
-  final bloc = di<WallBloc>();
-  final theme = di<AppTheme>();
-
-  WallScreen({super.key});
+  final WallBloc bloc;
+  const WallScreen({super.key, required this.bloc});
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.read<AppTheme>();
+
     return BlocProvider(
       create: (context) => bloc,
       child: BlocBuilder<WallBloc, WallState>(
@@ -25,14 +25,13 @@ final class WallScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ProfileContainer(),
-                // TODO:
-                // Expanded(
-                //   child: PostList(
-                //     postsState: state.postsState,
-                //     onPostLike: (id) => bloc.add(Like(postId: id)),
-                //   )
-                // ),
+                const ProfileContainer(),
+                Expanded(
+                  child: PostPagingList(
+                    pager: bloc.pager,
+                    onPostLike: (id) => bloc.add(Like(postId: id)),
+                  ),
+                ),
               ],
             ),
           ),
