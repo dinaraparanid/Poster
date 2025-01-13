@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:poster/core/presentation/post/post_paging_list.dart';
 import 'package:poster/core/presentation/theme/app.dart';
 import 'package:poster/feature/wall/presentation/bloc/mod.dart';
 import 'package:poster/feature/wall/presentation/widget/profile/profile_container.dart';
+import 'package:poster/feature/wall/presentation/widget/profile_posts.dart';
 
 final class WallScreen extends StatelessWidget {
   final WallBloc bloc;
@@ -27,9 +27,9 @@ final class WallScreen extends StatelessWidget {
               children: [
                 const ProfileContainer(),
                 Expanded(
-                  child: PostPagingList(
+                  child: ProfilePosts(
                     pager: bloc.pager,
-                    onPostLike: (id) => bloc.add(Like(postId: id)),
+                    onEvent: bloc.add,
                   ),
                 ),
               ],

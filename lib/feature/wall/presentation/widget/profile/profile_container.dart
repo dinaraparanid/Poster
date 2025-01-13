@@ -21,7 +21,7 @@ final class ProfileContainer extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: EdgeInsets.only(top: theme.dimensions.padding.enormous),
-              child: ProfileInfo(),
+              child: const ProfileInfo(),
             ),
           ),
 
