@@ -5,6 +5,9 @@
     "ok": "ОК",
     "unspecified": "Не указано",
 
+    "stub_empty_title": "Здесь пока пусто...",
+    "stub_error_title": "Что-то пошло не так",
+
     "no_connection_dialog_title": "Нет соединения",
     "no_connection_dialog_description": "Подключитесь к сети или попробуйте позже",
 

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 const _ChineseBlack = Color(0xFF0A1310);
-const _GhostWhite = Color(0xFFF0F2F9);
+const _BrightGray = Color(0xFFEDEEF5);
 const _Cultured = Color(0xFFF4F4F8);
 const _ColumbiaBlue = Color(0xFFBFDBF7);
 const _Aquamarine = Color(0xFF76E7CD);
@@ -62,7 +62,7 @@ final class AppBackgroundColors {
   });
 
   factory AppBackgroundColors._default() => const AppBackgroundColors(
-    primary: _GhostWhite,
+    primary: _BrightGray,
     post: _ColumbiaBlue,
     divider: _Lavender,
     avatarPlaceholder: _MoonstoneBlue,

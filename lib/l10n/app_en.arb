@@ -5,6 +5,9 @@
     "ok": "OK",
     "unspecified": "Unspecified",
 
+    "stub_empty_title": "No posts yet...",
+    "stub_error_title": "Something went wrong",
+
     "no_connection_dialog_title": "No internet connection",
     "no_connection_dialog_description": "Connect to the network or try again later",
 
