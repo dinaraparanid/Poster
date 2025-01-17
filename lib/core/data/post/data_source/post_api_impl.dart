@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:poster/core/data/paging/firestore_paging.dart';
+import 'package:poster/core/data/firestore/firestore_paging.dart';
 import 'package:poster/core/domain/paging/page_data.dart';
 import 'package:poster/core/domain/paging/paging_config.dart';
 import 'package:poster/core/domain/post/data_source/post_api.dart';

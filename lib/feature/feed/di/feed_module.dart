@@ -10,6 +10,7 @@ extension FeedModule on GetIt {
     ),
     provideSingleton<FeedBlocFactory>(() => FeedBlocFactory(
       profileChangesUseCase: this(),
+      likeUseCase: this(),
       feedPostPagingSourceFactory: this(),
     )),
   ];

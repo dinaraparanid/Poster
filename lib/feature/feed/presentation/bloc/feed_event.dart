@@ -14,3 +14,8 @@ final class Like extends FeedEvent {
   final String postId;
   Like({required this.postId});
 }
+
+final class Share extends FeedEvent {
+  final String postText;
+  Share({required this.postText});
+}

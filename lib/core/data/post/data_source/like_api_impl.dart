@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
-import 'package:poster/core/data/paging/firestore_paging.dart';
+import 'package:poster/core/data/firestore/firestore_paging.dart';
+import 'package:poster/core/data/firestore/firestore_query_ext.dart';
 import 'package:poster/core/domain/paging/page_data.dart';
 import 'package:poster/core/domain/paging/paging_config.dart';
 import 'package:poster/core/domain/post/data_source/like_api.dart';
@@ -12,17 +13,28 @@ const _collectionPostsLikes = 'posts_likes';
 
 final class LikeApiImpl with LikeApi {
   @override
-  Future<Either<Exception, Like>> likePost({
+  Future<Either<Exception, bool>> switchLikeForPost({
     required String email,
     required String postId,
   }) => tryFuture(() async {
+    final doc = await FirebaseFirestore.instance
+      .collection(_collectionPostsLikes)
+      .where(Like.fieldPostId, isEqualTo: postId)
+      .where(Like.fieldUserEmail, isEqualTo: email)
+      .firstOrNull;
+
+    if (doc != null) {
+      await doc.reference.delete();
+      return false;
+    }
+
     final like = Like(email: email, postId: postId);
 
     await FirebaseFirestore.instance
       .collection(_collectionPostsLikes)
       .add(like.toJson());
 
-    return like;
+    return true;
   });
 
   @override

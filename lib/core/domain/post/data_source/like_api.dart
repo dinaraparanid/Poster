@@ -5,7 +5,7 @@ import 'package:poster/core/domain/post/entity/like.dart';
 import 'package:poster/core/domain/post/entity/user.dart';
 
 mixin LikeApi {
-  Future<Either<Exception, Like>> likePost({
+  Future<Either<Exception, bool>> switchLikeForPost({
     required String email,
     required String postId,
   });

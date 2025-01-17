@@ -27,6 +27,7 @@ final class ProfilePosts extends StatelessWidget {
         return PostPagingList(
           pager: pager,
           onPostLike: (id) => onEvent(Like(postId: id)),
+          onPostShare: (text) => onEvent(Share(postText: text)),
         );
       },
     );

@@ -25,7 +25,8 @@ final class FeedScreen extends StatelessWidget {
             onRefresh: () async => bloc.add(Refresh()),
             child: PostPagingList(
               pager: bloc.pager,
-              onPostLike: (id) => onEvent(Like(postId: id)),
+              onPostLike: (postId) => onEvent(Like(postId: postId)),
+              onPostShare: (postText) => onEvent(Share(postText: postText)),
             ),
           ),
         ),

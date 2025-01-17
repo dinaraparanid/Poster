@@ -44,10 +44,10 @@ final class PostRepositoryImpl extends PostRepository {
   );
 
   @override
-  Future<Either<Exception, Like>> likePost({
+  Future<Either<Exception, bool>> switchLikeForPost({
     required String email,
     required String postId,
-  }) => _likeApi.likePost(email: email, postId: postId);
+  }) => _likeApi.switchLikeForPost(email: email, postId: postId);
 
   @override
   Future<Either<Exception, int>> usersLikedPostCount({

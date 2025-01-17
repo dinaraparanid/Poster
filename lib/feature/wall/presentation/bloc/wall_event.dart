@@ -14,3 +14,8 @@ final class Like extends WallEvent {
   final String postId;
   Like({required this.postId});
 }
+
+final class Share extends WallEvent {
+  final String postText;
+  Share({required this.postText});
+}

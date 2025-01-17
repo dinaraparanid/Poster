@@ -14,7 +14,8 @@ extension WallModule on GetIt {
     provideSingleton<WallBlocFactory>(() =>
       WallBlocFactory(
         profileChangesUseCase: this(),
-        pagingSourceFactory: this()
+        likeUseCase: this(),
+        pagingSourceFactory: this(),
       ),
     ),
   ];
